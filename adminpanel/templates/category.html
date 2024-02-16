@@ -1,0 +1,824 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from themes.pixelstrap.com/voxo/back-end/vendor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jan 2024 18:53:34 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Voxo admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, Voxo admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+    <title>Voxo - Vendor List</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Google font-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&amp;family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Fontawesome css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/font-awesome.css' %}">
+
+    <!-- Linear Icon css -->
+    <link rel="stylesheet" href="{% static 'assets/css/linearicon.css' %}">
+
+    <!-- Themify icon css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/themify.css' %}">
+
+    <!-- Feather icon css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/feather-icon.css' %}">
+
+    <!-- Plugins css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/scrollbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/animate.css' %}">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/bootstrap.css' %}">
+
+    <!-- App css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+
+    <!-- Responsive css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
+</head>
+
+<body>
+    <!-- tap on top start -->
+    <div class="tap-top">
+        <span class="lnr lnr-chevron-up"></span>
+    </div>
+    <!-- tap on tap end -->
+
+    <!-- page-wrapper Start -->
+    <div class="page-wrapper compact-wrapper dark-sidebar" id="pageWrapper">
+        <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="header-wrapper row m-0">
+                <div class="header-logo-wrapper col-auto p-0">
+                    <div class="logo-wrapper">
+                        <a href="index-2.html">
+                            <img class="img-fluid main-logo" src="assets/images/logo/logo.png" alt="logo">
+                            <img class="img-fluid white-logo" src="assets/images/logo/logo-white.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="toggle-sidebar">
+                        <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
+                    </div>
+                </div>
+
+                <form class="form-inline search-full col" action="#" method="get">
+                    <div class="form-group w-100">
+                        <div class="Typeahead Typeahead--twitterUsers">
+                            <div class="u-posRelative">
+                                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text"
+                                    placeholder="Search Voxo .." name="q" title="" autofocus>
+                                <i class="close-search" data-feather="x"></i>
+                                <div class="spinner-border Typeahead-spinner" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="Typeahead-menu"></div>
+                        </div>
+                    </div>
+                </form>
+                <div class="nav-right col-4 pull-right right-header p-0">
+                    <ul class="nav-menus">
+                        <li>
+                            <span class="header-search">
+                                <span class="lnr lnr-magnifier"></span>
+                            </span>
+                        </li>
+                        <li class="onhover-dropdown">
+                            <div class="notification-box">
+                                <span class="lnr lnr-alarm"></span>
+                                <span class="badge rounded-pill badge-theme">4</span>
+                            </div>
+                            <ul class="notification-dropdown onhover-show-div">
+                                <li>
+                                    <span class="lnr lnr-alarm"></span>
+                                    <h6 class="f-18 mb-0">Notitications</h6>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle-o me-3 font-primary"></i>Delivery processing <span
+                                            class="pull-right">10
+                                            min.</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle-o me-3 font-success"></i>Order Complete<span
+                                            class="pull-right">1 hr</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle-o me-3 font-info"></i>Tickets Generated<span
+                                            class="pull-right">3 hr</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle-o me-3 font-danger"></i>Delivery Complete<span
+                                            class="pull-right">6
+                                            hr</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary" href="javascript:void(0)">Check all notification</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <div class="mode">
+                                <span class="lnr lnr-moon"></span>
+                            </div>
+                        </li>
+
+                        <li class="onhover-dropdown">
+                            <span class="lnr lnr-bubble"></span>
+                            <ul class="chat-dropdown onhover-show-div">
+                                <li>
+                                    <span class="lnr lnr-bubble"></span>
+                                    <h6 class="f-18 mb-0">Message Box</h6>
+                                </li>
+                                <li>
+                                    <div class="media">
+                                        <img class="img-fluid rounded-circle me-3" src="assets/images/user/1.jpg"
+                                            alt="user1">
+                                        <div class="status-circle online"></div>
+                                        <div class="media-body">
+                                            <span>Erica Hughes</span>
+                                            <p>Lorem Ipsum is simply dummy...</p>
+                                        </div>
+                                        <p class="f-12 font-success">58 mins ago</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="media">
+                                        <img class="img-fluid rounded-circle me-3" src="assets/images/user/2.png"
+                                            alt="user2">
+                                        <div class="status-circle online"></div>
+                                        <div class="media-body">
+                                            <span>Kori Thomas</span>
+                                            <p>Lorem Ipsum is simply dummy...</p>
+                                        </div>
+                                        <p class="f-12 font-success">1 hr ago</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="media">
+                                        <img class="img-fluid rounded-circle me-3" src="assets/images/user/3.png"
+                                            alt="user3">
+                                        <div class="status-circle offline"></div>
+                                        <div class="media-body">
+                                            <span>Ain Chavez</span>
+                                            <p>Lorem Ipsum is simply dummy...</p>
+                                        </div>
+                                        <p class="f-12 font-danger">32 mins ago</p>
+                                    </div>
+                                </li>
+                                <li class="text-center">
+                                    <a class="btn btn-primary" href="javascript:void(0)">View All</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="maximize">
+                            <a class="text-dark" href="javascript:void(0)" onclick="javascript:toggleFullScreen()">
+                                <span class="lnr lnr-frame-expand"></span>
+                            </a>
+                        </li>
+                        <li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg"
+                                    alt="profile-picture">
+                                <div class="user-name-hide media-body">
+                                    <span>Emay Walter</span>
+                                    <p class="mb-0 font-roboto">Admin<i class="middle fa fa-angle-down"></i></p>
+                                </div>
+                            </div>
+                            <ul class="profile-dropdown onhover-show-div">
+                                <li>
+                                    <a href="all-users.html">
+                                        <i data-feather="users"></i>
+                                        <span>Users</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="order-list.html">
+                                        <i data-feather="archive"></i>
+                                        <span>Orders</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="support-ticket.html">
+                                        <i data-feather="phone"></i>
+                                        <span>Spports Tickets</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile-setting.html">
+                                        <i data-feather="settings"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                        href="javascript:void(0)">
+                                        <i data-feather="log-out"></i>
+                                        <span>Log out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header Ends-->
+
+        <!-- Page Body Start-->
+        <div class="page-body-wrapper">
+            <!-- Page Sidebar Start-->
+            <div class="sidebar-wrapper">
+                <div>
+                    <div class="logo-wrapper logo-wrapper-center">
+                        <a href="index-2.html" data-bs-original-title="" title="">
+                            <img class="img-fluid for-dark" src="assets/images/logo/logo-white.png" alt="">
+                        </a>
+                        <div class="back-btn">
+                            <i class="fa fa-angle-left"></i>
+                        </div>
+                        <div class="toggle-sidebar">
+                            <i class="status_toggle middle sidebar-toggle" data-feather="grid"></i>
+                        </div>
+                    </div>
+                    <div class="logo-icon-wrapper">
+                        <a href="index-2.html">
+                            <img class="img-fluid main-logo" src="assets/images/logo/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <nav class="sidebar-main">
+                        <div class="left-arrow" id="left-arrow">
+                            <i data-feather="arrow-left"></i>
+                        </div>
+
+                        <div id="sidebar-menu">
+                            <ul class="sidebar-links" id="simple-bar">
+                                <li class="back-btn"></li>
+                                <li class="sidebar-main-title sidebar-main-title-3">
+                                    <div>
+                                        <h6 class="lan-1">General</h6>
+                                        <p class="lan-2">Dashboards &amp; Users.</p>
+                                    </div>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="index-2.html">
+                                        <i data-feather="home"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="users"></i>
+                                        <span>Users</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="all-users.html">All users</a>
+                                        </li>
+                                        <li>
+                                            <a href="add-new-user.html">Add new user</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-main-title sidebar-main-title-2">
+                                    <div>
+                                        <h6 class="lan-1">Application</h6>
+                                        <p class="lan-2">Ready To Use Apps</p>
+                                    </div>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="archive"></i>
+                                        <span>Orders</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="order-list.html">Order List</a>
+                                        </li>
+                                        <li>
+                                            <a href="order-detail.html">Order Detail</a>
+                                        </li>
+                                        <li>
+                                            <a href="order-tracking.html">Order Tracking</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="users"></i>
+                                        <span>Categories</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="vendor-list.html">category List</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="create-vendor.html">Create category</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="users"></i>
+                                        <span>Localization</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="translation.html">Translation</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="currency-rates.html">Currency Rates</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="taxes.html">Taxes</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="box"></i>
+                                        <span>Product</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="products.html">Prodcts</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="add-new-product.html">Add New Products</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="align-left"></i>
+                                        <span>Menus</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="menu-lists.html">Menu Lists</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="create-menu.html">Create Menu</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="tag"></i>
+                                        <span>Coupons</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="coupon-list.html">Coupon List</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="create-coupon.html">Create Coupon</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="product-review.html">
+                                        <i data-feather="star"></i>
+                                        <span>Product Review</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="invoice.html">
+                                        <i data-feather="archive"></i>
+                                        <span>Invoice</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="support-ticket.html">
+                                        <i data-feather="phone"></i>
+                                        <span>Support Ticket</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i data-feather="settings"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="profile-setting.html">Profile Setting</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="reports.html">
+                                        <i data-feather="file-text"></i>
+                                        <span>Reports</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="list-page.html">
+                                        <i data-feather="list"></i>
+                                        <span>List Page</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="login.html">
+                                        <i data-feather="log-in"></i>
+                                        <span>Log In</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="forgot-password.html">
+                                        <i data-feather="key"></i>
+                                        <span>Forgot Password</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="sign-up.html">
+                                        <i data-feather="plus-circle"></i>
+                                        <span>Register</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="right-arrow" id="right-arrow">
+                            <i data-feather="arrow-right"></i>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Page Sidebar Ends-->
+
+            <!-- vendor List Section Start -->
+            <div class="page-body">
+                <div class="title-header title-header-1">
+                    <h5>category list</h5>
+                    {% comment %} <form class="d-inline-flex">
+                        <a href="add-new-user.html" class="align-items-center btn btn-theme">
+                            <i data-feather="plus-square"></i>Add New
+                        </a>
+                    </form> {% endcomment %}
+                    <button type="button" class="align-items-center btn btn-theme" data-bs-toggle="modal" data-bs-target="#addModal">
+                        <i data-feather="plus-square"></i>Add New
+                    </button>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <!-- Table Start -->
+                                <div class="card-body">
+                                    <div class="table-responsive table-desi">
+                                        <table class="user-table vendor-table table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Image</th>
+                                                    <th>Category</th>
+                                                    <th>Discription</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in category %}
+                                                <tr>
+                                                    <td> {{ forloop.counter }}</td>
+                                                    <td>
+                                                        <span>
+                                                            {% if i.category_image %}
+                                                            <img src="{{i.category_image.url}}" alt="Category Image">
+                                                            {% else %}
+                                                            <span>No image available</span>
+                                                            {% endif %}
+                                                        </span>
+                                                    </td>
+
+
+                                                   
+
+
+                                                    <td>
+                                                        <a href="javascript:void(0)">
+                                                            <span class="d-block">{{i.category_name}}</span>
+                                                        </a>
+                                                    </td>
+
+                                                   
+
+                                                    <td>
+                                                        <a href="javascript:void(0)">
+                                                            <span class="d-block">{{i.category_description}}</span>
+                                                        </a>
+                                                    </td>
+
+                                                    
+
+{% comment %}                                                   
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <span class="lnr lnr-eye"></span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <span class="lnr lnr-pencil"></span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <span class="lnr lnr-trash"></span>
+                                                                </a>
+                                                            </li>
+                                                            
+                                                        </ul>
+                                                    </td> {% endcomment %}
+                                                    <td>
+                                                        <a href="#editModal{{ forloop.counter }}" class="edit" data-toggle="modal"><i class="material-icons " data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                        <a href="#deleteModal{{ forloop.counter }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                    </td>
+                                                </tr>
+{% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- Table End -->
+
+                                <!-- Pagination Start -->
+                                <div class="pagination-box">
+                                    <nav class="ms-auto me-auto " aria-label="...">
+                                        <ul class="pagination pagination-primary">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript:void(0)">Previous</a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="javascript:void(0)">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">2</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">3</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- Pagination End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Start -->
+                <div class="container-fluid">
+                    <footer class="footer">
+                        <div class="row">
+                            <div class="col-md-12 footer-copyright text-center">
+                                <p class="mb-0">Copyright 2021 © Voxo theme by pixelstrap</p>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+                <!-- Footer End -->
+            </div>
+            <!-- vendor List Section End -->
+        </div>
+        <!-- Page Body Start-->
+
+
+
+   <!-- add Modal Start -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addModalLabel">Add Category</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Your form goes here -->
+                  <form method="POST" action="{% url 'adminpanel:add_category' %}" enctype="multipart/form-data">
+                    
+                     {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Category Name</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="Category name"/>
+                    </div>
+                    <div>
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+            
+                      <td>
+                      
+            
+                      <div class="mb-3">
+                        <label for="image" class="form-label">Image URL</label>
+                        <input type="file" class="form-control" id="image" name="image" required>
+                      </div>
+        
+        
+                    <button type="submit" class="btn btn-primary" id="addCategoryButton"> 
+                        Add Category
+                      </button>
+        
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- edit Modal Start -->
+    
+  {% for item in category %}
+  <!-- Edit Modal for {{ item.name }} -->
+  <div class="modal fade" id="editModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="editModalLabel{{ forloop.counter }}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel{{ forloop.counter }}">Edit Category {{ item.category_name }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          
+          <!-- Your edit form goes here -->
+          <form method="POST" action="{% url 'adminpanel:edit_category' %}" enctype="multipart/form-data">
+
+          {% csrf_token %}
+            <input type="hidden" name="category_id" value="{{ item.id }}">
+
+            <!-- Include form fields for editing -->
+            <div class="mb-3">
+              <label for="edit_name{{ forloop.counter }}" class="form-label">Name</label>
+              <input type="text" class="form-control" id="edit_name{{ forloop.counter }}" name="edit_name" value="{{ item.category_name }}" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_description{{ forloop.counter }}" class="form-label">Description</label>
+              <textarea class="form-control" id="edit_description{{ forloop.counter }}" name="edit_description" required>{{ item.category_description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_image{{ forloop.counter }}" class="form-label">Image</label>
+              <!-- Display existing image -->
+              {% if item.category_image %}
+              <img src="{{ item.category_image.url }}" alt="image" style="width: 50px; margin-bottom: 10px;">
+              {% endif %}
+              <input type="file" class="form-control" id="edit_image{{ forloop.counter }}" name="edit_image" accept="image/*">
+          </div>
+
+
+
+
+
+          
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+ <!-- delete Modal Start -->
+ {% for item in category %}
+
+ <div class="modal fade" id="deleteModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ forloop.counter }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel{{ forloop.counter }}">Delete Category {{ item.category_name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this category?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="{% url 'adminpanel:category_delete' item.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+          
+        <!-- Modal Start -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="staticBackdropLabel">Logging Out</h5>
+                        <p>Are you sure you want to log out?</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="button-box">
+                            <button type="button" class="btn btn--no " data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn  btn--yes btn-primary">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal End -->
+    </div>
+    <!-- page-wrapper End-->
+
+    <!-- latest js -->
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+    <!-- Bootstrap js -->
+    <script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- feather icon js -->
+    <script src="{% static 'assets/js/icons/feather-icon/feather.min.js' %}"></script>
+    <script src="{% static 'assets/js/icons/feather-icon/feather-icon.js' %}"></script>
+
+    <!-- scrollbar simplebar js -->
+    <script src="{% static 'assets/js/scrollbar/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/scrollbar/custom.js' %}"></script>
+
+    <!-- customizer js -->
+    <script src="{% static 'assets/js/customizer.js' %}"></script>
+
+    <!-- Sidebar js -->
+    <script src="{% static 'assets/js/config.js' %}"></script>
+
+    <!-- Plugins js -->
+    <script src="{% static 'assets/js/sidebar-menu.js' %}"></script>
+    <script src="{% static 'assets/js/notify/bootstrap-notify.min.js' %}"></script>
+    <script src="{% static 'assets/js/notify/index.js' %}"></script>
+
+    <!-- all checkbox select js -->
+    <script src="{% static 'assets/js/checkbox-all-check.js' %}"></script>
+
+<!-- modal extra .........................-->
+{% comment %} <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+</script> {% endcomment %}
+ <!-- Bootstrap CSS -->
+ {% comment %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+{% endcomment %}
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+ <!-- ..................... -->
+    <!-- Theme js -->
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from themes.pixelstrap.com/voxo/back-end/vendor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jan 2024 18:53:34 GMT -->
+</html>
