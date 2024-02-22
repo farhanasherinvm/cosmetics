@@ -3,10 +3,12 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
+from accounts.models import User_Profile
 from products.models import Product
 from category.models import Category
 from django.utils.text import slugify
-# Create your views here.
+# Create your views here
+@never_cache
 def admlogin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -16,7 +18,7 @@ def admlogin(request):
         if user_obj is not None:
             if user_obj.is_superuser:
                 login(request,user_obj)
-                return redirect ('dashboard')
+                return redirect ('adminpanel:dashboard')
             else:
                 context={
                     'error': "user is not authenticated"}
@@ -34,8 +36,31 @@ def admlogout(request):
 
 def dashboard(request):
     return render(request,"dashboard.html")
-def users(request):
-    return render(request,"all_users.html")
+
+
+def user_manage(request):
+    user=User_Profile.objects.all()
+    context={
+        'user':user,
+    }
+    return render(request,"all_users.html",context)
+
+def user_block(request,id):
+    user=get_object_or_404(User_Profile,id=id)
+
+    if user.is_active:
+        
+        user.is_active=False
+        user.save()
+        
+    else:
+        print("!!!!!!!!!!!!!!!!!!!!")
+        user.is_active=True
+        user.save()
+    return redirect('adminpanel:user_manage')
+
+
+
 def newuser(request):
     return render(request,"add_newuser.html")
 

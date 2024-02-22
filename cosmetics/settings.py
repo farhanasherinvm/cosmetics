@@ -108,7 +108,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
+ 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -132,6 +137,21 @@ STATICFILES_DIRS = [
 #media files configurations
 MEDIA_ROOTS = BASE_DIR / "media"
 MEDIA_URL = '/media/'
+
+
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # Use the appropriate port for your SMTP server
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'farhanashnz@gmail.com'
+EMAIL_HOST_PASSWORD = 'sfcz fpci uhjl bycp'
 
 
 # Default primary key field type

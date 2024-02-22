@@ -1,4 +1,5 @@
-{% load static %}
+{% extends 'base.html'%}
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -485,8 +486,8 @@
                     </nav>
                 </div>
             </div>
-            <!-- Page Sidebar Ends-->
-
+            <!-- Page Sidebar Ends--> {% endcomment %}
+{% block content %}
             <!-- Container-fluid starts-->
             <div class="page-body">
                 <div class="title-header title-header-1">
@@ -504,11 +505,12 @@
                                             <table class="user-table table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>
-                                                            {% comment %} <span class="form-check user-checkbox">
+                                                        {% comment %} <th>
+                                                             <span class="form-check user-checkbox">
                                                                 <input class="checkbox_animated" type="checkbox"
-                                                                    value="" id="checkall"> {% endcomment %}
-                                                            </span>User_id</th>
+                                                                    value="" id="checkall">
+                                                            </span>User</th> {% endcomment %}
+                                                            <th>User_id</th>
                                                         <th>Name</th>
     
                                                         <th>Email</th>
@@ -517,31 +519,32 @@
                                                         <th>Options</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody>{% for i in user %}
                                                     <tr>
-                                                        <td>
-                                                            {% comment %} <div class="form-check user-checkbox">
+                                                        {% comment %} <td>
+                                                            <div class="form-check user-checkbox">
                                                                 <input class="checkbox_animated check-it"
                                                                     type="checkbox" value="" id="flexCheckDefault">
-                                                            </div> {% endcomment %}
+                                                            </div> 
                                                             <span>
-                                                                <img src="{% static 'assets/images/users/1.jpg' %}" alt="users">
+                                                                <img src="{{ i.image.url }}" alt="users">
                                                             </span>
-                                                        </td>
+                                                        </td> {% endcomment %}
+                                                        <td> {{forloop.counter}}</td>
 
                                                         <td>
                                                             <a href="javascript:void(0)">
-                                                                <span class="d-block ">Everett C. Green</span>
-                                                                <span>Essex Court</span>
+                                                                <span class="d-block ">{{ i.user }}</span>
+                                                                {% comment %} <span>Essex Court</span> {% endcomment %}
                                                             </a>
                                                         </td>
 
             
 
-                                                        <td>EverettCGreen@rhyta.com</td>
+                                                        <td>{{i.email}}</td>
 
 
-                                                        <td>1 Day</td>
+                                                        <td>{{i.phone}}</td>
 
                                                         {% comment %} <td>
                                                             <ul>
@@ -564,28 +567,16 @@
                                                             </ul>
                                                         </td> {% endcomment %}
 
-                                                        <td>
-                                                            <ul>
-                                                        <li> 
-                                                           
-                                                                <form action="" method="POST">
-                                                                 
-                                                                    <button type="submit" class="btn btn-theme">Block</button>
-                                                                </form>
-                                                         
-                                                                <form action="" method="POST">
-                                                                     
-                                                                    <button type="submit" class="btn btn-success">Unblock</button>
-                                                                </form>
-                                                                
-                                                            </li>
-                                                            <ul>
-                                                        </td>
+                                               {% if i.is_active %}
+                                                           <td><a href="#" type="button" class="btn btn-success" data-bs-toggle="modal" 
+                                                                data-bs-target="#confirmationModal{{ i.id }}">Block</a></td>
+                                                {% else %}
+                                                          <td><a href="#"  type="button" class="btn btn-success" data-bs-toggle="modal" 
+                                                                   data-bs-target="#confirmationModal{{ i.id }}">Unblock</a></td>
+                                              {% endif %}
                                                     </tr>
-
-                                                   
-
-                                                   
+{% endfor %}
+                                    
                                                 </tbody>
                                             </table>
                                         </div>
@@ -635,7 +626,32 @@
         </div>
         <!-- Page Body End -->
 
-        <!-- Modal Start -->
+          <!-- block modal -->
+          {% for user in user %}
+          <div class="modal fade" id="confirmationModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+            <div class="modal-content">
+             <div class="modal-header">
+              <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+            <div class="modal-body">
+            {% if user.is_active %}
+            <p>Are you sure you want to block {{ user.user }}?</p>
+            {% else %}
+            <p>Are you sure you want to unblock {{ user.user }}?</p>
+            {% endif %}
+           </div>
+         <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+     <a href="{% url 'adminpanel:user_block' user.id %}" class="btn btn-primary">Confirm</a>
+   </div>
+ </div>
+   </div>
+   </div>
+   {% endfor %}
+   {% endblock%}
+        {% comment %} <!-- Modal Start -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
             <div class="modal-dialog  modal-dialog-centered">
                 <div class="modal-content">
@@ -688,4 +704,4 @@
 
 
 <!-- Mirrored from themes.pixelstrap.com/voxo/back-end/all-users.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jan 2024 18:53:26 GMT -->
-</html>
+</html> {% endcomment %}

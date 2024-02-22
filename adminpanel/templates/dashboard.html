@@ -303,11 +303,11 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="users">All users</a>
+                                            <a href="{% url 'adminpanel:user_manage' %}">All users</a>
                                         </li>
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="add-new-user.html">Add new user</a>
-                                        </li>
+                                        </li> {% endcomment %}
                                     </ul>
                                 </li>
 
@@ -339,19 +339,19 @@
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i data-feather="users"></i>
-                                        <span>Venders</span>
+                                        <span>Category</span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="vendor-list.html">Vendor List</a>
+                                            <a href="{% url 'adminpanel:category_manage' %}">Category List</a>
                                         </li>
 
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="create-vendor.html">Create Vendor</a>
-                                        </li>
+                                        </li> {% endcomment %}
                                     </ul>
                                 </li>
-
+{% comment %} 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i data-feather="users"></i>
@@ -370,7 +370,7 @@
                                             <a href="taxes.html">Taxes</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> {% endcomment %}
 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
@@ -379,16 +379,16 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="products.html">Prodcts</a>
+                                            <a href="{% url 'adminpanel:category_manage' %}">Prodcts</a>
                                         </li>
 
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="add-new-product.html">Add New Products</a>
-                                        </li>
+                                        </li> {% endcomment %}
                                     </ul>
                                 </li>
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i data-feather="align-left"></i>
                                         <span>Menus</span>
@@ -402,7 +402,7 @@
                                             <a href="create-menu.html">Create Menu</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> {% endcomment %}
 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
@@ -434,12 +434,12 @@
                                     </a>
                                 </li>
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="support-ticket.html">
                                         <i data-feather="phone"></i>
                                         <span>Support Ticket</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
@@ -453,40 +453,40 @@
                                     </ul>
                                 </li>
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="reports.html">
                                         <i data-feather="file-text"></i>
                                         <span>Reports</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="list-page.html">
                                         <i data-feather="list"></i>
                                         <span>List Page</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="login.html">
                                         <i data-feather="log-in"></i>
                                         <span>Log In</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="forgot-password.html">
                                         <i data-feather="key"></i>
                                         <span>Forgot Password</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="sign-up.html">
                                         <i data-feather="plus-circle"></i>
                                         <span>Register</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow">
@@ -1004,7 +1004,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="button-box">
                         <button type="button" class="btn btn--no " data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn  btn--yes btn-primary">Yes</button>
+                        <a href="{% url 'adminpanel:admlogout' %}" class="btn btn-primary">Yes</a>
                     </div>
                 </div>
             </div>

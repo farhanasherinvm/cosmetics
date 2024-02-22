@@ -43,9 +43,8 @@
                             <div class="login-title">
                                 <h2>Login</h2>
                             </div>
-                            <form action="admlogin" method="POST">
-
-                                {% csrf_token %}
+                            <form action="{% url 'adminpanel:admlogin' %}" method="POST">
+                              {% csrf_token %}
 
                                 {% if error %}
                               <h5>{{ error }}</h5>

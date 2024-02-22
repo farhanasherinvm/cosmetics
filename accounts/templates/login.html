@@ -49,7 +49,7 @@
                 <div class="login-title">
                     <h2>Login</h2>
                 </div>
-                <form action="{% url 'userlogin' %}" method="POST">
+                <form action="{% url 'accounts:userlogin' %}" method="POST">
                     {% csrf_token %}
                 <div class="input">
                     <label for="username">Username</label>

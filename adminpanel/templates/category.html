@@ -1,4 +1,4 @@
-{% load static %}
+{% extends 'base.html'%} {% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -486,10 +486,10 @@
                     </nav>
                 </div>
             </div>
-            <!-- Page Sidebar Ends-->
+            <!-- Page Sidebar Ends--> {% endcomment %}
 
             <!-- vendor List Section Start -->
-            <div class="page-body">
+    {% block content %}        <div class="page-body">
                 <div class="title-header title-header-1">
                     <h5>category list</h5>
                     {% comment %} <form class="d-inline-flex">
@@ -752,7 +752,7 @@
 {% endfor %}
           
         <!-- Modal Start -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        {% comment %} <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
             <div class="modal-dialog  modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -766,12 +766,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
         <!-- Modal End -->
-    </div>
+    </div>{% endblock %}
     <!-- page-wrapper End-->
 
-    <!-- latest js -->
+    {% comment %} <!-- latest js -->
     <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
 
     <!-- Bootstrap js -->
@@ -808,17 +808,17 @@
  <!-- Bootstrap CSS -->
  {% comment %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-{% endcomment %}
-<!-- jQuery -->
+
+{% comment %} <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
- <!-- ..................... -->
+ <!-- ..................... --> {% endcomment %}
     <!-- Theme js -->
-    <script src="{% static 'assets/js/script.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/script.js' %}"></script>
 </body>
 
 
 <!-- Mirrored from themes.pixelstrap.com/voxo/back-end/vendor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jan 2024 18:53:34 GMT -->
-</html>
+</html> {% endcomment %} 

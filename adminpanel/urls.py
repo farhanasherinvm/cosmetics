@@ -7,8 +7,12 @@ urlpatterns = [
     
     path('admlogin',views.admlogin,name="admlogin"),
     path('admlogout',views.admlogout,name="admlogout"),
+
+
+    
     path('dashboard',views.dashboard,name="dashboard"),
-    path('users',views.users,name="users"),
+    path('user_manage',views.user_manage,name="user_manage"),
+    path('user_block/<str:id>/',views.user_block,name='user_block'),
     path('newuser',views.newuser,name="newuser"),
 
 
