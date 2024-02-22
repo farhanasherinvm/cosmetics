@@ -35,7 +35,8 @@ def user_otp(request):
     return render(request,'otp.html')
 
 
-
+def new_otp(request):
+    return render(request,'otp.html')
 
 
 def usersignup(request):
