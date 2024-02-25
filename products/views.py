@@ -20,3 +20,12 @@ def single_product(request,category_slug,product_slug):
    }
     
     return render(request,'productlist.html', context)
+
+def shop(request):
+    product=Product.objects.all()
+    
+    context={
+        'product':product,
+        
+    }
+    return render(request, 'shop.html', context)
