@@ -36,6 +36,20 @@ def user_otp(request):
 
 
 def new_otp(request):
+    username=request.session.get("signup_username")
+    user=User.objects.get(username=username)
+    request.session.pop("signup_otp",None)
+    if user.email:
+        otp=str(random.randint(100000,999999))
+        request.session["signup_otp"]=otp
+        subject= 'otp verfication code'
+        massage=f'your otp code for signup is: {otp}'
+        from_email='farhanashnz@gmail.com'
+        recipient_list=[user.email]
+        send_mail (subject,massage,from_email,recipient_list)
+        messages.success(request, 'resend OTP sent successfully. Please check your email.')
+    else:
+        messages.warning(request, 'Failed to resend OTP. Please try again.')
     return render(request,'otp.html')
 
 
@@ -80,16 +94,21 @@ def usersignup(request):
 @never_cache
 def userlogin(request):
     if request.method=='POST':
-        email=request.POST['email']
-        password=request.POST['password']
-        print("fffffffffffffffff")
-        user=authenticate(email=email,password=password)
+        email = request.POST.get('email', '')  # Provide an empty string as the default value
+        password = request.POST.get('password', '')
+        print('email:', email)
+        user=authenticate(request, email=email, password=password)
         if user is not None:
+            print("not none")
+
+            if user.email != email:
+                messages.error(request, 'Invalid Credentials')
+                return render(request, 'login.html')
             print("tttttttttt")
             login(request,user)
             return redirect('home:home')
         else:
-            return redirect('accounts:usersignup')
+            return render(request,"login.html")
     return render(request,"login.html")
 
 def userlogout(request):

@@ -52,8 +52,8 @@
                 <form action="{% url 'accounts:userlogin' %}" method="POST">
                     {% csrf_token %}
                 <div class="input">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" required>
+                    <label for="email">Username</label>
+                    <input type="text" name="email" id="email" required>
                     <span class="spin"></span>
                     <div class="valid-feedback">
                         Please fill the name

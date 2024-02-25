@@ -80,21 +80,15 @@
                     <input type="number" id="otp_entered_6" name="otp_entered_6" disabled required/>
                 </div>
             
-
-
-
-              
-
-
-
   
               <button class="btn btn-primary mb-3">
                 Verify
               </button>
-            </form>
+          
               <p class="resend text-muted mb-0">
-                Didn't receive code? <a href="">Request again</a>
+                Didn't receive code? <a href="{% url 'accounts:new_otp' %}">Request again</a>
               </p>
+            </form>
             </div>
           </div>
         </div>
