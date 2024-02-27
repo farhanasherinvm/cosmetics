@@ -1057,31 +1057,35 @@
                                     <div class="col-lg-2">
                                         <div class="details-image-vertical black-slide rounded">
                                             <div>
-                                                <img src="{% static 'images/fashion/1.jpg' %}"
+                                                <img src="{{data.image.url}}"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </div>
-                                            <div>
+                                            {% comment %} <div>
                                                 <img src="{% static 'images/fashion/2.jpg' %}"
                                                     class="img-fluid blur-up lazyload" alt="">
-                                            </div>
-                                            <div>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div>
                                                 <img src="{% static 'images/fashion/3.jpg' %}"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </div>
                                             <div>
                                                 <img src="{% static 'images/fashion/4.jpg' %}"
                                                     class="img-fluid blur-up lazyload" alt="">
-                                            </div>
+                                            </div> {% endcomment %}
                                         </div>
+
                                     </div>
+
+
                                     <div class="col-lg-10">
                                         <div class="details-image-1 ratio_asos">
                                             <div>
-                                                <img src="{% static 'images/fashion/1.jpg'%}" id="zoom_01"
-                                                    data-zoom-image="{% static 'images/fashion/1.jpg'%}"
+                                                <img src="{{data.image.url}}" id="zoom_01"
+                                                    data-zoom-image="{{data.image.url}}"
                                                     class="img-fluid w-100 image_zoom_cls-0 blur-up lazyload" alt="">
                                             </div>
-                                            <div>
+                                            {% comment %} <div>
                                                 <img src="{% static 'images/fashion/2.jpg '%}" id="zoom_02"
                                                     data-zoom-image="assets/images/fashion/2.jpg"
                                                     class="img-fluid w-100 image_zoom_cls-1 blur-up lazyload" alt="">
@@ -1095,7 +1099,7 @@
                                                 <img src="assets/images/fashion/4.jpg" id="zoom_04"
                                                     data-zoom-image="assets/images/fashion/4.jpg"
                                                     class="img-fluid w-100 image_zoom_cls-3 blur-up lazyload" alt="">
-                                            </div>
+                                            </div> {% endcomment %}
                                         </div>
                                     </div>
                                 </div>
@@ -1121,7 +1125,7 @@
                                     </div>
 
                                     <div class="details-image-concept">
-                                        <h2>Brand New t-Shirt</h2>
+                                        <h2>{{data.product_name}}</h2>
                                     </div>
 
                                     <div class="label-section">
@@ -1129,7 +1133,7 @@
                                         <span class="label-text">in fashion</span>
                                     </div>
 
-                                    <h3 class="price-detail">$32.96 <del>$459.00</del><span>55% off</span></h3>
+                                    <h3 class="price-detail">${{data.price}}<del>$459.00</del><span>55% off</span></h3>
 
                                     <div class="color-image">
                                         <div class="image-select">

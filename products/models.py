@@ -17,7 +17,7 @@ class Product(models.Model):
 
 
     def get_url(self):
-        return reverse('products:single_product', args=[self.category.slug ,self.slug])
+        return reverse('products:product', args=[self.slug, self.id])
 
     def __str__(self):
         return self.product_name

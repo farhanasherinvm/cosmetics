@@ -1261,7 +1261,7 @@
                             <div class="product-box">
                                 <div class="img-wrapper">
                                     <div class="front">
-                                        <a href="{% url 'products:product' %}">
+                                        <a href="{% url 'products:product' slug=i.slug id=i.id  %}">
                                             <img src="{{ i.image.url }}"
                                                 class="bg-img blur-up lazyload" alt="">
                                         </a>
@@ -1321,7 +1321,7 @@
                                         </ul>
                                     </div>
                                     <div class="main-price">
-                                        <a href="{% url 'products:product' %}" class="font-default">
+                                        <a href="{% url 'products:product' slug=i.slug id=i.id %}" class="font-default">
                                             <h5 class="ms-0">{{ i.product_name }}</h5>
                                         </a>
                                         <div class="listing-content">
