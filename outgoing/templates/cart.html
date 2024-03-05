@@ -1071,7 +1071,7 @@
             <div class="row">
                 <div class="col-12">
                     <h3>Shopping Cart</h3>
-                    <nav>
+                    {% comment %} <nav>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="index.html">
@@ -1080,7 +1080,7 @@
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Cart</li>
                         </ol>
-                    </nav>
+                    </nav> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -1090,15 +1090,21 @@
     <!-- Cart Section Start -->
     <section class="cart-section section-b-space">
         <div class="container">
+            {% if not cart_items %}
+            <h2 class="text-center"> your cart item is empty </h2>
+            <div class="text-center">
+                <a href= "{% url 'shop:shop'%}" class=" btn btn-primary">continue shoping</a>
+            </div> 
+            {% else %}
             <div class="row">
-                <div class="col-12">
+                {% comment %} <div class="col-12">
                     <div class="count-down">
                         <h5>Your cart will be expired in <span class="count-timer theme-color" id="timer"></span>
                             minutes !</h5>
-                        <button type="button" onclick="location.href = 'checkout.html';"
+                         <button type="button" onclick="location.href = 'checkout.html';"
                             class="btn btn-solid-default btn-sm fw-bold">Check Out</button>
                     </div>
-                </div>
+                </div> {% endcomment %}
 
                 <div class="col-sm-12 table-responsive mt-4">
                     <table class="table cart-table">
@@ -1162,83 +1168,23 @@
                               
 
 
-                                 {% comment %} <td>
-                                    <div class="qty-box">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-danger btn-minus" onclick="decreaseQuantity('{{ cart.quantity }}')">-</button>
-                                            </span>
-                                            <input type="number" name="quantity" class="form-control input-number" value="{{ cart.quantity }}" id="quantity_{{ cart.id }}">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-success btn-plus" onclick="increaseQuantity('{{ cart.id }}')">+</button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </td> {% endcomment %}
-
-                                {% comment %} <td class="product-quantity">
-                                    <div id="ppp" class="quantity-container">
-                                        <button class="change_quantity" data-action="minus" data-product-id="{{ cart.id }}">
-                                            <span class="quantity-icon">-</span>
-                                        </button>
-                                        <div class="quantity-display">
-                                            <h6>{{ cart.quantity }}</h6>
-                                        </div>
-                                        <button class="change_quantity" data-action="plus" data-product-id="{{ cart.id }}">
-                                            <span class="quantity-icon">+</span>
-                                        </button>
-                                    </div>
-                                </td> {% endcomment %}
-                                {% comment %} <td>
-                                    <div class="qty-box">
-                                        <div class="input-group">
-                                            
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ cart.id }}', 'increase')">+</button>
-                                                <input type="number" name="quantity" class="form-control input-number"
-                                                value="{{ cart.quantity }}" id="quantityInput_{{ cart.id }}">
-                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ cart.id }}', 'decrease')">-</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td> {% endcomment %}
-                                {% comment %} <td>
-                                    <div class="qty-box" style=" align-items: center; ">
-                                        <p class="quantity" style="font-weight: bold;">{{ cart_item.quantity }}</p>
-                                        <div class="quantity" >
-                            
-                                            <img data-product="{{ cart_item.product.id }}" data-action="add" class="chg-quantity update-cart " src="{% static 'images/arrow-up.png' %}" style="width: 7px; height: 7px; ">
-                                            
-                                            <img data-product="{{ cart_item.product.id }}" data-action="remove" class="chg-quantity update-cart " src="{% static 'images/arrow-down.png' %}" style="width: 7px; height: 7px; cursor: pointer;">
-                                        </div>
-                                    </div>
-                                </td> {% endcomment %}
+                               
                                 <td>
-                                    {% comment %} <div class="qty-box">
-                                        <div class="input-group">
-                                            <input type="number" name="quantity" class="form-control input-number"
-                                                   value="{{ cart_item.quantity }}" id="quantityInput_{{ cart_item.id }}">
-                                            <button class="btn btn-outline-secondary" type="button"
-                                                    data-product="{{ cart_item.product.id }}" data-action="increase"
-                                                    onclick="updateQuantity('{{ cart_item.id }}', 'increase')">+</button>
-                                            <button class="btn btn-outline-secondary" type="button"
-                                                    data-product="{{ cart_item.product.id }}" data-action="decrease"
-                                                    onclick="updateQuantity('{{ cart_item.id }}', 'decrease')">-</button>
-                                        </div>
-                                    </div> {% endcomment %}
+                                   
+                                    
                                     <div class="input-group">
-                                        <button class="btn btn-link px-2"
+                                        <a href = "{% url 'outgoing:remove_cart' cart_item.product.id %}" class="btn btn-link px-2"
                                           onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                           <i class="fas fa-minus"></i>
-                                        </button>
+                                        </a>
                         
-                                        <input id="form1" min="0" name="quantity" value="{{ cart_item.quantity }}" type="number"
-                                          class="form-control form-control-sm" style="width: 30px !important;"/>
+                                        <input id="form1" min="1" name="quantity" value="{{ cart_item.quantity }}" type="number"
+                                          class="form-control form-control-sm" style="width: 10px ;"/>
                         
-                                        <button class="btn btn-link px-2"
+                                        <a href = "{% url 'outgoing:add_cart' cart_item.product.id %}" class="btn btn-link px-2"
                                           onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                           <i class="fas fa-plus"></i>
-                                        </button>
+                                        </a>
                                       </div>
                                 </td>
 
@@ -1246,7 +1192,7 @@
 
 
                                 <td>
-                                    <a href="javascript:void(0)">
+                                    <a href="{% url 'outgoing:remove_item' cart_item.product.id %}">
                                         <i class="fas fa-times"></i>
                                     </a>
                                 </td>
@@ -1269,16 +1215,16 @@
 
                 <div class="col-12 mt-md-5 mt-4">
                     <div class="row">
-                        <div class="col-sm-7 col-5 order-1">
+                        {% comment %} <div class="col-sm-7 col-5 order-1">
                             <div class="left-side-button text-end d-flex d-block justify-content-end">
                                 <a href="javascript:void(0)"
                                     class="text-decoration-underline theme-color d-block text-capitalize">clear
                                     all items</a>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                         <div class="col-sm-5 col-7">
                             <div class="left-side-button float-start">
-                                <a href="index.html" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
+                                <a href="{% url "shop:shop"%}" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
                                     <i class="fas fa-arrow-left"></i> Continue Shopping</a>
                             </div>
                         </div>
@@ -1313,9 +1259,10 @@
                                     <div class="total-details">
                                         <div class="top-details">
                                             <h3>Cart Totals</h3>
-                                            <h6>Total MRP <span>$250.00</span></h6>
-                                            <h6>Coupon Discount <span>-$25.00</span></h6>
-                                            <h6>Convenience Fee <span><del>$25.00</del></span></h6>
+                                            <h6>Total MRP <span>${{ total }}</span></h6>
+                                            <h6>Tax <span>${{ tax }}</span></h6>
+                                           <br>
+                                            <h6><strong>Grand total<span>${{ grand_total }}</span></strong></h6>
                                         </div>
                                         <div class="bottom-details">
                                             <a href="checkout.html">Process Checkout</a>
@@ -1327,6 +1274,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </section>
     <!-- Cart Section End -->

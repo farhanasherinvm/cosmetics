@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from outgoing.models import Cart , Cartitem
 from products.models import Product
 from django.core.exceptions import ObjectDoesNotExist
@@ -13,13 +13,17 @@ def cart(request, total=0, quantity=0, cart_item=None):
             print("222222")
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
-            print("suuuuuuuuuuuuuuuuuuuuuuuuuuuuuiiiiiiii")
+        tax= ( 2 * total)/100
+        grand_total = tax + total    
+        print("suuuuuuuuuuuuuuuuuuuuuuuuuuuuuiiiiiiii")
     except ObjectDoesNotExist:
         pass
     context = {
         'total' : total,
         'quantity' : quantity,
         'cart_items' : cart_items,
+        'tax': tax,
+        'grand_total' : grand_total
     }
     print(f'item:{cart_items}')
     print(f'total:{quantity}')
@@ -65,8 +69,23 @@ def add_cart(request,product_id):
     #return HttpResponse(cart_item.quantity)   
     return redirect('outgoing:cart')
 
+def remove_cart(request, product_id):
+    cart = Cart.objects.get(cart_id =_cart_id(request))
+    product = get_object_or_404(Product, id=product_id)
+    cart_item =Cartitem.objects.get(product =product , cart=cart)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    return redirect('outgoing:cart')
 
-
+def remove_item(request ,product_id):
+    cart = Cart.objects.get(cart_id =_cart_id(request)) 
+    product = get_object_or_404(Product, id=product_id)
+    cart_item =Cartitem.objects.get(product=product, cart=cart)
+    cart_item.delete()
+    return redirect('outgoing:cart')
 # def update_quantity(request, product_id, action):
 #     # Assume you have a Cart model and 'quantity' field
 #     # Replace this with your actual model and field names
