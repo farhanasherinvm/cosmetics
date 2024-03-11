@@ -100,3 +100,7 @@ def remove_item(request ,product_id):
 
 #     # Return the updated quantity in JSON format
 #     return JsonResponse({'quantity': cart_item.quantity})
+
+
+def check_out(request):
+    return render (request,"checkout.html")

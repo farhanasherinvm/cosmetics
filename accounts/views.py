@@ -114,3 +114,14 @@ def userlogin(request):
 def userlogout(request):
     logout(request)
     return redirect("home:home")
+
+def edit_profile(request):
+    if request.method=='POST': 
+        first_name = request.POST.get('first name')
+        last_name = request.POST.get('Last Name')
+        email = request.POST.get('email')
+        number = request.POST.get('number')
+        image = request.FILES.get('image')
+        
+
+    return render(request, "edit_profile.html")

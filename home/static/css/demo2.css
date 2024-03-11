@@ -1262,9 +1262,9 @@ span {
 
 .theme-color {
   color: var(--theme-color) !important; }
-
+/* 
 .theme-bg-color {
-  background-color: var(--theme-color); }
+  background-color: var(--theme-color); } */
 
 /**=====================
      buttons css start
