@@ -40,9 +40,11 @@ def dashboard(request):
 
 def user_manage(request):
     user=User_Profile.objects.all()
+    print(f"she:",user)
     context={
         'user':user,
     }
+    print("sec:",user)
     return render(request,"all_users.html",context)
 
 def user_block(request,id):
@@ -61,8 +63,8 @@ def user_block(request,id):
 
 
 
-def newuser(request):
-    return render(request,"add_newuser.html")
+# def newuser(request):
+#     return render(request,"add_newuser.html")
 
 def product_manage(request):
     product= Product.objects.all()

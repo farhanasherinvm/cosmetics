@@ -57,9 +57,12 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Include Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+<form class="bg0 p-t-75 p-b-0" action ={% url 'accounts:edit_profile' %} method="POST" enctype="multipart/form-data">
+    {% csrf_token %} 
 <div class="container rounded bg-white mt-5 mb-5">
+    
     <div class="row">
+        
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
@@ -67,7 +70,7 @@ body {
                 <div class="mb-3">
                     {% comment %} <label for="image" class="form-label">Image</label> {% endcomment %}
                     <input type="file" class="form-control" id="image" name="image" required>
-                  </div>
+                </div>
                 <span></span>
             </div>
         </div>
@@ -76,32 +79,35 @@ body {
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Create Profile</h4>
                 </div>
+                
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="" placeholder="Last Name"></div>
+                    <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value="" name="first_name" id="first_name" required></div>
+                    <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="" placeholder="Last Name" name="last_name" id="last_name" required></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
+                    <div class="col-md-12"><label class="labels">username</label><input type="text" class="form-control" placeholder="username" value="" name="username" id="username" required></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value="" name="number" id="number" required></div>
                     {% comment %} <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
                     <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div> {% endcomment %}
                     {% comment %} <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div> {% endcomment %}
                     {% comment %} <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
                     <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div> {% endcomment %}
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
+                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value="" name="email" id="email" required></div>
                     {% comment %} <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div> {% endcomment %}
                 </div>
                 {% comment %} <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
                     <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
                 </div> {% endcomment %}
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                {% comment %} <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> {% endcomment %}
+            
             </div>
         </div>
         <div class="col-md-4">
             
             <div class="p-3 py-5">
               
-                <button type="button" class="btn btn-dark" >Update Profile</button>
+                <button type="submit" class="btn btn-dark" >Update Profile</button>
                 <br>
                 <br>
                 <button type="button" class="btn btn-dark">Change Password</button>
@@ -114,10 +120,7 @@ body {
                 <br>
                 
                 <button type="button" class="btn btn-dark">Log out</button>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-primary" type="button">Button</button>
-                    <button class="btn btn-primary" type="button">Button</button>
-                  </div>
+               
                  {% comment %} <button class="flex-c-m stext-101 cl0 size-111 bg3 bor14 p-lr-15 trans-04 pointer btn-sm">
                     Change Password
                 </button> {% endcomment %}
@@ -135,10 +138,10 @@ body {
                 <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div> {% endcomment %}
             </div>
         </div>
+      
     </div>
 </div>
-</div>
-</div>
+</form>
 
 </body>
 </html>

@@ -519,7 +519,8 @@
                                                         <th>Options</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>{% for i in user %}
+                                                <tbody>
+                                                    {% for i in user %}
                                                     <tr>
                                                         {% comment %} <td>
                                                             <div class="form-check user-checkbox">
@@ -541,7 +542,7 @@
 
             
 
-                                                        <td>{{i.email}}</td>
+                                                        <td>{{i.user.email}}</td>
 
 
                                                         <td>{{i.phone}}</td>

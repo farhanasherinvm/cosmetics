@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
     
 class User_Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email=models.EmailField(unique=True)
     phone = models.BigIntegerField(null=True)
     city = models.CharField(max_length=15)
     state = models.CharField(max_length=15,default=True,null=True)
@@ -14,9 +13,12 @@ class User_Profile(models.Model):
     is_active = models.BooleanField(default=True) 
 
     def __str__(self):
+        print(f"User instancessssssssss: {self.user}")
         return self.user.username
 
     def user_name(self):
+        print(f"User first_name: {self.user.first_name}")
+        print(f"User last_name: {self.user.last_name}")
         return f"{self.user.first_name} {self.user.last_name}"
     
 

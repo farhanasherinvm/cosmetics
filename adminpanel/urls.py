@@ -13,7 +13,7 @@ urlpatterns = [
     path('dashboard',views.dashboard,name="dashboard"),
     path('user_manage',views.user_manage,name="user_manage"),
     path('user_block/<str:id>/',views.user_block,name='user_block'),
-    path('newuser',views.newuser,name="newuser"),
+    
 
 
     path('category_manage',views.category_manage,name="category_manage"),

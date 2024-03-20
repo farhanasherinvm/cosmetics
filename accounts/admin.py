@@ -3,5 +3,7 @@ from .models import User_Profile
 
 # Register your models here.
 
+class User_ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user_name', 'phone' ,'image')
 
-admin.site.register(User_Profile)
+admin.site.register(User_Profile,User_ProfileAdmin)

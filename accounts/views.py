@@ -6,7 +6,7 @@ from django.views.decorators.cache import never_cache
 from django.core.mail import send_mail
 from accounts.forms import SignUpForm
 from django.contrib import messages
-
+from accounts.models import User_Profile
 # Create your views here.
 def user_otp(request):
     if request.method=='POST':
@@ -115,13 +115,63 @@ def userlogout(request):
     logout(request)
     return redirect("home:home")
 
+def profile(request):
+    print("check")
+    if request.user.is_authenticated:
+        print("profile")
+        user=request.user
+        print("user:",user)
+        user_pro ,created= User_Profile.objects.get_or_create(user=user)
+        user_pro_image_url = user_pro.image.url if user_pro.image else None
+        print("pro:",user_pro)
+        context={
+            'user_pro': user_pro,
+            'created': created,
+            'user_pro_image_url' : user_pro_image_url
+        }
+        print('created:',created)
+        return render(request,"profile.html",context)
+    return render(request,"login.html")
+
+
+
+
+
+
+
+
 def edit_profile(request):
     if request.method=='POST': 
-        first_name = request.POST.get('first name')
-        last_name = request.POST.get('Last Name')
-        email = request.POST.get('email')
-        number = request.POST.get('number')
+        username=request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        number = request.POST['number']
         image = request.FILES.get('image')
-        
+      
+        print("username:" , username)
+        print("email:",email)
+        print("number:", number)
 
-    return render(request, "edit_profile.html")
+        user_form , created = User.objects.get_or_create(username=username)
+        user_form.email = email
+        user_form.first_name= first_name
+        user_form.last_name = last_name
+        user_form.save()
+        print("user_form",user_form.email)
+       
+        profile , created= User_Profile.objects.get_or_create(user=user_form)
+        print("after:",profile)
+        profile.phone= number
+        if image:
+            profile.image = image
+        return redirect('accounts:profile')
+    else:
+        user_form=request.user
+        profile ,created = User_Profile.objects.get_or_create(user=user_form)
+
+        context={
+            'user_form':user_form,
+            'profie': profile
+        }
+    return render(request, "edit_profile.html", context)
