@@ -65,7 +65,8 @@ def usersignup(request):
         #     usr_obj.save()
         print("!!!!!!!!!!!!!!!!!!!!!!!")
         form = SignUpForm(request.POST)
-        print("aaaaaaaaaaaaaaa")
+        print("aaaaaaaaaaaaaaa:", form)
+
         if form.is_valid():
             print("bbbbbbbbbbbb")
             form.save()
@@ -97,17 +98,28 @@ def userlogin(request):
         email = request.POST.get('email', '')  # Provide an empty string as the default value
         password = request.POST.get('password', '')
         print('email:', email)
-        user=authenticate(request, email=email, password=password)
+        user= authenticate(request, email=email, password=password)
+        print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
         if user is not None:
             print("not none")
 
             if user.email != email:
                 messages.error(request, 'Invalid Credentials')
+                print("tttttttttt")
+
                 return render(request, 'login.html')
-            print("tttttttttt")
+            
+            if user:
+                user_pro, created = User_Profile.objects.get_or_create(user=user)
+                user_pro.email = email
+                user_pro.user_name
+                print(user_pro.email,"___________________________")
+                user_pro.save()
+
             login(request,user)
-            return redirect('home:home')
+            return redirect('accounts:edit_profile')
         else:
+            print("not ifffffffffffff")
             return render(request,"login.html")
     return render(request,"login.html")
 
@@ -118,26 +130,22 @@ def userlogout(request):
 def profile(request):
     print("check")
     if request.user.is_authenticated:
-        print("profile")
+
         user=request.user
         print("user:",user)
         user_pro ,created= User_Profile.objects.get_or_create(user=user)
         user_pro_image_url = user_pro.image.url if user_pro.image else None
-        print("pro:",user_pro)
+        print("pro:||||||||||||",user_pro)
+        print('procreated:',created)
         context={
             'user_pro': user_pro,
-            'created': created,
+         
             'user_pro_image_url' : user_pro_image_url
         }
         print('created:',created)
+        print( 'user_pro:' ,user_pro.user_name)
         return render(request,"profile.html",context)
     return render(request,"login.html")
-
-
-
-
-
-
 
 
 def edit_profile(request):
@@ -163,6 +171,7 @@ def edit_profile(request):
         profile , created= User_Profile.objects.get_or_create(user=user_form)
         print("after:",profile)
         profile.phone= number
+        print("phoneeeeeee:",profile.phone)
         if image:
             profile.image = image
         return redirect('accounts:profile')

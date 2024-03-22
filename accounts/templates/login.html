@@ -52,7 +52,7 @@
                 <form action="{% url 'accounts:userlogin' %}" method="POST">
                     {% csrf_token %}
                 <div class="input">
-                    <label for="email">Username</label>
+                    <label for="email">Email</label>
                     <input type="text" name="email" id="email" required>
                     <span class="spin"></span>
                     <div class="valid-feedback">
@@ -62,7 +62,7 @@
 
                 <div class="input">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" required>
                     <span class="spin"></span>
                 </div>
 

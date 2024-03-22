@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
     
 class User_Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.BigIntegerField(null=True)
+    phone = models.BigIntegerField(null=True,blank=True)
     city = models.CharField(max_length=15)
     state = models.CharField(max_length=15,default=True,null=True)
     country = models.CharField(max_length=15)

@@ -69,7 +69,7 @@ body {
                 <span class="font-weight-bold">Image</span>
                 <div class="mb-3">
                     {% comment %} <label for="image" class="form-label">Image</label> {% endcomment %}
-                    <input type="file" class="form-control" id="image" name="image" required>
+                    <input type="file" class="form-control" id="image" name="image" >
                 </div>
                 <span></span>
             </div>
@@ -81,18 +81,18 @@ body {
                 </div>
                 
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value="" name="first_name" id="first_name" required></div>
-                    <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="" placeholder="Last Name" name="last_name" id="last_name" required></div>
+                    <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value="{{ user_form.first_name }}" name="first_name" id="first_name" required></div>
+                    <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="{{ user_form.last_name}}" placeholder="Last Name" name="last_name" id="last_name" required></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">username</label><input type="text" class="form-control" placeholder="username" value="" name="username" id="username" required></div>
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value="" name="number" id="number" required></div>
+                    <div class="col-md-12"><label class="labels">username</label><input type="text" class="form-control" placeholder="username" value="{{ user_form.username }}" name="username" id="username" required></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value="{{ profile.phone }}" name="number" id="number"></div>
                     {% comment %} <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
                     <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div> {% endcomment %}
                     {% comment %} <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div> {% endcomment %}
                     {% comment %} <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
                     <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div> {% endcomment %}
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value="" name="email" id="email" required></div>
+                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value="{{ user_form.email }}" name="email" id="email" required></div>
                     {% comment %} <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div> {% endcomment %}
                 </div>
                 {% comment %} <div class="row mt-3">
