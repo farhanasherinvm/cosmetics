@@ -1,7 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from outgoing.models import Cart , Cartitem
-from products.models import Product
+from products.models import Product 
+from accounts.models import User_Profile ,Address
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def cart(request, total=0, quantity=0, cart_item=None):
@@ -42,6 +43,7 @@ def _cart_id(request):
 
 def add_cart(request,product_id):
     print("kuuui")
+    current_user=request.user
     product = Product.objects.get(id=product_id)#get product
     try:
         print("555")
@@ -102,5 +104,20 @@ def remove_item(request ,product_id):
 #     return JsonResponse({'quantity': cart_item.quantity})
 
 
-def check_out(request):
-    return render (request,"checkout.html")
+def checkout(request , cart_items=None):
+    user= request.user
+    user_pro , create=User_Profile.objects.get_or_create(user=user)
+    user_profile_image_url=user_pro.image.url if user_pro.image else None
+    user_pro.save()
+    print("checkout_user:" , user)
+    user_address=Address.objects.filter(user=request.user)
+    print("checkout_:user_address" ,user_address)
+    cart_items=Cartitem.objects.filter(user=request.user , is_active=True)
+    print("checkout_:user_address" ,user_address)
+    context={  
+        'user_pro': user_pro,
+        'user_address' :  user_address,
+        'cart_items' : cart_items,
+        'user_profile_image_url' : user_profile_image_url,
+    }
+    return render (request , "checkout.html")

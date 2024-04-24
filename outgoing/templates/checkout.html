@@ -1084,23 +1084,24 @@
             <div class="row g-4">
                 <div class="col-lg-8">
                     <h3 class="mb-3">Billing address</h3>
-                    <form class="needs-validation">
+                    <form class="needs-validation" action="{% url 'outgoing:checkout' %}" method="POST">
+                     {% csrf_token %}
                         <div class="row g-4">
                             <div class="col-md-6">
-                                <label for="fname" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
+                                <label for="fname" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fname" placeholder="Enter Full Name">
                             </div>
-                            <div class="col-md-6">
+                            {% comment %} <div class="col-md-6">
                                 <label for="lname" class="form-label">Last Name</label>
                                 <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
-                            </div>
-                            <div class="col-md-6">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="col-md-6">
                                 <label for="lname" class="form-label">Username</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">@</span>
                                     <input type="text" class="form-control" placeholder="Username" required>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
 
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email address</label>
@@ -1109,18 +1110,18 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="address" class="form-label">Address</label>
+                                <label for="address" class="form-label">Phone</label>
                                 <input type="text" class="form-control" id="address" aria-describedby="emailHelp"
-                                    placeholder="1234 Main St" required>
+                                    placeholder="Enter Phone  Number" required>
                                 <div class="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="address2" class="form-label">Address 2</label>
+                                <label for="address2" class="form-label">Address</label>
                                 <input type="text" class="form-control" id="address2" aria-describedby="emailHelp"
-                                    placeholder="1234 Main St" required>
+                                    placeholder="Enter Address" required>
                             </div>
 
                             <div class="col-md-5">
@@ -1162,7 +1163,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <label for="zip" class="form-label">Zip</label>
+                                <label for="zip" class="form-label">City</label>
                                 <input type="text" class="form-control" id="zip" aria-describedby="emailHelp"
                                     placeholder="1234 Main St">
                             </div>
@@ -1174,7 +1175,7 @@
                         </div>
 
                         <hr class="my-lg-5 my-4">
-
+                              {% comment %} 
                         <h3 class="mb-3">Payment</h3>
 
                         <div class="d-block my-3">
@@ -1192,8 +1193,8 @@
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
                                 <label class="form-check-label" for="paypal">PayPal</label>
                             </div>
-                        </div>
-                        <div class="row g-4">
+                        </div> {% endcomment %}
+                        {% comment %} <div class="row g-4">
                             <div class="col-md-6">
                                 <label for="cc-name" class="form-label">Name on card</label>
                                 <input type="text" class="form-control" id="cc-name">
@@ -1212,14 +1213,31 @@
                                 <label for="cc-cvv" class="form-label">CVV</label>
                                 <input type="text" class="form-control" id="cc-cvv">
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                         <button class="btn btn-solid-default mt-4" type="submit">Continue
                             to checkout</button>
                     </form>
                 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="col-lg-4">
-                    <div class="your-cart-box">
+                    <div class="your-cart-box">{% comment %}
                         <h3 class="mb-3 d-flex text-capitalize">Your cart<span
                                 class="badge bg-theme new-badge rounded-pill ms-auto bg-dark">3</span>
                         </h3>
@@ -1265,14 +1283,92 @@
                                     <button type="submit" class="btn btn-solid-default rounded-0">Redeem</button>
                                 </div>
                             </div>
-                        </form>
+                        </form>{% endcomment %}
+                    
+                <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                    <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                        <!-- Default address -->
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                            <div class="mtext-109 cl2 p-b-30">
+                                <h6> hhhhhhhhhhhhhhhhh</h6>
+                            </div>
+                            <div class="size-209">
+                                <span class="mtext-110 cl2" style="font-size: 15px;">
+                                    emailllllllllllllll
+                                  666666666666666666666
+                                </span>
+                            </div>
+                        </div>
+                                    
+                     <!-- Address options with radio buttons -->
+                 
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                            <!-- Radio button for selecting the address -->
+                            <input type="radio" name="selected_address" value="{{ address.id }}" data-user-name="{{ address.new_name }}" data-email="{{ address.email }}" data-phone="{{ address.phone }}" data-address="{{ address.address }}" data-city="{{ address.city }}" data-state="{{ address.state }}" data-country="{{ address.country }}">
+
+
+
+
+                            <div class="mtext-109 cl2 p-b-30">
+                                <h6> address.new_name </h6>
+                            </div>
+                            {% comment %} <a href="#"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413zm-3-3l1.587 1.585l-1.59 1.584l-1.586-1.585zM6 16v-1.585l7.04-7.018l1.586 1.586L7.587 16zm-2 4h16v2H4z"/></svg> {% endcomment %}
+                            <a href="#" data-toggle="modal" data-target="#editModal{{ forloop.counter }}" style="color: #808080; text-align: right; display: inline-block; margin-left: 126px;" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="vertical-align: middle;">
+                                    <path fill="#808080" d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413zm-3-3l1.587 1.585l-1.59 1.584l-1.586-1.585zM6 16v-1.585l7.04-7.018l1.586 1.586L7.587 16zm-2 4h16v2H4z"/>
+                                </svg>
+                            </a>
+                            
+                            <a href="#" data-toggle="modal" data-target="#deleteModal{{ forloop.counter }}" style="color: #808080; text-align: right; display: inline-block;" >
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="1em" height="1em" viewBox="0 0 29 29" id="delete">
+                                <path fill="#808080" d="M24.2,12.193,23.8,24.3a3.988,3.988,0,0,1-4,3.857H12.2a3.988,3.988,0,0,1-4-3.853L7.8,12.193a1,1,0,0,1,2-.066l.4,12.11a2,2,0,0,0,2,1.923h7.6a2,2,0,0,0,2-1.927l.4-12.106a1,1,0,0,1,2,.066Zm1.323-4.029a1,1,0,0,1-1,1H7.478a1,1,0,0,1,0-2h3.1a1.276,1.276,0,0,0,1.273-1.148,2.991,2.991,0,0,1,2.984-2.694h2.33a2.991,2.991,0,0,1,2.984,2.694,1.276,1.276,0,0,0,1.273,1.148h3.1A1,1,0,0,1,25.522,8.164Zm-11.936-1h4.828a3.3,3.3,0,0,1-.255-.944,1,1,0,0,0-.994-.9h-2.33a1,1,0,0,0-.994.9A3.3,3.3,0,0,1,13.586,7.164Zm1.007,15.151V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Zm4.814,0V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Z"></path>
+                            </svg>
+                            </a>
+                            
+                            <div class="size-209">
+                                <span class="mtext-110 cl2" style="font-size: 15px;">
+                                     address.email 
+                                    address.phone ,
+                                     address.address 
+                                   address.city , address.state , address.country 
+                                </span>
+                            </div>
+                        </div>
+               
+
+
+
+                        <div class="p-t-40">
+                            <br>
+                            
+                            
+                         
+                            {% comment %} <button type="button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 p-lr-15 trans-04 pointer" style="color: white;" id="deliverButton">
+                                Deliver to this Address
+                            </button>
+                            <br>
+                            <button type="button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 p-lr-15 trans-04 pointer" style="color: white;" data-toggle="modal" data-target="#newAddressModal">
+                                New Address
+                            </button> {% endcomment %}
+                            <button class="btn btn-solid-default mt-4" type="submit"> Deliver to this Address</button>
+                            <br>
+                                <button class="btn btn-solid-default mt-4" type="submit"> New Address</button>   
+                        </div>
                     </div>
                 </div>
+               
+                    </div>
+                </div> 
+
+                
             </div>
         </div>
     </section>
     <!-- Cart Section End -->
 
+
+    
     <!-- Subscribe Section Start -->
     <section class="subscribe-section section-b-space">
         <div class="container">
@@ -1294,7 +1390,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>e
     </section>
     <!-- Subscribe Section End -->
 
@@ -1336,7 +1432,7 @@
 
                                 </li>
                             </ul>
-                        </div>
+                        </div>    
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="footer-links">

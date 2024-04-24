@@ -6,7 +6,7 @@ from django.views.decorators.cache import never_cache
 from django.core.mail import send_mail
 from accounts.forms import SignUpForm
 from django.contrib import messages
-from accounts.models import User_Profile
+from accounts.models import User_Profile,Address
 # Create your views here.
 def user_otp(request):
     if request.method=='POST':
@@ -184,3 +184,15 @@ def edit_profile(request):
             'profie': profile
         }
     return render(request, "edit_profile.html", context)
+
+def address(request):
+    user_pro ,created = User_Profile.objects.get_or_create(user=request.user)
+    user_address= Address.objects.filter(user=request.user)
+    context={
+        'user_pro':user_pro,
+        'user_address':user_address
+    }
+    return render(request ,"checkout.html" ,context)
+
+def edit_address(request):
+    return render(request,"checkout.html")

@@ -1245,14 +1245,21 @@
                                 </form>
                             </div>
                         </div>
-
+                         {% if user.is_authenticated %}
                         <div class="col-lg-4 col-sm-6 ">
                             <div class="checkout-button">
-                                <a href="{% url 'outgoing:check_out' %}" class="btn btn-solid-default btn fw-bold">
+                                <a href="{% url 'outgoing:checkout' %}" class="btn btn-solid-default btn fw-bold">
                                     Check Out <i class="fas fa-arrow-right ms-1"></i></a>
                             </div>
                         </div>
-
+                        {% else %}
+                        <div class="col-lg-4 col-sm-6 ">
+                            <div class="checkout-button">
+                                <a href="{% url 'accounts:userlogin' %}" class="btn btn-solid-default btn fw-bold">
+                                    Check Out <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                        {% endif %}
                         <div class="col-lg-4">
                             <div class="cart-box">
                                 <div class="cart-box-details">
