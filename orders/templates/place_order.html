@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,11 +71,11 @@
     <div class="container">
       <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
         <div class='flex-w m-t-130 w-full'>
-        <a href="{% url 'home_app:home' %}" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="{% url 'home:home' %}" class="stext-109 cl8 hov-cl1 trans-04">
           Home
           <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
-        <a href="{% url 'outgoing_app:checkout' %}" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="{% url 'outgoing:checkout' %}" class="stext-109 cl8 hov-cl1 trans-04">
           Checkout
           <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
@@ -306,11 +306,11 @@
     var originalAmount = {{ grand_total }};
     var amount = originalAmount;
   
-    var url = "{% url 'order_app:payments' %}";
+    var url = "";
     var csrftoken = getCookie('csrftoken');
     var orderID = "{{ order.order_number }}"
     var payment_method = "PayPal"
-    var redirect_url = "{% url 'order_app:order_complete' %}";
+    var redirect_url = "";
   
     paypal.Buttons({
         style: {
@@ -400,7 +400,7 @@
   
             $.ajax({
                 type: "POST",
-                url: "{% url 'order_app:apply_coupon' %}",
+                url: "",
                 data: {
                     'coupon': couponValue
                 },
@@ -459,7 +459,7 @@
             // Perform AJAX request for wallet payment
             $.ajax({
                 type: "POST",
-                url: "{% url 'order_app:wallet_payment' order.order_number %}",
+                url: "",
                 dataType: "json",
                 headers: { "X-CSRFToken": getCookie("csrftoken") },
                 success: function (response) {
@@ -473,7 +473,7 @@
                             title: "Success",
                             text: response.message,
                         });
-                        window.location.href = "{% url 'order_app:success'  %}";
+                        window.location.href = "";
                         // Update the relevant parts of the page with the response
                         // Add logic to update the UI based on the wallet payment response
                         // (e.g., show a success message, update order status, etc.)

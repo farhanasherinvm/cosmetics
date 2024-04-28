@@ -1,4 +1,241 @@
+<style>
+    .body{margin-top:20px;
+        background-color: #f1f3f7;
+        }
+        
+        .card {
+            margin-bottom: 24px;
+            -webkit-box-shadow: 0 2px 3px #e4e8f0;
+            box-shadow: 0 2px 3px #e4e8f0;
+        }
+        .card {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid #eff0f2;
+            border-radius: 1rem;
+        }
+        .activity-checkout {
+            list-style: none
+        }
+        
+        .activity-checkout .checkout-icon {
+            position: absolute;
+            top: -4px;
+            left: -24px
+        }
+        
+        .activity-checkout .checkout-item {
+            position: relative;
+            padding-bottom: 24px;
+            padding-left: 35px;
+            border-left: 2px solid #f5f6f8
+        }
+        
+        .activity-checkout .checkout-item:first-child {
+            border-color: #3b76e1
+        }
+        
+        .activity-checkout .checkout-item:first-child:after {
+            background-color: #3b76e1
+        }
+        
+        .activity-checkout .checkout-item:last-child {
+            border-color: transparent
+        }
+        
+        .activity-checkout .checkout-item.crypto-activity {
+            margin-left: 50px
+        }
+        
+        .activity-checkout .checkout-item .crypto-date {
+            position: absolute;
+            top: 3px;
+            left: -65px
+        }
+        
+        
+        
+        .avatar-xs {
+            height: 1rem;
+            width: 1rem
+        }
+        
+        .avatar-sm {
+            height: 2rem;
+            width: 2rem
+        }
+        
+        .avatar {
+            height: 3rem;
+            width: 3rem
+        }
+        
+        .avatar-md {
+            height: 4rem;
+            width: 4rem
+        }
+        
+        .avatar-lg {
+            height: 5rem;
+            width: 5rem
+        }
+        
+        .avatar-xl {
+            height: 6rem;
+            width: 6rem
+        }
+        
+        .avatar-title {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: #3b76e1;
+            color: #fff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            font-weight: 500;
+            height: 100%;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 100%
+        }
+        
+        .avatar-group {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            padding-left: 8px
+        }
+        
+        .avatar-group .avatar-group-item {
+            margin-left: -8px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            -webkit-transition: all .2s;
+            transition: all .2s
+        }
+        
+        .avatar-group .avatar-group-item:hover {
+            position: relative;
+            -webkit-transform: translateY(-2px);
+            transform: translateY(-2px)
+        }
+        
+        .card-radio {
+            background-color: #fff;
+            border: 2px solid #eff0f2;
+            border-radius: .75rem;
+            padding: .5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block
+        }
+        
+        .card-radio:hover {
+            cursor: pointer
+        }
+        
+        .card-radio-label {
+            display: block
+        }
+        
+        .edit-btn {
+            width: 35px;
+            height: 35px;
+            line-height: 40px;
+            text-align: center;
+            position: absolute;
+            right: 25px;
+            margin-top: -50px
+        }
+        
+        .card-radio-input {
+            display: none
+        }
+        
+        .card-radio-input:checked+.card-radio {
+            border-color: #3b76e1!important
+        }
+        
+        
+        .font-size-16 {
+            font-size: 16px!important;
+        }
+        .text-truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        a {
+            text-decoration: none!important;
+        }
+        
+        
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.47rem 0.75rem;
+            font-size: .875rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #545965;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #e2e5e8;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 0.75rem;
+            -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+            transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+        }
+        
+        .edit-btn {
+            width: 35px;
+            height: 35px;
+            line-height: 40px;
+            text-align: center;
+            position: absolute;
+            right: 25px;
+            margin-top: -50px;
+        }
+        
+        .ribbon {
+            position: absolute;
+            right: -26px;
+            top: 20px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 1px 22px;
+            font-size: 13px;
+            font-weight: 500
+        }
+      
+        
+</style>
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1079,292 +1316,318 @@
     <!-- Breadcrumb section end -->
 
     <!-- Cart Section Start -->
-    <section class="section-b-space">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-8">
-                    <h3 class="mb-3">Billing address</h3>
-                    <form class="needs-validation" action="{% url 'outgoing:checkout' %}" method="POST">
-                     {% csrf_token %}
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <label for="fname" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter Full Name">
-                            </div>
-                            {% comment %} <div class="col-md-6">
-                                <label for="lname" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
-                            </div> {% endcomment %}
-                            {% comment %} <div class="col-md-6">
-                                <label for="lname" class="form-label">Username</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1">@</span>
-                                    <input type="text" class="form-control" placeholder="Username" required>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <div class="container">
+    
+        <div class="row">
+            <div class="col-xl-8">
+    
+                <div class="card">
+                    <div class="card-body">
+                        <ol class="activity-checkout mb-0 px-4 mt-3">
+                            <li class="checkout-item">
+                                <div class="avatar checkout-icon p-1">
+                                    <div class="avatar-title rounded-circle bg-primary">
+                                        <i class="bx bxs-receipt text-white font-size-20"></i>
+                                    </div>
                                 </div>
-                            </div> {% endcomment %}
-
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@example.com"
-                                    required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="address" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="address" aria-describedby="emailHelp"
-                                    placeholder="Enter Phone  Number" required>
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
+                                <div class="feed-item-list">
+                                    <div>
+                                        <h5 class="font-size-16 mb-1">Billing Info</h5>
+                                        <p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
+                                        <div class="mb-3">
+                                            <form>
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="billing-name">Name</label>
+                                                                <input type="text" class="form-control" id="billing-name" placeholder="Enter name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="billing-email-address">Email Address</label>
+                                                                <input type="email" class="form-control" id="billing-email-address" placeholder="Enter email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="billing-phone">Phone</label>
+                                                                <input type="text" class="form-control" id="billing-phone" placeholder="Enter Phone no.">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="billing-address">Address</label>
+                                                        <textarea class="form-control" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
+                                                    </div>
+    
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="mb-4 mb-lg-0">
+                                                                <label class="form-label">Country</label>
+                                                                <select class="form-control form-select" title="Country">
+                                                                    <option value="0">Select Country</option>
+                                                                    <option value="AF">Afghanistan</option>
+                                                                    <option value="AL">Albania</option>
+                                                                    <option value="DZ">Algeria</option>
+                                                                    <option value="AS">American Samoa</option>
+                                                                    <option value="AD">Andorra</option>
+                                                                    <option value="AO">Angola</option>
+                                                                    <option value="AI">Anguilla</option>                                   
+                                                                </select>
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-lg-4">
+                                                            <div class="mb-4 mb-lg-0">
+                                                                <label class="form-label" for="billing-city">City</label>
+                                                                <input type="text" class="form-control" id="billing-city" placeholder="Enter City">
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-lg-4">
+                                                            <div class="mb-0">
+                                                                <label class="form-label" for="zip-code">Zip / Postal code</label>
+                                                                <input type="text" class="form-control" id="zip-code" placeholder="Enter Postal code">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="address2" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address2" aria-describedby="emailHelp"
-                                    placeholder="Enter Address" required>
-                            </div>
-
-                            <div class="col-md-5">
-                                <label for="validationCustom04" class="form-label">Country</label>
-                                <select class="form-select custome-form-select" id="validationCustom04">
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>United States</option>
-                                    <option>India</option>
-                                    <option>America</option>
-                                    <option>South America</option>
-                                    <option>Dubai</option>
-                                    <option>Hong Kong</option>
-                                    <option>Indonesia</option>
-                                    <option>Pakistan</option>
-                                    <option>Saudi Arabia</option>
-                                    <option>China</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid country.
+                            </li>
+                            <li class="checkout-item">
+                                <div class="avatar checkout-icon p-1">
+                                    <div class="avatar-title rounded-circle bg-primary">
+                                        <i class="bx bxs-truck text-white font-size-20"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="validationCustom04" class="form-label">State</label>
-                                <select class="form-select custome-form-select" id="validationCustom05">
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>Bhutan</option>
-                                    <option>Burundi</option>
-                                    <option>Comoros</option>
-                                    <option>Dilhi</option>
-                                    <option>Mumbai</option>
-                                    <option>Surat</option>
-                                    <option>Abu & Ambaji</option>
-                                    <option>Japan</option>
-                                    <option>Cuba</option>
-                                    <option>Zambia</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please provide a valid state.
+                                <div class="feed-item-list">
+                                    <div>
+                                        <h5 class="font-size-16 mb-1">Shipping Info</h5>
+                                        <p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-6">
+                                                    <div data-bs-toggle="collapse">
+                                                        <label class="card-radio-label mb-0">
+                                                            <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
+                                                            <div class="card-radio text-truncate p-3">
+                                                                <span class="fs-14 mb-4 d-block">Address 1</span>
+                                                                <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
+                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
+                                                               
+                                                                <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
+                                                            </div>
+                                                        </label>
+                                                        <div class="edit-btn bg-light  rounded">
+                                                            <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+                                                                <i class="bx bx-pencil font-size-16"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                                <div class="col-lg-4 col-sm-6">
+                                                    <div>
+                                                        <label class="card-radio-label mb-0">
+                                                            <input type="radio" name="address" id="info-address2" class="card-radio-input">
+                                                            <div class="card-radio text-truncate p-3">
+                                                                <span class="fs-14 mb-4 d-block">Address 2</span>
+                                                                <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
+                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
+                                                                <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
+                                                            </div>
+                                                        </label>
+                                                        <div class="edit-btn bg-light  rounded">
+                                                            <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+                                                                <i class="bx bx-pencil font-size-16"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="zip" class="form-label">City</label>
-                                <input type="text" class="form-control" id="zip" aria-describedby="emailHelp"
-                                    placeholder="1234 Main St">
-                            </div>
-                        </div>
-                        <div class="form-check ps-0 mt-3 custome-form-check">
-                            <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault11">
-                            <label class="form-check-label checkout-label" for="flexCheckDefault11">Save this
-                                information for next time</label>
-                        </div>
-
-                        <hr class="my-lg-5 my-4">
-                              {% comment %} 
-                        <h3 class="mb-3">Payment</h3>
-
-                        <div class="d-block my-3">
-                            <div class="form-check custome-radio-box">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                <label class="form-check-label" for="credit">Credit card</label>
-                            </div>
-
-                            <div class="form-check custome-radio-box">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
-                                <label class="form-check-label" for="debit">Debit card</label>
-                            </div>
-
-                            <div class="form-check custome-radio-box">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                <label class="form-check-label" for="paypal">PayPal</label>
-                            </div>
-                        </div> {% endcomment %}
-                        {% comment %} <div class="row g-4">
-                            <div class="col-md-6">
-                                <label for="cc-name" class="form-label">Name on card</label>
-                                <input type="text" class="form-control" id="cc-name">
-                                <div id="emailHelp" class="form-text">Full name as displayed on card</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="cc-number" class="form-label">Credit card number</label>
-                                <input type="text" class="form-control" id="cc-number" required="">
-                                <div class="invalid-feedback">Credit card number is required</div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="expiration" class="form-label">Expiration</label>
-                                <input type="text" class="form-control" id="expiration">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="cc-cvv" class="form-label">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv">
-                            </div>
-                        </div> {% endcomment %}
-                        <button class="btn btn-solid-default mt-4" type="submit">Continue
-                            to checkout</button>
-                    </form>
+                            </li>
+                            <li class="checkout-item">
+                                <div class="avatar checkout-icon p-1">
+                                    <div class="avatar-title rounded-circle bg-primary">
+                                        <i class="bx bxs-wallet-alt text-white font-size-20"></i>
+                                    </div>
+                                </div>
+                                <div class="feed-item-list">
+                                    <div>
+                                        <h5 class="font-size-16 mb-1">Payment Info</h5>
+                                        <p class="text-muted text-truncate mb-4">Duis arcu tortor, suscipit eget</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-size-14 mb-3">Payment method :</h5>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div data-bs-toggle="collapse">
+                                                    <label class="card-radio-label">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+                                                        <span class="card-radio py-3 text-center text-truncate">
+                                                            <i class="bx bx-credit-card d-block h2 mb-3"></i>
+                                                            Credit / Debit Card
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div>
+                                                    <label class="card-radio-label">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input">
+                                                        <span class="card-radio py-3 text-center text-truncate">
+                                                            <i class="bx bxl-paypal d-block h2 mb-3"></i>
+                                                            Paypal
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+    
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div>
+                                                    <label class="card-radio-label">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
+    
+                                                        <span class="card-radio py-3 text-center text-truncate">
+                                                            <i class="bx bx-money d-block h2 mb-3"></i>
+                                                            <span>Cash on Delivery</span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="col-lg-4">
-                    <div class="your-cart-box">{% comment %}
-                        <h3 class="mb-3 d-flex text-capitalize">Your cart<span
-                                class="badge bg-theme new-badge rounded-pill ms-auto bg-dark">3</span>
-                        </h3>
-                        <ul class="list-group mb-3">
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0">Product name</h6>
-                                    <small>Brief description</small>
-                                </div>
-                                <span>$12</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0">Second product</h6>
-                                    <small>Brief description</small>
-                                </div>
-                                <span>$8</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0">Third item</h6>
-                                    <small>Brief description</small>
-                                </div>
-                                <span>$5</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-condensed active">
-                                <div class="text-dark">
-                                    <h6 class="my-0">Promo code</h6>
-                                    <small>EXAMPLECODE</small>
-                                </div>
-                                <span>-$5</span>
-                            </li>
-                            <li class="list-group-item d-flex lh-condensed justify-content-between">
-                                <span class="fw-bold">Total (USD)</span>
-                                <strong>$20</strong>
-                            </li>
-                        </ul>
-
-                        <form class="card border-0">
-                            <div class="input-group custome-imput-group">
-                                <input type="text" class="form-control" placeholder="Promo code">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-solid-default rounded-0">Redeem</button>
-                                </div>
-                            </div>
-                        </form>{% endcomment %}
-                    
-                <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-                    <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-                        <!-- Default address -->
-                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-                            <div class="mtext-109 cl2 p-b-30">
-                                <h6> hhhhhhhhhhhhhhhhh</h6>
-                            </div>
-                            <div class="size-209">
-                                <span class="mtext-110 cl2" style="font-size: 15px;">
-                                    emailllllllllllllll
-                                  666666666666666666666
-                                </span>
-                            </div>
+    
+                <div class="row my-4">
+                    <div class="col">
+                        <a href="ecommerce-products.html" class="btn btn-link text-muted">
+                            <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
+                    </div> <!-- end col -->
+                    <div class="col">
+                        <div class="text-end mt-2 mt-sm-0">
+                            <a href="#" class="btn btn-success">
+                                <i class="mdi mdi-cart-outline me-1"></i> Procced </a>
                         </div>
-                                    
-                     <!-- Address options with radio buttons -->
-                 
-                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-                            <!-- Radio button for selecting the address -->
-                            <input type="radio" name="selected_address" value="{{ address.id }}" data-user-name="{{ address.new_name }}" data-email="{{ address.email }}" data-phone="{{ address.phone }}" data-address="{{ address.address }}" data-city="{{ address.city }}" data-state="{{ address.state }}" data-country="{{ address.country }}">
-
-
-
-
-                            <div class="mtext-109 cl2 p-b-30">
-                                <h6> address.new_name </h6>
-                            </div>
-                            {% comment %} <a href="#"> 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413zm-3-3l1.587 1.585l-1.59 1.584l-1.586-1.585zM6 16v-1.585l7.04-7.018l1.586 1.586L7.587 16zm-2 4h16v2H4z"/></svg> {% endcomment %}
-                            <a href="#" data-toggle="modal" data-target="#editModal{{ forloop.counter }}" style="color: #808080; text-align: right; display: inline-block; margin-left: 126px;" >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="vertical-align: middle;">
-                                    <path fill="#808080" d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413zm-3-3l1.587 1.585l-1.59 1.584l-1.586-1.585zM6 16v-1.585l7.04-7.018l1.586 1.586L7.587 16zm-2 4h16v2H4z"/>
-                                </svg>
-                            </a>
-                            
-                            <a href="#" data-toggle="modal" data-target="#deleteModal{{ forloop.counter }}" style="color: #808080; text-align: right; display: inline-block;" >
-                            <svg xmlns="http://www.w3.org/2000/svg"  width="1em" height="1em" viewBox="0 0 29 29" id="delete">
-                                <path fill="#808080" d="M24.2,12.193,23.8,24.3a3.988,3.988,0,0,1-4,3.857H12.2a3.988,3.988,0,0,1-4-3.853L7.8,12.193a1,1,0,0,1,2-.066l.4,12.11a2,2,0,0,0,2,1.923h7.6a2,2,0,0,0,2-1.927l.4-12.106a1,1,0,0,1,2,.066Zm1.323-4.029a1,1,0,0,1-1,1H7.478a1,1,0,0,1,0-2h3.1a1.276,1.276,0,0,0,1.273-1.148,2.991,2.991,0,0,1,2.984-2.694h2.33a2.991,2.991,0,0,1,2.984,2.694,1.276,1.276,0,0,0,1.273,1.148h3.1A1,1,0,0,1,25.522,8.164Zm-11.936-1h4.828a3.3,3.3,0,0,1-.255-.944,1,1,0,0,0-.994-.9h-2.33a1,1,0,0,0-.994.9A3.3,3.3,0,0,1,13.586,7.164Zm1.007,15.151V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Zm4.814,0V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Z"></path>
-                            </svg>
-                            </a>
-                            
-                            <div class="size-209">
-                                <span class="mtext-110 cl2" style="font-size: 15px;">
-                                     address.email 
-                                    address.phone ,
-                                     address.address 
-                                   address.city , address.state , address.country 
-                                </span>
-                            </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row-->
+            </div>
+            <div class="col-xl-4">
+                <div class="card checkout-order-summary">
+                    <div class="card-body">
+                        <div class="p-3 bg-light mb-3">
+                            <h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
                         </div>
-               
-
-
-
-                        <div class="p-t-40">
-                            <br>
+                        <div class="table-responsive">
+                            <table class="table table-centered mb-0 table-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0" style="width: 110px;" scope="col">Product</th>
+                                        <th class="border-top-0" scope="col">Product Desc</th>
+                                        <th class="border-top-0" scope="col">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+                                        <td>
+                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Waterproof Mobile Phone</a></h5>
+                                            <p class="text-muted mb-0">
+                                                <i class="bx bxs-star text-warning"></i>
+                                                <i class="bx bxs-star text-warning"></i>
+                                                <i class="bx bxs-star text-warning"></i>
+                                                <i class="bx bxs-star text-warning"></i>
+                                                <i class="bx bxs-star-half text-warning"></i>
+                                            </p>
+                                            <p class="text-muted mb-0 mt-1">$ 260 x 2</p>
+                                        </td>
+                                        <td>$ 520</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+                                        <td>
+                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Smartphone Dual Camera</a></h5>
+                                            <p class="text-muted mb-0">
+                                                <i class="bx bxs-star text-warning"></i>
+                                                <i class="bx bxs-star text-warning"></i>
+                                                <i class="bx bxs-star text-warning"></i>
+                                                <i class="bx bxs-star text-warning"></i>
+                                            </p>
+                                            <p class="text-muted mb-0 mt-1">$ 260 x 1</p>
+                                        </td>
+                                        <td>$ 260</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="font-size-14 m-0">Sub Total :</h5>
+                                        </td>
+                                        <td>
+                                            $ 780
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="font-size-14 m-0">Discount :</h5>
+                                        </td>
+                                        <td>
+                                            - $ 78
+                                        </td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="font-size-14 m-0">Shipping Charge :</h5>
+                                        </td>
+                                        <td>
+                                            $ 25
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="font-size-14 m-0">Estimated Tax :</h5>
+                                        </td>
+                                        <td>
+                                            $ 18.20
+                                        </td>
+                                    </tr>                              
+                                        
+                                    <tr class="bg-light">
+                                        <td colspan="2">
+                                            <h5 class="font-size-14 m-0">Total:</h5>
+                                        </td>
+                                        <td>
+                                            $ 745.2
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             
-                            
-                         
-                            {% comment %} <button type="button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 p-lr-15 trans-04 pointer" style="color: white;" id="deliverButton">
-                                Deliver to this Address
-                            </button>
-                            <br>
-                            <button type="button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 p-lr-15 trans-04 pointer" style="color: white;" data-toggle="modal" data-target="#newAddressModal">
-                                New Address
-                            </button> {% endcomment %}
-                            <button class="btn btn-solid-default mt-4" type="submit"> Deliver to this Address</button>
-                            <br>
-                                <button class="btn btn-solid-default mt-4" type="submit"> New Address</button>   
                         </div>
                     </div>
                 </div>
-               
-                    </div>
-                </div> 
-
-                
             </div>
         </div>
-    </section>
+        <!-- end row -->
+        
+    </div>
     <!-- Cart Section End -->
 
 

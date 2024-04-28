@@ -6,6 +6,12 @@ from accounts.models import User_Profile ,Address
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def cart(request, total=0, quantity=0, cart_item=None):
+
+    cart_items = []  # Initialize cart_items as an empty list
+    tax = 0  # Initialize tax
+    grand_total = 0  # Initialize grand_total
+    
+
     try:
         print("11111111111")
         cart = Cart.objects.get(cart_id=_cart_id(request))

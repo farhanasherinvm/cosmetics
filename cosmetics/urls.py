@@ -29,6 +29,7 @@ urlpatterns = [
     path('',include('category.urls')),
     path('',include('products.urls')),
     path('outgoing/', include('outgoing.urls', namespace='outgoing')),
-      path('cart/', include('outgoing.urls', namespace='cart')),  # Assuming you have a separate 'cart' app
-    path('products/', include('products.urls', namespace="products"))
+    path('cart/', include('outgoing.urls', namespace='cart')),  # Assuming you have a separate 'cart' app
+    path('products/', include('products.urls', namespace="products")),
+    path('orders/', include('orders.urls', namespace='orders'))
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
