@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
 # Create your views here.
-def place_order(request):
-    return render (request,"place_order.html")
+
+def order_success(request):
+    return render (request ,"order_success.html")
