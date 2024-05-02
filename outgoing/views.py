@@ -4,6 +4,7 @@ from outgoing.models import Cart , Cartitem
 from products.models import Product 
 from accounts.models import User_Profile ,Address
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 # Create your views here.
 def cart(request, total=0, quantity=0, cart_item=None):
 
@@ -127,3 +128,34 @@ def checkout(request , cart_items=None):
         'user_profile_image_url' : user_profile_image_url,
     }
     return render (request , "checkout.html")
+
+def new_address(request):
+    if request.method=='POST':
+        count=Address.objects.filter(user=request.user).count()
+        if count>=2:
+            messages.error(request, "Maximum of two addresses are allowed.")
+            return redirect("outgoing:checkout")
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        address=request.POST.get('address')
+        country=request.POST.get('country')
+        city=request.POST.get('city')
+        state=request.POST.get('state')
+        zip=request.POST.get('zip')
+        user_address=Address.objects.create(
+            user=request.user,
+            new_name=name,
+            email=email,
+            phone=phone,
+            address=address,
+            country=country,
+            city=city,
+            state=state,
+            zip=zip
+        )
+        user_address.save()
+        messages.success(request, "Successfully added")
+        return redirect("outgoing:checkout")
+
+    return redirect ("outgoing:checkout")

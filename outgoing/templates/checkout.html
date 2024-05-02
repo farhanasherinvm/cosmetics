@@ -1344,33 +1344,33 @@
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="billing-name">Name</label>
-                                                                <input type="text" class="form-control" id="billing-name" placeholder="Enter name">
+                                                                <input type="text" class="form-control" id="billing-name" name="name" placeholder="Enter name">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="billing-email-address">Email Address</label>
-                                                                <input type="email" class="form-control" id="billing-email-address" placeholder="Enter email">
+                                                                <input type="email" class="form-control" id="billing-email-address" name="email" placeholder="Enter email">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="billing-phone">Phone</label>
-                                                                <input type="text" class="form-control" id="billing-phone" placeholder="Enter Phone no.">
+                                                                <input type="text" class="form-control" id="billing-phone" name="phone" placeholder="Enter Phone no.">
                                                             </div>
                                                         </div>
                                                     </div>
     
                                                     <div class="mb-3">
                                                         <label class="form-label" for="billing-address">Address</label>
-                                                        <textarea class="form-control" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
+                                                        <textarea class="form-control" id="billing-address" rows="3" name="address" placeholder="Enter full address"></textarea>
                                                     </div>
     
                                                     <div class="row">
                                                         <div class="col-lg-4">
                                                             <div class="mb-4 mb-lg-0">
                                                                 <label class="form-label">Country</label>
-                                                                <select class="form-control form-select" title="Country">
+                                                                <select class="form-control form-select" name="country" title="Country">
                                                                     <option value="0">Select Country</option>
                                                                    
                                                                     
@@ -1587,21 +1587,31 @@
                                                             </div>
                                                         </div>
     
+
+                                                        <div class="col-lg-4">
+                                                            <div class="mb-4 mb-lg-0">
+                                                                <label class="form-label" for="billing-city">state</label>
+                                                                <input type="text" class="form-control" name="state" id="billing-city" placeholder="Enter City">
+                                                            </div>
+                                                        </div>
+
+
                                                         <div class="col-lg-4">
                                                             <div class="mb-4 mb-lg-0">
                                                                 <label class="form-label" for="billing-city">City</label>
-                                                                <input type="text" class="form-control" id="billing-city" placeholder="Enter City">
+                                                                <input type="text" class="form-control" name="city" id="billing-city" placeholder="Enter City">
                                                             </div>
                                                         </div>
-    
+                                                    
+                                                    
                                                         <div class="col-lg-4">
-                                                            <div class="mb-0">
+                                                            <div class="mb-0"><br>
                                                                 <label class="form-label" for="zip-code">Zip / Postal code</label>
-                                                                <input type="text" class="form-control" id="zip-code" placeholder="Enter Postal code">
+                                                                <input type="text" class="form-control" name="zip" id="zip-code" placeholder="Enter Postal code">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <br>
+                                               
                                                     <div class="text-end mt-2 mt-sm-0">
                                                         <a href="#" class="btn btn-danger">
                                                             <i class="mdi -cart-outline me-1"></i> SAVE AND DELIVER HERE </a>

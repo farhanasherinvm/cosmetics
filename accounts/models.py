@@ -24,13 +24,13 @@ class User_Profile(models.Model):
 
 class Address(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
-    new_user=models.CharField(max_length=20)
+    new_name=models.CharField(max_length=20)
     email=models.EmailField(max_length=50)
     phone=models.BigIntegerField(max_length=15)
     address=models.TextField(max_length=20)
     city=models.CharField(max_length=50)
     state=models.CharField(max_length=50) 
     country=models.CharField(max_length=50)
-
+    zip=models.BigIntegerField(max_length=6, default='00000')
     def __str__(self):
         return self.user.username
