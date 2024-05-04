@@ -126,8 +126,10 @@ def checkout(request , cart_items=None):
         'user_address' :  user_address,
         'cart_items' : cart_items,
         'user_profile_image_url' : user_profile_image_url,
+        'user_address': user_address
     }
-    return render (request , "checkout.html")
+    return render (request , "checkout.html", context)
+
 
 def new_address(request):
     if request.method=='POST':

@@ -1588,7 +1588,7 @@
                                                         <div class="col-lg-4">
                                                             <div class="mb-4 mb-lg-0">
                                                                 <label class="form-label" for="billing-city">state</label>
-                                                                <input type="text" class="form-control" name="state" id="billing-city" placeholder="Enter City">
+                                                                <input type="text" class="form-control" name="state" id="billing-city" placeholder="Enter State">
                                                             </div>
                                                         </div>
 
@@ -1619,9 +1619,7 @@
                                     </div>
                                 </div>
                             </li>
-                            
                             <li class="checkout-item">
-                                
                                 <div class="avatar checkout-icon p-1">
                                     <div class="avatar-title rounded-circle bg-primary">
                                         <i class="bx bxs-truck text-white font-size-20"></i>
@@ -1631,20 +1629,20 @@
                                     <div>
                                         <h5 class="font-size-16 mb-1">Shipping Info</h5>
                                         <p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
-                        
                                         <div class="mb-3">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-6">
+                                                    {% for address in user_address%}
                                                     <div data-bs-toggle="collapse">
-                                                        {% for address in user_address %}
                                                         <label class="card-radio-label mb-0">
                                                             <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
                                                             <div class="card-radio text-truncate p-3">
                                                                 <span class="fs-14 mb-4 d-block">Address 1</span>
-                                                                <span class="fs-14 mb-2 d-block">{{ address.new_name }}</span>
-                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
-                                                               
+                                                                <span class="fs-14 mb-2 d-block">{{address.new_name}}</span>
                                                                 <span class="text-muted fw-normal d-block">{{ address.phone }}</span>
+                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">{{ address.address }},<br>{{ address.city }} <br>{{ address.state }}<br>{{ address.district }} {{ address.zip }}</span>
+                                                               
+                                                                
                                                             </div>
                                                         </label>
                                                         <div class="edit-btn bg-light  rounded">
@@ -1652,9 +1650,11 @@
                                                                 <i class="bx bx-pencil font-size-16"></i>
                                                             </a>
                                                         </div>
-                                                        {% endfor %}
                                                     </div>
+                                                    {% endfor %}
                                                 </div>
+    
+                                              
                                             </div>
                                         </div>
                                     </div>
