@@ -23,7 +23,7 @@ class User_Profile(models.Model):
     
 
 class Address(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
     new_name=models.CharField(max_length=20)
     email=models.EmailField(max_length=50)
     phone=models.BigIntegerField(max_length=15)

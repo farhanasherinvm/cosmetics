@@ -1326,7 +1326,7 @@
     
                 <div class="card">
                     <div class="card-body">
-                        <ol class="activity-checkout mb-0 px-4 mt-3">
+                        <ol class=" mb-0 px-4 mt-3">
                             <li class="checkout-item">
                                 <div class="avatar checkout-icon p-1">
                                     <div class="avatar-title rounded-circle bg-primary">
@@ -1338,13 +1338,14 @@
                                         <h5 class="font-size-16 mb-1">Billing Info</h5>
                                         <p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
                                         <div class="mb-3">
-                                            <form>
+                                            <form action="{% url 'outgoing:new_address' %}" method="POST">
+                                               {% csrf_token %}
                                                 <div>
                                                     <div class="row">
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="billing-name">Name</label>
-                                                                <input type="text" class="form-control" id="billing-name" name="name" placeholder="Enter name">
+                                                                <input type="text" class="form-control" id="billing-name" name="name"  placeholder="Enter name" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
@@ -1372,217 +1373,213 @@
                                                                 <label class="form-label">Country</label>
                                                                 <select class="form-control form-select" name="country" title="Country">
                                                                     <option value="0">Select Country</option>
-                                                                   
-                                                                    
-                                                                    
-
-                                                                   <option value="AI"> Afghanistan</option> 
-                                                                    <option value="AI"> Albania</option> 
-                                                                    <option value="AI">  Algeria</option> 
-                                                                        <option value="AI">Andorra</option> 
-                                                                            <option value="AI">Angola</option> 
-                                                                                <option value="AI">Antigua and Barbuda</option> 
-                                                                                    <option value="AI">Argentina</option> 
-                                                                                        <option value="AI">Armenia</option> 
-                                                                                            <option value="AI">Australia</option> 
-                                                                    <option value="AI"> Austria</option> 
-                                                                    <option value="AI"> Austrian Empire*</option> 
+                                                                    <option value="AI">Afghanistan</option> 
+                                                                    <option value="AI">Albania</option> 
+                                                                    <option value="AI">Algeria</option> 
+                                                                    <option value="AI">Andorra</option> 
+                                                                    <option value="AI">Angola</option> 
+                                                                    <option value="AI">Antigua and Barbuda</option> 
+                                                                    <option value="AI">Argentina</option> 
+                                                                    <option value="AI">Armenia</option> 
+                                                                    <option value="AI">Australia</option> 
+                                                                    <option value="AI">Austria</option> 
+                                                                    <option value="AI">Austrian Empire*</option> 
                                                                     <option value="AI">Azerbaijan   </option> 
                                                                     <option value="AI">Baden*</option> 
-                                                                        <option value="AI">Bahamas</option> 
-                                                                            <option value="AI">Bahrain</option> 
-                                                                                <option value="AI">Bangladesh</option> 
-                                                                                    <option value="AI">Barbados</option> 
-                                                                                        <option value="AI">Bavaria*</option> 
-                                                                                            <option value="AI">Belarus</option> 
-                                                                                                <option value="AI">Belgium</option> 
-<option value="AI">Belize</option>
-<option value="AI">Benin (Dahomey)</option>
-<option value="AI">Bolivia</option>
-<option value="AI">Bosnia and Herzegovina</option>
-<option value="AI">Botswana</option>
-<option value="AI">Brazil</option>
-<option value="AI">Brunei</option>
-<option value="AI">Brunswick and Lüneburg*</option>
-<option value="AI">Bulgaria</option>
-<option value="AI">Burkina Faso (Upper Volta)</option>
-<option value="AI">Burma</option>
-<option value="AI">Burundi</option>
-    <option value="AI">  Cabo Verde</option>
-        <option value="AI">  Cambodia</option>
-            <option value="AI">  Cameroon</option>
-                <option value="AI"> Canada</option>
-                    <option value="AI"> Cayman Islands</option>
-                        <option value="AI"> Central African Republic</option>
-    <option value="AI">Central American Federation*</option>
-        <option value="AI">Chad</option>
-            <option value="AI"> Chile</option>
-                <option value="AI"> China</option>
-                    <option value="AI">Colombia</option>
-                        <option value="AI">Comoros</option>
-                            <option value="AI"> Congo Free State</option>
-                                <option value="AI"> Costa Rica</option>
-                                    <option value="AI">Cote d’Ivoire (Ivory Coast)</option>
-                                        <option value="AI">Croatia</option>
-                                            <option value="AI"> Cuba</option>
-                                                <option value="AI"> Cyprus</option>
-    <option value="AI"> Czechia</option>
-        <option value="AI"> Czechoslovakia</option>
-    <option value="AI">Ecuador</option>
-        <option value="AI">Egypt</option>
-            <option value="AI">El Salvador</option>
-                <option value="AI">Equatorial Guinea</option>
-<option value="AI">Eritrea</option>
-    <option value="AI">Estonia</option>
-        <option value="AI">Eswatini</option>
-            <option value="AI">Ethiopia</option>
-                <option value="AI">Fiji</option>
-<option value="AI">Finland</option>
-<option value="AI">France</option>
-    <option value="AI">Gabon</option>
-<option value="AI">Gambia</option>
-    <option value="AI">Georgia</option>
-        <option value="AI">Germany</option>
-            <option value="AI">Ghana</option>
-                <option value="AI">Grand Duchy of Tuscany</option>
-                    <option value="AI">Greece</option>
-                        <option value="AI">Grenada</option>
-                            <option value="AI">Guatemala</option>
-                                <option value="AI">Guinea</option>
-                                    <option value="AI">Guinea-Bissau</option>
-<option value="AI">Guyana</option>
-    <option value="AI">Iceland</option>
-        <option value="AI">India</option>
-            <option value="AI">Indonesia</option>
-                <option value="AI">Iran</option>
-                    <option value="AI">Iraq</option>
-                        <option value="AI">Ireland</option>
-                            <option value="AI">Israel</option>
-                                <option value="AI">Italy</option>
-                                    <option value="AI">Jamaica</option>
-                                        <option value="AI">Japan</option>
-                                            <option value="AI">Jordan</option>
-                                                <option value="AI">Kiribati</option>
-<option value="AI">Korea</option>
-<option value="AI">Kosovo</option>
-<option value="AI">Kuwait</option>
-<option value="AI">Kyrgyzstan</option>
-<option value="AI">Laos</option>
-<option value="AI">Latvia</option>
-<option value="AI">Lebanon</option>
-<option value="AI">Lesotho</option>
-<option value="AI">Lew Chew</option>
-<option value="AI">Liberia</option>
-<option value="AI">Libya</option>
-<option value="AI">Liechtenstein</option>
-<option value="AI">Lithuania</option>
-<option value="AI">Luxembourg</option>
-<option value="AI">Madagascar</option>
-<option value="AI">Malawi</option>
-<option value="AI">Malaysia</option>
-<option value="AI">Maldives</option>
-<option value="AI">Mali</option>
-<option value="AI">Malta</option>
-    <option value="AI">Marshall Islands</option>
-        <option value="AI">Mauritania</option>
-            <option value="AI">Mauritius</option>
-                <option value="AI">Mecklenburg-Schwerin*</option>
-                    <option value="AI">Mecklenburg-Strelitz*</option>
-                        <option value="AI">Mexico</option>
-<option value="AI">Micronesia</option>
-<option value="AI">Moldova</option>
-<option value="AI">Monaco</option>
-<option value="AI">Mongolia</option>
-<option value="AI">Montenegro</option>
-<option value="AI">Morocco</option>
-<option value="AI">Mozambique</option>
-<option value="AI">Namibia</option>
-<option value="AI">Nassau</option>
-<option value="AI">Nauru</option>
-<option value="AI">Nepal</option>
-<option value="AI">Netherlands</option>
-<option value="AI">New Zealand</option>
-<option value="AI">Nicaragua</option>
-<option value="AI">Niger</option>
-<option value="AI">Nigeria</option>
-<option value="AI">North German Confederation*</option>
-<option value="AI">North German Union*</option>
-<option value="AI">North Macedonia</option>
-<option value="AI">Norway</option>
-<option value="AI">Oldenburg*</option>
-<option value="AI">Oman</option>
-<option value="AI">Orange Free State*</option>
-<option value="AI">Pakistan</option>
-<option value="AI">Palau</option>
-<option value="AI">Panama</option>
-<option value="AI">Papal States*</option>
-<option value="AI">Papua New Guinea</option>
-<option value="AI">Paraguay</option>
-<option value="AI">Peru</option>
-<option value="AI">Philippines</option>
-<option value="AI">Piedmont-Sardinia*</option>
-<option value="AI">Poland</option>
-<option value="AI">Portugal</option>
-<option value="AI">Qatar</option>
-<option value="AI">Republic of Genoa*</option>
-<option value="AI">Republic of Korea (South Korea)</option>
-<option value="AI">Republic of the Congo</option>
-<option value="AI">Romania</option>
-<option value="AI">Russia</option>
-<option value="AI">Rwanda</option>
-<option value="AI">Saint Kitts and Nevis</option>
-<option value="AI">Saint Lucia</option>
-<option value="AI">Saint Vincent and the Grenadines</option>
-<option value="AI">Samoa</option>
-<option value="AI">San Marino</option>
-<option value="AI">Sao Tome and Principe</option>
-<option value="AI">Saudi Arabia</option>
-<option value="AI">Schaumburg-Lippe*</option>
-<option value="AI">Senegal</option>
-<option value="AI">Serbia</option>
-<option value="AI">Seychelles</option>
-<option value="AI">Sierra Leone</option>
-<option value="AI">Singapore</option>
-<option value="AI">Slovakia</option>
-<option value="AI">Slovenia</option>
-<option value="AI">Solomon Islands</option>
-<option value="AI">Somalia</option>
-<option value="AI">South Africa</option>
-<option value="AI">South Sudan</option>
-<option value="AI">Spain</option>
-<option value="AI">Sri Lanka</option>
-<option value="AI">Sudan</option>
-<option value="AI">Suriname</option>
-<option value="AI">Sweden</option>
-<option value="AI">Switzerland</option>
-<option value="AI">Syria</option>
-<option value="AI">Tajikistan</option>
-<option value="AI">Tanzania</option>
-<option value="AI">Texas*</option>
-<option value="AI">Thailand</option>
-<option value="AI">Timor-Leste</option>
-<option value="AI">Togo</option>
-<option value="AI">Tonga</option>
-<option value="AI">Trinidad and Tobago</option>
-<option value="AI">Tunisia</option>
-<option value="AI">Turkey</option>
-<option value="AI">Turkmenistan</option>
-<option value="AI">Tuvalu</option>
-<option value="AI">Two Sicilies*</option>
-<option value="AI">Uganda</option>
-<option value="AI">Ukraine</option>
-<option value="AI">Union of Soviet Socialist Republics*</option>
-<option value="AI">United Arab Emirates</option>
-<option value="AI">United Kingdom</option>
-<option value="AI">Uruguay</option>
-<option value="AI">Uzbekistan</option>
-<option value="AI">Vanuatu</option>
-<option value="AI">Venezuela</option>
-<option value="AI">Vietnam</option>
-<option value="AI">Württemberg*</option>
-<option value="AI">Yemen</option>
-<option value="AI">Zambia</option>
-<option value="AI">Zimbabwe</option>
+                                                                    <option value="AI">Bahamas</option> 
+                                                                    <option value="AI">Bahrain</option> 
+                                                                    <option value="AI">Bangladesh</option> 
+                                                                    <option value="AI">Barbados</option> 
+                                                                    <option value="AI">Bavaria*</option> 
+                                                                    <option value="AI">Belarus</option> 
+                                                                    <option value="AI">Belgium</option> 
+                                                                    <option value="AI">Belize</option>
+                                                                    <option value="AI">Benin (Dahomey)</option>
+                                                                    <option value="AI">Bolivia</option>
+                                                                    <option value="AI">Bosnia and Herzegovina</option>
+                                                                    <option value="AI">Botswana</option>
+                                                                    <option value="AI">Brazil</option>
+                                                                    <option value="AI">Brunei</option>
+                                                                    <option value="AI">Brunswick and Lüneburg*</option>
+                                                                    <option value="AI">Bulgaria</option>
+                                                                    <option value="AI">Burkina Faso (Upper Volta)</option>
+                                                                    <option value="AI">Burma</option>
+                                                                    <option value="AI">Burundi</option>
+                                                                    <option value="AI">Cabo Verde</option>
+                                                                    <option value="AI">Cambodia</option>
+                                                                    <option value="AI">Cameroon</option>
+                                                                    <option value="AI">Canada</option>
+                                                                    <option value="AI">Cayman Islands</option>
+                                                                    <option value="AI">Central African Republic</option>
+                                                                    <option value="AI">Central American Federation*</option>
+                                                                    <option value="AI">Chad</option>
+                                                                    <option value="AI">Chile</option>
+                                                                    <option value="AI">China</option>
+                                                                    <option value="AI">Colombia</option>
+                                                                    <option value="AI">Comoros</option>
+                                                                    <option value="AI">Congo Free State</option>
+                                                                    <option value="AI">Costa Rica</option>
+                                                                    <option value="AI">Cote d’Ivoire (Ivory Coast)</option>
+                                                                    <option value="AI">Croatia</option>
+                                                                    <option value="AI">Cuba</option>
+                                                                    <option value="AI">Cyprus</option>
+                                                                    <option value="AI">Czechia</option>
+                                                                    <option value="AI">Czechoslovakia</option>
+                                                                    <option value="AI">Ecuador</option>
+                                                                    <option value="AI">Egypt</option>
+                                                                    <option value="AI">El Salvador</option>
+                                                                    <option value="AI">Equatorial Guinea</option>
+                                                                    <option value="AI">Eritrea</option>
+                                                                    <option value="AI">Estonia</option>
+                                                                    <option value="AI">Eswatini</option>
+                                                                    <option value="AI">Ethiopia</option>
+                                                                    <option value="AI">Fiji</option>
+                                                                    <option value="AI">Finland</option>
+                                                                    <option value="AI">France</option>
+                                                                    <option value="AI">Gabon</option>
+                                                                    <option value="AI">Gambia</option>
+                                                                    <option value="AI">Georgia</option>
+                                                                    <option value="AI">Germany</option>
+                                                                    <option value="AI">Ghana</option>
+                                                                    <option value="AI">Grand Duchy of Tuscany</option>
+                                                                    <option value="AI">Greece</option>
+                                                                    <option value="AI">Grenada</option>
+                                                                    <option value="AI">Guatemala</option>
+                                                                    <option value="AI">Guinea</option>
+                                                                    <option value="AI">Guinea-Bissau</option>
+                                                                    <option value="AI">Guyana</option>
+                                                                    <option value="AI">Iceland</option>
+                                                                    <option value="AI">India</option>
+                                                                    <option value="AI">Indonesia</option>
+                                                                    <option value="AI">Iran</option>
+                                                                    <option value="AI">Iraq</option>
+                                                                    <option value="AI">Ireland</option>
+                                                                    <option value="AI">Israel</option>
+                                                                    <option value="AI">Italy</option>
+                                                                    <option value="AI">Jamaica</option>
+                                                                    <option value="AI">Japan</option>
+                                                                    <option value="AI">Jordan</option>
+                                                                    <option value="AI">Kiribati</option>
+                                                                    <option value="AI">Korea</option>
+                                                                    <option value="AI">Kosovo</option>
+                                                                    <option value="AI">Kuwait</option>
+                                                                    <option value="AI">Kyrgyzstan</option>
+                                                                    <option value="AI">Laos</option>
+                                                                    <option value="AI">Latvia</option>
+                                                                    <option value="AI">Lebanon</option>
+                                                                    <option value="AI">Lesotho</option>
+                                                                    <option value="AI">Lew Chew</option>
+                                                                    <option value="AI">Liberia</option>
+                                                                    <option value="AI">Libya</option>
+                                                                    <option value="AI">Liechtenstein</option>
+                                                                    <option value="AI">Lithuania</option>
+                                                                    <option value="AI">Luxembourg</option>
+                                                                    <option value="AI">Madagascar</option>
+                                                                    <option value="AI">Malawi</option>
+                                                                    <option value="AI">Malaysia</option>
+                                                                    <option value="AI">Maldives</option>
+                                                                    <option value="AI">Mali</option>
+                                                                    <option value="AI">Malta</option>
+                                                                    <option value="AI">Marshall Islands</option>
+                                                                    <option value="AI">Mauritania</option>
+                                                                    <option value="AI">Mauritius</option>
+                                                                    <option value="AI">Mecklenburg-Schwerin*</option>
+                                                                    <option value="AI">Mecklenburg-Strelitz*</option>
+                                                                    <option value="AI">Mexico</option>
+                                                                    <option value="AI">Micronesia</option>
+                                                                    <option value="AI">Moldova</option>
+                                                                    <option value="AI">Monaco</option>
+                                                                    <option value="AI">Mongolia</option>
+                                                                    <option value="AI">Montenegro</option>
+                                                                    <option value="AI">Morocco</option>
+                                                                    <option value="AI">Mozambique</option>
+                                                                    <option value="AI">Namibia</option>
+                                                                    <option value="AI">Nassau</option>
+                                                                    <option value="AI">Nauru</option>
+                                                                    <option value="AI">Nepal</option>
+                                                                    <option value="AI">Netherlands</option>
+                                                                    <option value="AI">New Zealand</option>
+                                                                    <option value="AI">Nicaragua</option>
+                                                                    <option value="AI">Niger</option>
+                                                                    <option value="AI">Nigeria</option>
+                                                                    <option value="AI">North German Confederation*</option>
+                                                                    <option value="AI">North German Union*</option>
+                                                                    <option value="AI">North Macedonia</option>
+                                                                    <option value="AI">Norway</option>
+                                                                    <option value="AI">Oldenburg*</option>
+                                                                    <option value="AI">Oman</option>
+                                                                    <option value="AI">Orange Free State*</option>
+                                                                    <option value="AI">Pakistan</option>
+                                                                    <option value="AI">Palau</option>
+                                                                    <option value="AI">Panama</option>
+                                                                    <option value="AI">Papal States*</option>
+                                                                    <option value="AI">Papua New Guinea</option>
+                                                                    <option value="AI">Paraguay</option>
+                                                                    <option value="AI">Peru</option>
+                                                                    <option value="AI">Philippines</option>
+                                                                    <option value="AI">Piedmont-Sardinia*</option>
+                                                                    <option value="AI">Poland</option>
+                                                                    <option value="AI">Portugal</option>
+                                                                    <option value="AI">Qatar</option>
+                                                                    <option value="AI">Republic of Genoa*</option>
+                                                                    <option value="AI">Republic of Korea (South Korea)</option>
+                                                                    <option value="AI">Republic of the Congo</option>
+                                                                    <option value="AI">Romania</option>
+                                                                    <option value="AI">Russia</option>
+                                                                    <option value="AI">Rwanda</option>
+                                                                    <option value="AI">Saint Kitts and Nevis</option>
+                                                                    <option value="AI">Saint Lucia</option>
+                                                                    <option value="AI">Saint Vincent and the Grenadines</option>
+                                                                    <option value="AI">Samoa</option>
+                                                                    <option value="AI">San Marino</option>
+                                                                    <option value="AI">Sao Tome and Principe</option>
+                                                                    <option value="AI">Saudi Arabia</option>
+                                                                    <option value="AI">Schaumburg-Lippe*</option>
+                                                                    <option value="AI">Senegal</option>
+                                                                    <option value="AI">Serbia</option>
+                                                                    <option value="AI">Seychelles</option>
+                                                                    <option value="AI">Sierra Leone</option>
+                                                                    <option value="AI">Singapore</option>
+                                                                    <option value="AI">Slovakia</option>
+                                                                    <option value="AI">Slovenia</option>
+                                                                    <option value="AI">Solomon Islands</option>
+                                                                    <option value="AI">Somalia</option>
+                                                                    <option value="AI">South Africa</option>
+                                                                    <option value="AI">South Sudan</option>
+                                                                    <option value="AI">Spain</option>
+                                                                    <option value="AI">Sri Lanka</option>
+                                                                    <option value="AI">Sudan</option>
+                                                                    <option value="AI">Suriname</option>
+                                                                    <option value="AI">Sweden</option>
+                                                                    <option value="AI">Switzerland</option>
+                                                                    <option value="AI">Syria</option>
+                                                                    <option value="AI">Tajikistan</option>
+                                                                    <option value="AI">Tanzania</option>
+                                                                    <option value="AI">Texas*</option>
+                                                                    <option value="AI">Thailand</option>
+                                                                    <option value="AI">Timor-Leste</option>
+                                                                    <option value="AI">Togo</option>
+                                                                    <option value="AI">Tonga</option>
+                                                                    <option value="AI">Trinidad and Tobago</option>
+                                                                    <option value="AI">Tunisia</option>
+                                                                    <option value="AI">Turkey</option>
+                                                                    <option value="AI">Turkmenistan</option>
+                                                                    <option value="AI">Tuvalu</option>
+                                                                    <option value="AI">Two Sicilies*</option>
+                                                                    <option value="AI">Uganda</option>
+                                                                    <option value="AI">Ukraine</option>
+                                                                    <option value="AI">Union of Soviet Socialist Republics*</option>
+                                                                    <option value="AI">United Arab Emirates</option>
+                                                                    <option value="AI">United Kingdom</option>
+                                                                    <option value="AI">Uruguay</option>
+                                                                    <option value="AI">Uzbekistan</option>
+                                                                    <option value="AI">Vanuatu</option>
+                                                                    <option value="AI">Venezuela</option>
+                                                                    <option value="AI">Vietnam</option>
+                                                                    <option value="AI">Württemberg*</option>
+                                                                    <option value="AI">Yemen</option>
+                                                                    <option value="AI">Zambia</option>
+                                                                    <option value="AI">Zimbabwe</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -1613,8 +1610,8 @@
                                                     </div>
                                                
                                                     <div class="text-end mt-2 mt-sm-0">
-                                                        <a href="#" class="btn btn-danger">
-                                                            <i class="mdi -cart-outline me-1"></i> SAVE AND DELIVER HERE </a>
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="mdi -cart-outline me-1"></i> SAVE</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -1622,7 +1619,9 @@
                                     </div>
                                 </div>
                             </li>
+                            
                             <li class="checkout-item">
+                                
                                 <div class="avatar checkout-icon p-1">
                                     <div class="avatar-title rounded-circle bg-primary">
                                         <i class="bx bxs-truck text-white font-size-20"></i>
@@ -1632,18 +1631,20 @@
                                     <div>
                                         <h5 class="font-size-16 mb-1">Shipping Info</h5>
                                         <p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
+                        
                                         <div class="mb-3">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-6">
                                                     <div data-bs-toggle="collapse">
+                                                        {% for address in user_address %}
                                                         <label class="card-radio-label mb-0">
                                                             <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
                                                             <div class="card-radio text-truncate p-3">
                                                                 <span class="fs-14 mb-4 d-block">Address 1</span>
-                                                                <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
+                                                                <span class="fs-14 mb-2 d-block">{{ address.new_name }}</span>
                                                                 <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
                                                                
-                                                                <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
+                                                                <span class="text-muted fw-normal d-block">{{ address.phone }}</span>
                                                             </div>
                                                         </label>
                                                         <div class="edit-btn bg-light  rounded">
@@ -1651,25 +1652,7 @@
                                                                 <i class="bx bx-pencil font-size-16"></i>
                                                             </a>
                                                         </div>
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div>
-                                                        <label class="card-radio-label mb-0">
-                                                            <input type="radio" name="address" id="info-address2" class="card-radio-input">
-                                                            <div class="card-radio text-truncate p-3">
-                                                                <span class="fs-14 mb-4 d-block">Address 2</span>
-                                                                <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
-                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
-                                                                <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
-                                                            </div>
-                                                        </label>
-                                                        <div class="edit-btn bg-light  rounded">
-                                                            <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
-                                                                <i class="bx bx-pencil font-size-16"></i>
-                                                            </a>
-                                                        </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>

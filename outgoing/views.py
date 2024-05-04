@@ -131,6 +131,7 @@ def checkout(request , cart_items=None):
 
 def new_address(request):
     if request.method=='POST':
+        print(" if request.method=='POST':")
         count=Address.objects.filter(user=request.user).count()
         if count>=2:
             messages.error(request, "Maximum of two addresses are allowed.")
@@ -157,5 +158,5 @@ def new_address(request):
         user_address.save()
         messages.success(request, "Successfully added")
         return redirect("outgoing:checkout")
-
+    print(" if request.method=='POST':noooooooooooooo")
     return redirect ("outgoing:checkout")
