@@ -162,3 +162,8 @@ def new_address(request):
         return redirect("outgoing:checkout")
     print(" if request.method=='POST':noooooooooooooo")
     return redirect ("outgoing:checkout")
+
+def delete_address(request,id):
+    user_address=get_object_or_404(Address,id=id)
+    user_address.delete()
+    return redirect('outgoing:checkout')

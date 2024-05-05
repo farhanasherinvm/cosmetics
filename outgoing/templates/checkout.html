@@ -243,7 +243,7 @@
 <!-- Mirrored from themes.pixelstrap.com/voxo/front-end/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Jan 2024 17:30:43 GMT -->
 <head>
     <link rel="manifest" href="manifest.json" />
-    <link rel="icon" href="assets/images/favicon/2.png" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/favicon/2.png' %}" type="image/x-icon" />
     <link rel="apple-touch-icon" href="assets/images/favicon/2.png" />
     <meta name="theme-color" content="#e22454" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -265,7 +265,7 @@
     <meta name="author" content="Voxo">
     <link rel="icon" href="assets/images/favicon/2.png" type="image/x-icon" />
     <title>Checkout</title>
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -288,6 +288,15 @@
 
     <!-- Theme css -->
     <link id="color-link" rel="stylesheet" type="text/css" href="{% static 'css/demo2.css' %}">
+<!--    hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh   -->
+    <!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -1631,34 +1640,32 @@
                                         <p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
                                         <div class="mb-3">
                                             <div class="row">
+                                                {% for address in user_address %}
                                                 <div class="col-lg-4 col-sm-6">
-                                                    {% for address in user_address%}
                                                     <div data-bs-toggle="collapse">
                                                         <label class="card-radio-label mb-0">
                                                             <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
                                                             <div class="card-radio text-truncate p-3">
                                                                 <span class="fs-14 mb-4 d-block">Address 1</span>
-                                                                <span class="fs-14 mb-2 d-block">{{address.new_name}}</span>
+                                                                <span class="fs-14 mb-2 d-block">{{ address.new_name }}</span>
                                                                 <span class="text-muted fw-normal d-block">{{ address.phone }}</span>
-                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">{{ address.address }},<br>{{ address.city }} <br>{{ address.state }}<br>{{ address.district }} {{ address.zip }}</span>
-                                                               
-                                                                
+                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">{{ address.address }},<br> {{ address.city }} {{ address.state }} {{ address.district }} {{ address.zip }}</span>
                                                             </div>
                                                         </label>
-                                                        <div class="edit-btn bg-light  rounded">
-                                                            <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
-                                                                <i class="bx bx-pencil font-size-16"></i>
-                                                            </a>
+                                                        <div class="edit-btn bg-light rounded">
+                                                           
+                                                                <a href="#editModal{{ forloop.counter }}" class="edit" data-toggle="modal"><i class="material-icons " data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                                <a href="#deleteModal{{ forloop.counter }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                           
                                                         </div>
                                                     </div>
-                                                    {% endfor %}
                                                 </div>
-    
-                                              
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                             </li>
                             <li class="checkout-item">
                                 <div class="avatar checkout-icon p-1">
@@ -1828,6 +1835,81 @@
             </div>
         </div>
         <!-- end row -->
+        <!-- edit Modal Start -->
+    
+  {% for item in category %}
+  <!-- Edit Modal for {{ item.name }} -->
+  <div class="modal fade" id="editModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="editModalLabel{{ forloop.counter }}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel{{ forloop.counter }}">Edit Category {{ item.category_name }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          
+          <!-- Your edit form goes here -->
+          <form method="POST" action="{% url 'adminpanel:edit_category' %}" enctype="multipart/form-data">
+
+          {% csrf_token %}
+            <input type="hidden" name="category_id" value="{{ item.id }}">
+
+            <!-- Include form fields for editing -->
+            <div class="mb-3">
+              <label for="edit_name{{ forloop.counter }}" class="form-label">Name</label>
+              <input type="text" class="form-control" id="edit_name{{ forloop.counter }}" name="edit_name" value="{{ item.category_name }}" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_description{{ forloop.counter }}" class="form-label">Description</label>
+              <textarea class="form-control" id="edit_description{{ forloop.counter }}" name="edit_description" required>{{ item.category_description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_image{{ forloop.counter }}" class="form-label">Image</label>
+              <!-- Display existing image -->
+              {% if item.category_image %}
+              <img src="{{ item.category_image.url }}" alt="image" style="width: 50px; margin-bottom: 10px;">
+              {% endif %}
+              <input type="file" class="form-control" id="edit_image{{ forloop.counter }}" name="edit_image" accept="image/*">
+          </div>
+
+
+
+
+
+          
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+         <!-- delete Modal Start -->
+ {% for address in user_address %}
+
+ <div class="modal fade" id="deleteModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ forloop.counter }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel{{ forloop.counter }}">Delete Category {{ address.new_name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this category?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="{% url 'outgoing:delete_address' address.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
         
     </div>
     <!-- Cart Section End -->
@@ -2057,6 +2139,7 @@
     <!-- tap to top Section End -->
 
     <div class="bg-overlay"></div>
+   
 
     <!-- latest jquery-->
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
