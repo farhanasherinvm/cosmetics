@@ -235,3 +235,5 @@ def edit_category(request):
         return redirect('adminpanel:category_manage') 
    
 
+def order_detail(request):
+    return render (request,"order_detail.html")
