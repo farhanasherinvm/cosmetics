@@ -237,3 +237,5 @@ def edit_category(request):
 
 def order_detail(request):
     return render (request,"order_detail.html")
+def orders(request):
+    return render (request,"orders.html")

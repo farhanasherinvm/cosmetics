@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -12,8 +13,8 @@
     <meta name="keywords"
         content="admin template, Voxo admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
     <title>Voxo - Order List</title>
 
     <!-- Google font-->
@@ -22,29 +23,31 @@
         rel="stylesheet">
 
     <!-- Fontawesome css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/font-awesome.css' %}">
+    <!-- Linear Icon css -->
+    <link rel="stylesheet" href="{% static 'assets/css/linearicon.css' %}">
 
     <!-- Linear Icon -->
-    <link rel="stylesheet" href="../../../cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="{% static '../../../cdn.linearicons.com/free/1.0.0/icon-font.min.css' %}">
 
     <!-- Themify icon css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/themify.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/themify.css' %}">
 
     <!-- Feather icon css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/feather-icon.css' %}">
 
     <!-- Plugins css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/scrollbar.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/scrollbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/animate.css' %}">
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/bootstrap.css' %}">
 
     <!-- App css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
 
     <!-- Responsive css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
 </head>
 
 <body>
@@ -853,7 +856,7 @@
                                                     <tr>
                                                         <td>
                                                             <span>
-                                                                <img src="assets/images/profile/1.jpg" alt="users">
+                                                                <img src="{% static 'assets/images/profile/1.jpg' %}" alt="users">
                                                             </span>
                                                         </td>
 
@@ -1049,35 +1052,35 @@
     <!-- Modal end -->
 
     <!-- latest js -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
 
     <!-- Bootstrap js -->
-    <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 
     <!-- feather icon js -->
-    <script src="assets/js/icons/feather-icon/feather.min.js"></script>
-    <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
+    <script src="{% static 'assets/js/icons/feather-icon/feather.min.js' %}"></script>
+    <script src="{% static 'assets/js/icons/feather-icon/feather-icon.js' %}"></script>
 
     <!-- customizer js -->
-    <script src="assets/js/customizer.js"></script>
+    <script src="{% static 'assets/js/customizer.js' %}"></script>
 
     <!-- scrollbar simplebar js -->
-    <script src="assets/js/scrollbar/simplebar.js"></script>
-    <script src="assets/js/scrollbar/custom.js"></script>
+    <script src="{% static 'assets/js/scrollbar/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/scrollbar/custom.js' %}"></script>
 
     <!-- Sidebar js -->
-    <script src="assets/js/config.js"></script>
+    <script src="{% static 'assets/js/config.js' %}"></script>
 
     <!-- Plugins js -->
-    <script src="assets/js/sidebar-menu.js"></script>
-    <script src="assets/js/notify/bootstrap-notify.min.js"></script>
-    <script src="assets/js/notify/index.js"></script>
+    <script src="{% static 'assets/js/sidebar-menu.js' %}"></script>
+    <script src="{% static 'assets/js/notify/bootstrap-notify.min.js' %}"></script>
+    <script src="{% static 'assets/js/notify/index.js' %}"></script>
 
     <!-- all checkbox select js -->
-    <script src="assets/js/checkbox-all-check.js"></script>
+    <script src="{% static 'assets/js/checkbox-all-check.js' %}"></script>
 
     <!-- Theme js -->
-    <script src="assets/js/script.js"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
 </body>
 
 
