@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User_Profile
+from products.models import Product
 # Create your models here.
 
 class Payment(models.Model):
@@ -40,3 +41,34 @@ class Order(models.Model):
     status       = models.IntegerField(choices=ORDER_STATUS, default=1, null=True, blank=True)
     created_at   = models.DateTimeField(auto_now_add=True)
     updated_at   = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user_name
+    
+
+
+class OrderProduct(models.Model):
+    STATUS = (
+        ('New' , 'New'),
+        ('Accepted' , 'Accepted'),
+        ('Return' , 'Return'),
+        ('Cancelled' , 'Cancelled'),
+    )
+    user       = models.ForeignKey(User_Profile, on_delete=models.CASCADE)
+    order      = models.ForeignKey(Order, on_delete=models.CASCADE)
+    payment    = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
+    product    = models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity   = models.IntegerField()
+    price      = models.FloatField()
+    ordered    = models.BooleanField(default=False)
+    status     = models.CharField(choices=STATUS, default="New")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    user_note  = models.CharField(blank=True,max_length=100)
+
+    def __str__(self):
+        return self.product.product_name
+    def subtotal(self):
+        return self.price * self.quantity
+
+
