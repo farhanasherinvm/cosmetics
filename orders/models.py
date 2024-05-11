@@ -62,6 +62,7 @@ class OrderProduct(models.Model):
     price      = models.FloatField()
     ordered    = models.BooleanField(default=False)
     status     = models.CharField(choices=STATUS, default="New")
+    ip         = models.CharField(blank=True, max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user_note  = models.CharField(blank=True,max_length=100)
