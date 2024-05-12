@@ -1755,10 +1755,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for item in cart_items %}
                                     <tr>
-                                        <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+                                        
+                                        <th scope="row"><img src="{{ item.product.image.url }}" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
                                         <td>
-                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Waterproof Mobile Phone</a></h5>
+                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">{{ item.product.product_name }}</a></h5>
                                             <p class="text-muted mb-0">
                                                 <i class="bx bxs-star text-warning"></i>
                                                 <i class="bx bxs-star text-warning"></i>
@@ -1768,22 +1770,10 @@
                                             </p>
                                             <p class="text-muted mb-0 mt-1">$ 260 x 2</p>
                                         </td>
-                                        <td>$ 520</td>
+                                        <td>$ {{ item.product.price }}</td>
+                                        
                                     </tr>
-                                    <tr>
-                                        <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
-                                        <td>
-                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Smartphone Dual Camera</a></h5>
-                                            <p class="text-muted mb-0">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                            </p>
-                                            <p class="text-muted mb-0 mt-1">$ 260 x 1</p>
-                                        </td>
-                                        <td>$ 260</td>
-                                    </tr>
+                                    {% endfor %} 
                                     <tr>
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Sub Total :</h5>

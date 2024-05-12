@@ -128,6 +128,7 @@ def checkout(request , cart_items=None):
         'user_profile_image_url' : user_profile_image_url,
         'user_address': user_address
     }
+    print("checkout_:cart_items" ,cart_items)
     return render (request , "checkout.html", context)
 
 
