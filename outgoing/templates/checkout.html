@@ -1755,9 +1755,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for item in cart_items %}
+                                    
                                     <tr>
-                                        
+                                        {% for item in cart_items %}
                                         <th scope="row"><img src="{{ item.product.image.url }}" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
                                         <td>
                                             <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">{{ item.product.product_name }}</a></h5>
@@ -1771,9 +1771,9 @@
                                             <p class="text-muted mb-0 mt-1">$ 260 x 2</p>
                                         </td>
                                         <td>$ {{ item.product.price }}</td>
-                                        
+                                        {% endfor %} 
                                     </tr>
-                                    {% endfor %} 
+                                  
                                     <tr>
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Sub Total :</h5>
