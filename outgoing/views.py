@@ -112,7 +112,7 @@ def remove_item(request ,product_id):
 
 
 def checkout(request , cart_items=None):
-    cart_items = Cartitem.objects.filter(user=request.user, is_active=True)
+    cart_items = [] 
     user= request.user
     user_pro , create=User_Profile.objects.get_or_create(user=user)
     user_profile_image_url=user_pro.image.url if user_pro.image else None
@@ -120,17 +120,25 @@ def checkout(request , cart_items=None):
     print("checkout_user:" , user)
     user_address=Address.objects.filter(user=request.user)
     print("checkout_:user_address" ,user_address)
-
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart_items = Cartitem.objects.filter(cart=cart, is_active=True)
+           
+    except ObjectDoesNotExist:
+        pass
+    
     context={  
         'user_pro': user_pro,
         'user_address' :  user_address,
         'cart_items' : cart_items,
-        'user_profile_image_url' : user_profile_image_url,
-        'user_address': user_address
+        'user_profile_image_url' : user_profile_image_url
+        
     }
     print(f'item:{cart_items}')
-  
-    print("checkout_:cart_items" ,cart_items)
+    print(f'userrrrr:{user}')
+    print(f'user_address:{user_address}')
+    print(f'user_pro:{user_pro}')
+   
     return render (request , "checkout.html", context)
 
 
