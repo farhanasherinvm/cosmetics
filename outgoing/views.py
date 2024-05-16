@@ -111,7 +111,7 @@ def remove_item(request ,product_id):
 #     return JsonResponse({'quantity': cart_item.quantity})
 
 
-def checkout(request , cart_items=None):
+def checkout(request ,total=0 ,cart_items=None):
     cart_items = [] 
     user= request.user
     user_pro , create=User_Profile.objects.get_or_create(user=user)
@@ -123,7 +123,10 @@ def checkout(request , cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = Cartitem.objects.filter(cart=cart, is_active=True)
-           
+        for i in cart_items:
+            total += (i.product.price * i.quantity)
+        tax= ( 2 * total)/100
+        grand_total = tax + total        
     except ObjectDoesNotExist:
         pass
     
@@ -131,8 +134,10 @@ def checkout(request , cart_items=None):
         'user_pro': user_pro,
         'user_address' :  user_address,
         'cart_items' : cart_items,
-        'user_profile_image_url' : user_profile_image_url
-        
+        'user_profile_image_url' : user_profile_image_url,
+        'total': total,
+        'grand_total': grand_total,
+        'tax': tax
     }
     print(f'item:{cart_items}')
     print(f'userrrrr:{user}')
@@ -178,3 +183,4 @@ def delete_address(request,id):
     user_address=get_object_or_404(Address,id=id)
     user_address.delete()
     return redirect('outgoing:checkout')
+
