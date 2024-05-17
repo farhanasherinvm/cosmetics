@@ -1,7 +1,9 @@
+import datetime
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from outgoing.models import Cart , Cartitem
 from products.models import Product 
+from orders.models import Order
 from accounts.models import User_Profile ,Address
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -129,7 +131,32 @@ def checkout(request ,total=0 ,cart_items=None):
         grand_total = tax + total        
     except ObjectDoesNotExist:
         pass
-    
+    if request.method =='POST':
+        print('yessssssssssssss')
+    else:
+        print('nooooooo')
+    # data = Order()
+    # data.user=user
+    # data.user_name=
+    # data.address=
+    # data.email=
+    # data.phone=
+    # data.city=
+    # data.state=
+    # data.country=
+    # data.ip=request.META.get('REMOTE_ADDR')
+    # # generate order number
+    # yr=int(datetime.date.today().strftime('%Y'))
+    # mt=int(datetime.date.today().strftime('%m'))
+    # dt=int(datetime.date.today().strftime('%d'))
+    # d =datetime.date(yr,mt,dt)
+    # current_date= d.strftime('%y%m%d')
+    # order_number= current_date + str(data.id)
+    # data.order_number=order_number
+    # print('data:' , data)
+    # data.save()
+
+
     context={  
         'user_pro': user_pro,
         'user_address' :  user_address,
