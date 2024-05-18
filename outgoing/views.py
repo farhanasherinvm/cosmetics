@@ -1,4 +1,5 @@
 import datetime
+import uuid
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from outgoing.models import Cart , Cartitem
@@ -128,7 +129,13 @@ def checkout(request ,total=0 ,cart_items=None):
         for i in cart_items:
             total += (i.product.price * i.quantity)
         tax= ( 2 * total)/100
-        grand_total = tax + total        
+        grand_total = tax + total 
+         # Generate order ID
+        order_id = generate_order_id()
+        
+        # Save order ID to session
+        request.session['order_id'] = order_id
+
     except ObjectDoesNotExist:
         pass
     context={  
@@ -138,7 +145,8 @@ def checkout(request ,total=0 ,cart_items=None):
         'user_profile_image_url' : user_profile_image_url,
         'total': total,
         'grand_total': grand_total,
-        'tax': tax
+        'tax': tax,
+        'order_id': order_id
     }
     print(f'item:{cart_items}')
     print(f'userrrrr:{user}')
@@ -153,10 +161,8 @@ def new_address(request):
         print(" if request.method=='POST':")
         count=Address.objects.filter(user=request.user).count()
         if count>=2:
-            print("nooooooooooooooooooooooooooooiiiiiiiiii")
             messages.error(request, "Maximum of two addresses are allowed.")
             return redirect("outgoing:checkout")
-        print("yasssssssssssssssss!!!!!!!!!!!!!!!")
         name=request.POST.get('name')
         email=request.POST.get('email')
         phone=request.POST.get('phone')
@@ -165,7 +171,6 @@ def new_address(request):
         city=request.POST.get('city')
         state=request.POST.get('state')
         zip=request.POST.get('zip')
-        print("get alllllllllllll")
         user_address=Address.objects.create(
             user=request.user,
             new_name=name,
@@ -177,43 +182,9 @@ def new_address(request):
             state=state,
             zip=zip
         )
-        print("user_addresssssssssssssssssssssss saveeeeeeeeee")
         user_address.save()
-        user_profile = User_Profile.objects.get(user=request.user)
-        print("new user_profile:" , user_profile)
-        data=Order()
-        print("datttttttttaaaaaaa:", data)
-        data.user=user_profile
-        data.user_name=name
-        data.address=address
-        data.email=email
-        data.phone=phone
-        data.city=city
-        data.state=state
-        data.country=country
-        data.ip=request.META.get('REMOTE_ADDR')
-        data.save()
-        print("data.usermmmmmmmmmmmmmm:" ,data.user)
-        order_id =data.id
-        print("order_id:",order_id)
-        yr = int(datetime.date.today().strftime('%Y'))  # Use %Y instead of %y
-        mt = int(datetime.date.today().strftime('%m'))
-        dt = int(datetime.date.today().strftime('%d'))
-        d = datetime.date(yr, mt, dt)
-        current_date = d.strftime("%y%m%d")
-        order_number = current_date + str(data.id)
-        data.order_number = order_number
-        data.save()
-        print("datassssssss:", data.order_number)
-        order=Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
-        
-
         messages.success(request, "Successfully added")
-        context={
-            'order_id':order_id,
-            'order':order,
-        }
-        return render(request, "checkout.html", context)
+        return redirect("outgoing:checkout")
     print(" if request.method=='POST':noooooooooooooo")
     return redirect ("outgoing:checkout")
 
@@ -222,3 +193,6 @@ def delete_address(request,id):
     user_address.delete()
     return redirect('outgoing:checkout')
 
+def generate_order_id():
+    unique_str = str(uuid.uuid4()).replace('-', '').upper()[:10]  # Generate a 10-character unique ID
+    return unique_str

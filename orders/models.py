@@ -1,3 +1,5 @@
+import datetime
+import uuid
 from django.db import models
 from accounts.models import User_Profile
 from products.models import Product
@@ -47,6 +49,13 @@ class Order(models.Model):
     def __str__(self):
         return self.user_name
     
+    def save(self, *args, **kwargs):
+        if not self.order_number:
+            today = datetime.today()
+            date_str = today.strftime('%Y%m%d')
+            unique_str = str(uuid.uuid4()).replace('-', '').upper()[:3]
+            self.order_number = f"{date_str}-{unique_str}"
+        super().save(*args, **kwargs)
 
 
 class OrderProduct(models.Model):
