@@ -196,3 +196,5 @@ def delete_address(request,id):
 def generate_order_id():
     unique_str = str(uuid.uuid4()).replace('-', '').upper()[:10]  # Generate a 10-character unique ID
     return unique_str
+
+
