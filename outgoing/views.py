@@ -1,4 +1,6 @@
 import datetime
+from datetime import date 
+from django.utils import timezone
 import uuid
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -171,6 +173,7 @@ def new_address(request):
         city=request.POST.get('city')
         state=request.POST.get('state')
         zip=request.POST.get('zip')
+        print("ziiiiiiiiiiipp:", zip)
         user_address=Address.objects.create(
             user=request.user,
             new_name=name,
@@ -197,4 +200,46 @@ def generate_order_id():
     unique_str = str(uuid.uuid4()).replace('-', '').upper()[:10]  # Generate a 10-character unique ID
     return unique_str
 
+def place_order(request):
+    if request.method == "POST":
+        user = request.user
+        cart_items = Cartitem.objects.filter(user=user)
 
+        # Get the address ID from the POST request
+        address_id = request.POST.get('address')
+        print('Address ID:', address_id)
+
+        # Fetch the corresponding Address object
+        address = get_object_or_404(Address, id=address_id)
+        print('Address Details:', address)
+
+        # Fetch the User_Profile instance associated with the current user
+        user_profile = get_object_or_404(User_Profile, user=user)
+        print('User Profile:', user_profile)
+
+        # Proceed with your order placement logic
+        order = Order.objects.create(
+            user=user_profile,
+            address=address.address,
+            user_name=address.new_name,
+            email=address.email,
+            phone=address.phone,
+            city=address.city,
+            state=address.state,
+            country=address.country,  # Set this according to your needs
+            order_number="ORD12345678"  # Generate or assign order number as needed
+            # Add more fields as needed
+        )
+        order.save()
+
+        # Clear the cart items after placing the order (example logic)
+        cart_items.delete()
+
+        # Redirect to checkout or order summary page
+        return redirect('outgoing:checkout')
+
+   
+    else:
+        # Handle cases where the request method is not POST
+        print('Invalid request method')
+        return redirect('outgoing:checkout')

@@ -1634,6 +1634,11 @@
                                         <i class="bx bxs-truck text-white font-size-20"></i>
                                     </div>
                                 </div>
+
+
+
+
+
                                 <div class="feed-item-list">
                                     <div>
                                         <h5 class="font-size-16 mb-1">Shipping Info</h5>
@@ -1643,15 +1648,69 @@
                                                 {% for address in user_address %}
                                                 <div class="col-lg-4 col-sm-6">
                                                     <div data-bs-toggle="collapse">
+                                                        <form method="post" action="{% url 'outgoing:place_order' %}">
+                                                            {% csrf_token %}
+                                                            <label class="card-radio-label mb-0">
+                                                                <input type="radio" name="address" class="card-radio-input"
+                                                                    id="address{{ address.id }}" value="{{ address.id }}" required>
+                                                                <div class="card-radio text-truncate p-3">
+                                                                    <span class="fs-14 mb-4 d-block">Address 1</span>
+                                                                    <span class="fs-14 mb-2 d-block">{{ address.new_name }}</span>
+                                                                    <span class="text-muted fw-normal d-block">{{ address.phone }}</span>
+                                                                    <span class="text-muted fw-normal text-wrap mb-1 d-block">
+                                                                        {{ address.address }},<br> {{ address.city }} {{ address.state }}
+                                                                        {{ address.district }} {{ address.zip }}</span>
+                                                                </div>
+                                                            </label>
+                                                            <div class="edit-btn bg-light rounded">
+                                                                <a href="#editModal{{ forloop.counter }}" class="edit" data-toggle="modal"><i
+                                                                        class="material-icons " data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                                <a href="#deleteModal{{ forloop.counter }}" class="delete" data-toggle="modal"><i
+                                                                        class="material-icons" data-toggle="tooltip"
+                                                                        title="Delete">&#xE872;</i></a>
+                                                            </div>
+                                                            <button type="submit">Place Order</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                                {% comment %} <div class="feed-item-list">
+                                    <div>
+                                        <h5 class="font-size-16 mb-1">Shipping Info</h5>
+                                        <p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                {% for address in user_address %}
+                                                <div class="col-lg-4 col-sm-6">
+                                                    <div data-bs-toggle="collapse">
                                                         <label class="card-radio-label mb-0">
-                                                            <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
+                                                            <form method="post" action="{% url 'outgoing:place_order' %}">
+                                                                {% csrf_token  %}
+                                                            <input type="radio" name="address" id="info-address1" class="card-radio-input" checked=""  id="address{{ address.id }}" value="{{ address.id }}"  required>
+                                                            
                                                             <div class="card-radio text-truncate p-3">
                                                                 <span class="fs-14 mb-4 d-block">Address 1</span>
                                                                 <span class="fs-14 mb-2 d-block">{{ address.new_name }}</span>
                                                                 <span class="text-muted fw-normal d-block">{{ address.phone }}</span>
                                                                 <span class="text-muted fw-normal text-wrap mb-1 d-block">{{ address.address }},<br> {{ address.city }} {{ address.state }} {{ address.district }} {{ address.zip }}</span>
                                                             </div>
+                                                        </form>
                                                         </label>
+                                                      
                                                         <div class="edit-btn bg-light rounded">
                                                            
                                                                 <a href="#editModal{{ forloop.counter }}" class="edit" data-toggle="modal"><i class="material-icons " data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -1664,7 +1723,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> {% endcomment %}
                                 
                             </li>
                             <li class="checkout-item">
