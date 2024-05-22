@@ -43,6 +43,7 @@ class Order(models.Model):
     status       = models.IntegerField(choices=ORDER_STATUS, default=1, null=True, blank=True)
     ip           = models.CharField(blank=True, max_length=20)
     is_ordered   = models.BooleanField(default=False)
+    order_total  = models.FloatField(default=0.0)
     created_at   = models.DateTimeField(auto_now_add=True)
     updated_at   = models.DateTimeField(auto_now=True)
 

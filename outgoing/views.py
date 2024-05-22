@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from outgoing.models import Cart , Cartitem
 from products.models import Product 
-from orders.models import Order
+from orders.models import Order,Payment,OrderProduct
 from accounts.models import User_Profile ,Address
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -228,12 +228,16 @@ def place_order(request):
             state=address.state,
             country=address.country,  # Set this according to your needs
             order_number="ORD12345678"  # Generate or assign order number as needed
+            # order_total=
+
             # Add more fields as needed
         )
         order.save()
 
         # Clear the cart items after placing the order (example logic)
-        cart_items.delete()
+        
+        
+        # cart_items.delete()
 
         # Redirect to checkout or order summary page
         return redirect('outgoing:checkout')
@@ -243,3 +247,45 @@ def place_order(request):
         # Handle cases where the request method is not POST
         print('Invalid request method')
         return redirect('outgoing:checkout')
+    
+def cash_on_delivery(request,number):
+    orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
+    user_profile=get_object_or_404(User_Profile , user=request.user)
+    if orders.exists():
+        order=(
+            orders.last()
+        )
+        payment =Payment(
+            user=user_profile,
+            payment_id=number,
+            method="COD",
+            status="Completed",
+
+        )
+        payment.save()
+        order.payment=payment
+        order.is_ordered = True
+        order.save()
+        cart_item = Cartitem.objects.filter(user=request.user)
+        for item in cart_item:
+            order_product = OrderProduct()
+            order_product.order=order
+            order_product.payment=payment
+            order_product.user=user_profile
+            order_product.product=item.product
+            order_product.price=item.product.price
+            order_product.quantity=item.quantity
+            order_product.save()
+
+           # Reduce the quantity of sold product
+            # product = Product.objects.get(id=item.product_id)
+            # product.stock -= item.quantity
+            # product.save()
+        Cartitem.objects.filter(user=request.user).delete()
+            # order_products = OrderProduct.objects.filter(order=order, user=user_profile)
+        
+            # context = {
+            #     "order_products": order_products,
+            #     }
+        return redirect("outgoing:checkout")
+    return redirect("outgoing:checkout")
