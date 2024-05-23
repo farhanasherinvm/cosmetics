@@ -1763,20 +1763,22 @@
                                                     </label>
                                                 </div>
                                             </div>
-    
+   
                                             <div class="col-lg-3 col-sm-6">
-                                                <div>
+                                                <div> 
                                                     <label class="card-radio-label">
+                                                        {% comment %} <a href="{% url 'outgoing:cash_on_delivery order.order_number' %}"> {% endcomment %}
                                                         <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
     
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-money d-block h2 mb-3"></i>
                                                             <span>Cash on Delivery</span>
                                                         </span>
+                                                    </a>
                                                     </label>
                                                 </div>
                                             </div>
-                                            
+                                        
                                         </div>
                                     </div>
                                 </div>
@@ -1803,7 +1805,7 @@
                 <div class="card checkout-order-summary">
                     <div class="card-body">
                         <div class="p-3 bg-light mb-3">
-                            <h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">{{ order_id }}</span></h5>
+                            <h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">{{ order.order_number }}</span></h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-centered mb-0 table-nowrap">

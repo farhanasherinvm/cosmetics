@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 # Create your views here.
 def cart(request, total=0, quantity=0, cart_item=None):
+    print("in cart")
 
     cart_items = []  # Initialize cart_items as an empty list
     tax = 0  # Initialize tax
@@ -45,7 +46,7 @@ def cart(request, total=0, quantity=0, cart_item=None):
     return render(request,"cart.html", context)
 
 def _cart_id(request):
-    
+    print("in cart_id+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     cart = request.session.session_key
     print("33333333333")
     if not cart:
@@ -54,7 +55,7 @@ def _cart_id(request):
     return cart
 
 def add_cart(request,product_id):
-    print("kuuui")
+    print("in add_cart+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     current_user=request.user
     product = Product.objects.get(id=product_id)#get product
     try:
@@ -66,7 +67,7 @@ def add_cart(request,product_id):
             cart_id= _cart_id(request)
         ) 
     cart.save()
-    print("7777")
+    print("add_cart....cart_save")
     try:
         print("88888888")
         cart_item =Cartitem.objects.get(product = product, cart = cart)
@@ -84,6 +85,8 @@ def add_cart(request,product_id):
     return redirect('outgoing:cart')
 
 def remove_cart(request, product_id):
+    print("in remove_cart+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
     cart = Cart.objects.get(cart_id =_cart_id(request))
     product = get_object_or_404(Product, id=product_id)
     cart_item =Cartitem.objects.get(product =product , cart=cart)
@@ -95,6 +98,7 @@ def remove_cart(request, product_id):
     return redirect('outgoing:cart')
 
 def remove_item(request ,product_id):
+    print("remove_item+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     cart = Cart.objects.get(cart_id =_cart_id(request)) 
     product = get_object_or_404(Product, id=product_id)
     cart_item =Cartitem.objects.get(product=product, cart=cart)
@@ -117,6 +121,7 @@ def remove_item(request ,product_id):
 
 
 def checkout(request ,total=0 ,cart_items=None):
+    print("in checkout++++++++++++++++++++++++++++++++++++++++++++++++++++")
     cart_items = [] 
     user= request.user
     user_pro , create=User_Profile.objects.get_or_create(user=user)
@@ -132,12 +137,8 @@ def checkout(request ,total=0 ,cart_items=None):
             total += (i.product.price * i.quantity)
         tax= ( 2 * total)/100
         grand_total = tax + total 
-         # Generate order ID
-        order_id = generate_order_id()
+         
         
-        # Save order ID to session
-        request.session['order_id'] = order_id
-
     except ObjectDoesNotExist:
         pass
     context={  
@@ -148,7 +149,7 @@ def checkout(request ,total=0 ,cart_items=None):
         'total': total,
         'grand_total': grand_total,
         'tax': tax,
-        'order_id': order_id
+        # 'order_id': order_id
     }
     print(f'item:{cart_items}')
     print(f'userrrrr:{user}')
@@ -159,6 +160,7 @@ def checkout(request ,total=0 ,cart_items=None):
 
 
 def new_address(request):
+    print("in new_address++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if request.method=='POST':
         print(" if request.method=='POST':")
         count=Address.objects.filter(user=request.user).count()
@@ -192,15 +194,18 @@ def new_address(request):
     return redirect ("outgoing:checkout")
 
 def delete_address(request,id):
+    print("in delet_address++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     user_address=get_object_or_404(Address,id=id)
     user_address.delete()
     return redirect('outgoing:checkout')
 
 def generate_order_id():
+    print("in generate_order_id++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     unique_str = str(uuid.uuid4()).replace('-', '').upper()[:10]  # Generate a 10-character unique ID
     return unique_str
 
 def place_order(request):
+    print("in place_order+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if request.method == "POST":
         user = request.user
         cart_items = Cartitem.objects.filter(user=user)
@@ -216,6 +221,12 @@ def place_order(request):
         # Fetch the User_Profile instance associated with the current user
         user_profile = get_object_or_404(User_Profile, user=user)
         print('User Profile:', user_profile)
+        # Generate order ID
+        order_id = generate_order_id()
+        
+        # Save order ID to session
+        request.session['order_id'] = order_id
+
 
         # Proceed with your order placement logic
         order = Order.objects.create(
@@ -227,11 +238,12 @@ def place_order(request):
             city=address.city,
             state=address.state,
             country=address.country,  # Set this according to your needs
-            order_number="ORD12345678"  # Generate or assign order number as needed
+            order_number=order_id  # Generate or assign order number as needed
             # order_total=
 
             # Add more fields as needed
         )
+        print("order_number:", order.order_number)
         order.save()
 
         # Clear the cart items after placing the order (example logic)
@@ -248,44 +260,46 @@ def place_order(request):
         print('Invalid request method')
         return redirect('outgoing:checkout')
     
-def cash_on_delivery(request,number):
-    orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
-    user_profile=get_object_or_404(User_Profile , user=request.user)
-    if orders.exists():
-        order=(
-            orders.last()
-        )
-        payment =Payment(
-            user=user_profile,
-            payment_id=number,
-            method="COD",
-            status="Completed",
+# def cash_on_delivery(request,number):
+#     print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+#     orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
+#     user_profile=get_object_or_404(User_Profile , user=request.user)
+#     if orders.exists():
+#         print("hhhhhhhhhhhhhhhhhhhhhhhhaaaaaaaaaaaaaaaaiiiiiiiiii")
+#         order=(
+#             orders.last()
+#         )
+#         payment =Payment(
+#             user=user_profile,
+#             payment_id=number,
+#             method="COD",
+#             status="Completed",
 
-        )
-        payment.save()
-        order.payment=payment
-        order.is_ordered = True
-        order.save()
-        cart_item = Cartitem.objects.filter(user=request.user)
-        for item in cart_item:
-            order_product = OrderProduct()
-            order_product.order=order
-            order_product.payment=payment
-            order_product.user=user_profile
-            order_product.product=item.product
-            order_product.price=item.product.price
-            order_product.quantity=item.quantity
-            order_product.save()
+#         )
+#         payment.save()
+#         order.payment=payment
+#         order.is_ordered = True
+#         order.save()
+#         cart_item = Cartitem.objects.filter(user=request.user)
+#         for item in cart_item:
+#             order_product = OrderProduct()
+#             order_product.order=order
+#             order_product.payment=payment
+#             order_product.user=user_profile
+#             order_product.product=item.product
+#             order_product.price=item.product.price
+#             order_product.quantity=item.quantity
+#             order_product.save()
 
-           # Reduce the quantity of sold product
-            # product = Product.objects.get(id=item.product_id)
-            # product.stock -= item.quantity
-            # product.save()
-        Cartitem.objects.filter(user=request.user).delete()
-            # order_products = OrderProduct.objects.filter(order=order, user=user_profile)
+#            # Reduce the quantity of sold product
+#             # product = Product.objects.get(id=item.product_id)
+#             # product.stock -= item.quantity
+#             # product.save()
+#         Cartitem.objects.filter(user=request.user).delete()
+#             # order_products = OrderProduct.objects.filter(order=order, user=user_profile)
         
-            # context = {
-            #     "order_products": order_products,
-            #     }
-        return redirect("outgoing:checkout")
-    return redirect("outgoing:checkout")
+#             # context = {
+#             #     "order_products": order_products,
+#             #     }
+#         return redirect("outgoing:checkout")
+#     return redirect("outgoing:checkout")
