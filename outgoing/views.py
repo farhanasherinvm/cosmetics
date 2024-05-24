@@ -70,12 +70,13 @@ def add_cart(request,product_id):
     print("add_cart....cart_save")
     try:
         print("88888888")
-        cart_item =Cartitem.objects.get(product = product, cart = cart)
+        cart_item =Cartitem.objects.get(product = product, user=current_user, cart = cart)
         cart_item.quantity += 1
         cart_item.save()
     except Cartitem.DoesNotExist:
         print("999999999")
         cart_item = Cartitem.objects.create(
+            user = current_user,
             product = product,
             quantity = 1,
             cart = cart,
@@ -137,8 +138,13 @@ def checkout(request ,total=0 ,cart_items=None):
             total += (i.product.price * i.quantity)
         tax= ( 2 * total)/100
         grand_total = tax + total 
-         
+         # Generate order ID
+        order_number = generate_order_id()
         
+        # Save order ID to session
+        request.session['order_id'] = order_number
+
+        print("checkout.order_number:",order_number)
     except ObjectDoesNotExist:
         pass
     context={  
@@ -149,7 +155,7 @@ def checkout(request ,total=0 ,cart_items=None):
         'total': total,
         'grand_total': grand_total,
         'tax': tax,
-        # 'order_id': order_id
+        'order_number': order_number
     }
     print(f'item:{cart_items}')
     print(f'userrrrr:{user}')
@@ -221,12 +227,14 @@ def place_order(request):
         # Fetch the User_Profile instance associated with the current user
         user_profile = get_object_or_404(User_Profile, user=user)
         print('User Profile:', user_profile)
-        # Generate order ID
-        order_id = generate_order_id()
-        
-        # Save order ID to session
-        request.session['order_id'] = order_id
 
+        order_number = request.session.get('order_id')
+        print('Order Number:', order_number)
+
+        if not order_number:
+            # Handle the case where order_number is not found in session
+            print('Order number not found in session')
+            return redirect('outgoing:checkout')
 
         # Proceed with your order placement logic
         order = Order.objects.create(
@@ -238,13 +246,15 @@ def place_order(request):
             city=address.city,
             state=address.state,
             country=address.country,  # Set this according to your needs
-            order_number=order_id  # Generate or assign order number as needed
+            order_number=order_number  # Generate or assign order number as needed
             # order_total=
 
             # Add more fields as needed
         )
         print("order_number:", order.order_number)
         order.save()
+        # order = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
+        # print(".............",order.user_name, order.order_number,order.status, order.phone, order.address, order.city, order.state, order.country)
 
         # Clear the cart items after placing the order (example logic)
         
@@ -260,46 +270,48 @@ def place_order(request):
         print('Invalid request method')
         return redirect('outgoing:checkout')
     
-# def cash_on_delivery(request,number):
-#     print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-#     orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
-#     user_profile=get_object_or_404(User_Profile , user=request.user)
-#     if orders.exists():
-#         print("hhhhhhhhhhhhhhhhhhhhhhhhaaaaaaaaaaaaaaaaiiiiiiiiii")
-#         order=(
-#             orders.last()
-#         )
-#         payment =Payment(
-#             user=user_profile,
-#             payment_id=number,
-#             method="COD",
-#             status="Completed",
+def cash_on_delivery(request,number):
+    print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
 
-#         )
-#         payment.save()
-#         order.payment=payment
-#         order.is_ordered = True
-#         order.save()
-#         cart_item = Cartitem.objects.filter(user=request.user)
-#         for item in cart_item:
-#             order_product = OrderProduct()
-#             order_product.order=order
-#             order_product.payment=payment
-#             order_product.user=user_profile
-#             order_product.product=item.product
-#             order_product.price=item.product.price
-#             order_product.quantity=item.quantity
-#             order_product.save()
+    
+    user_profile=get_object_or_404(User_Profile , user=request.user)
+    if orders.exists():
+        print("hhhhhhhhhhhhhhhhhhhhhhhhaaaaaaaaaaaaaaaaiiiiiiiiii")
+        order=(
+            orders.last()
+        )
+        payment =Payment(
+            user=user_profile,
+            payment_id=number,
+            method="COD",
+            status="Completed",
 
-#            # Reduce the quantity of sold product
-#             # product = Product.objects.get(id=item.product_id)
-#             # product.stock -= item.quantity
-#             # product.save()
-#         Cartitem.objects.filter(user=request.user).delete()
-#             # order_products = OrderProduct.objects.filter(order=order, user=user_profile)
+        )
+        payment.save()
+        order.payment=payment
+        order.is_ordered = True
+        order.save()
+        cart_item = Cartitem.objects.filter(user=request.user)
+        for item in cart_item:
+            order_product = OrderProduct()
+            order_product.order=order
+            order_product.payment=payment
+            order_product.user=user_profile
+            order_product.product=item.product
+            order_product.price=item.product.price
+            order_product.quantity=item.quantity
+            order_product.save()
+
+           # Reduce the quantity of sold product
+            # product = Product.objects.get(id=item.product_id)
+            # product.stock -= item.quantity
+            # product.save()
+        Cartitem.objects.filter(user=request.user).delete()
+            # order_products = OrderProduct.objects.filter(order=order, user=user_profile)
         
-#             # context = {
-#             #     "order_products": order_products,
-#             #     }
-#         return redirect("outgoing:checkout")
-#     return redirect("outgoing:checkout")
+            # context = {
+            #     "order_products": order_products,
+            #     }
+        return redirect("outgoing:checkout")
+    return redirect("outgoing:checkout")
