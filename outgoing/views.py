@@ -314,4 +314,4 @@ def cash_on_delivery(request,number):
             #     "order_products": order_products,
             #     }
         return redirect("outgoing:checkout")
-    return redirect("outgoing:checkout")
+    return redirect("outgoing:checkout") 
