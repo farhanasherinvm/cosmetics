@@ -17,7 +17,7 @@ urlpatterns = [
     path('cash_on_delivery/<int:number>/', views.cash_on_delivery, name="cash_on_delivery")
  
     # path('add_cart/<int:product_id>/increase/', views.add_cart, {'action': 'increase'}, name='add_cart_increase'),
-    # Other URL patterns
+   
 ]
 
 
