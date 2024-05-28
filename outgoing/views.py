@@ -270,48 +270,48 @@ def place_order(request):
         print('Invalid request method')
         return redirect('outgoing:checkout')
     
-def cash_on_delivery(request,number):
-    print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-    orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
+# def cash_on_delivery(request,number):
+#     print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+#     orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
 
     
-    user_profile=get_object_or_404(User_Profile , user=request.user)
-    if orders.exists():
-        print("hhhhhhhhhhhhhhhhhhhhhhhhaaaaaaaaaaaaaaaaiiiiiiiiii")
-        order=(
-            orders.last()
-        )
-        payment =Payment(
-            user=user_profile,
-            payment_id=number,
-            method="COD",
-            status="Completed",
+#     user_profile=get_object_or_404(User_Profile , user=request.user)
+#     if orders.exists():
+#         print("hhhhhhhhhhhhhhhhhhhhhhhhaaaaaaaaaaaaaaaaiiiiiiiiii")
+#         order=(
+#             orders.last()
+#         )
+#         payment =Payment(
+#             user=user_profile,
+#             payment_id=number,
+#             method="COD",
+#             status="Completed",
 
-        )
-        payment.save()
-        order.payment=payment
-        order.is_ordered = True
-        order.save()
-        cart_item = Cartitem.objects.filter(user=request.user)
-        for item in cart_item:
-            order_product = OrderProduct()
-            order_product.order=order
-            order_product.payment=payment
-            order_product.user=user_profile
-            order_product.product=item.product
-            order_product.price=item.product.price
-            order_product.quantity=item.quantity
-            order_product.save()
+#         )
+#         payment.save()
+#         order.payment=payment
+#         order.is_ordered = True
+#         order.save()
+#         cart_item = Cartitem.objects.filter(user=request.user)
+#         for item in cart_item:
+#             order_product = OrderProduct()
+#             order_product.order=order
+#             order_product.payment=payment
+#             order_product.user=user_profile
+#             order_product.product=item.product
+#             order_product.price=item.product.price
+#             order_product.quantity=item.quantity
+#             order_product.save()
 
-           # Reduce the quantity of sold product
-            # product = Product.objects.get(id=item.product_id)
-            # product.stock -= item.quantity
-            # product.save()
-        Cartitem.objects.filter(user=request.user).delete()
-            # order_products = OrderProduct.objects.filter(order=order, user=user_profile)
+#            # Reduce the quantity of sold product
+#             # product = Product.objects.get(id=item.product_id)
+#             # product.stock -= item.quantity
+#             # product.save()
+#         Cartitem.objects.filter(user=request.user).delete()
+#             # order_products = OrderProduct.objects.filter(order=order, user=user_profile)
         
-            # context = {
-            #     "order_products": order_products,
-            #     }
-        return redirect("outgoing:checkout")
-    return redirect("outgoing:checkout") 
+#             # context = {
+#             #     "order_products": order_products,
+#             #     }
+#         return redirect("outgoing:checkout")
+#     return redirect("outgoing:checkout") 
