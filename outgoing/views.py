@@ -315,3 +315,4 @@ def place_order(request):
 #             #     }
 #         return redirect("outgoing:checkout")
 #     return redirect("outgoing:checkout") 
+  
