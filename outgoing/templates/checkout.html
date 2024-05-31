@@ -1647,7 +1647,7 @@
                                             <div class="row">
                                                 {% for address in user_address %}
                                                 <div class="col-lg-4 col-sm-6">
-                                                    <div data-bs-toggle="collapse">
+                                                    <div data-bs-toggle="collapse" class="address">
                                                         <form method="post" action="{% url 'outgoing:place_order' %}">
                                                             {% csrf_token %}
                                                             <label class="card-radio-label mb-0">
