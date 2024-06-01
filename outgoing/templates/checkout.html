@@ -1628,6 +1628,8 @@
                                     </div>
                                 </div>
                             </li>
+                            <form method="post" action="{% url 'outgoing:place_order' %}">
+                                {% csrf_token %}
                             <li class="checkout-item">
                                 <div class="avatar checkout-icon p-1">
                                     <div class="avatar-title rounded-circle bg-primary">
@@ -1648,8 +1650,8 @@
                                                 {% for address in user_address %}
                                                 <div class="col-lg-4 col-sm-6">
                                                     <div data-bs-toggle="collapse" class="address">
-                                                        <form method="post" action="{% url 'outgoing:place_order' %}">
-                                                            {% csrf_token %}
+                                                        
+                                                            
                                                             <label class="card-radio-label mb-0">
                                                                 <input type="radio" name="address" class="card-radio-input"
                                                                     id="address{{ address.id }}" value="{{ address.id }}" required>
@@ -1669,8 +1671,8 @@
                                                                         class="material-icons" data-toggle="tooltip"
                                                                         title="Delete">&#xE872;</i></a>
                                                             </div>
-                                                            <button type="submit">Place Order</button>
-                                                        </form>
+                                                            
+                                                        
                                                     </div>
                                                 </div>
                                                 {% endfor %}
@@ -1743,7 +1745,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div data-bs-toggle="collapse">
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input" value="wallet">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-credit-card d-block h2 mb-3"></i>
                                                             Credit / Debit Card
@@ -1755,7 +1757,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div>
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" value="paypal">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bxl-paypal d-block h2 mb-3"></i>
                                                             Paypal
@@ -1768,13 +1770,13 @@
                                                 <div> 
                                                     <label class="card-radio-label">
                                                          {% comment %} <a href="{% url 'outgoing:cash_on_delivery' %}">  {% endcomment %}
-                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" value="cod" checked>
     
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-money d-block h2 mb-3"></i>
                                                             <span>Cash on Delivery</span>
                                                         </span>
-                                                    </a>
+                                                    {% comment %} </a> {% endcomment %}
                                                     </label>
                                                 </div>
                                             </div>
@@ -1783,6 +1785,7 @@
                                     </div>
                                 </div>
                             </li>
+                        
                         </ol>
                     </div>
                 </div>
@@ -1795,11 +1798,15 @@
                     <!-- end col -->
                     <div class="col">
                         <div class="text-end mt-2 mt-sm-0">
-                            <a href="{% url 'orders:order_success' %}" class="btn btn-success">
-                                <i class="mdi mdi-cart-outline me-1"></i> Procced </a>
+                           
+                            <button type="submit" class="btn btn-success">
+                                <i class="mdi mdi-cart-outline me-1"></i> Procced 
+                            </button>
                         </div>
                     </div> <!-- end col -->
-                </div> <!-- end row-->
+                </div> 
+            </form>
+                <!-- end row-->
             </div>
             <div class="col-xl-4">
                 <div class="card checkout-order-summary">

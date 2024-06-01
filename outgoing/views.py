@@ -223,6 +223,8 @@ def place_order(request):
         # Fetch the corresponding Address object
         address = get_object_or_404(Address, id=address_id)
         print('Address Details:', address)
+        payment= request.POST.get("pay-method")
+        print("payment:", payment)
 
         # Fetch the User_Profile instance associated with the current user
         user_profile = get_object_or_404(User_Profile, user=user)
@@ -262,7 +264,7 @@ def place_order(request):
         # cart_items.delete()
 
         # Redirect to checkout or order summary page
-        return redirect('outgoing:checkout')
+        return redirect('orders:order_success')
 
    
     else:
