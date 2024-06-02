@@ -223,7 +223,7 @@ def place_order(request):
         # Fetch the corresponding Address object
         address = get_object_or_404(Address, id=address_id)
         print('Address Details:', address)
-        payment= request.POST.get("pay-method")
+        payment= request.POST.get("method")
         print("payment:", payment)
 
         # Fetch the User_Profile instance associated with the current user

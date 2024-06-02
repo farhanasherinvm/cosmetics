@@ -1329,10 +1329,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     <div class="container">
-    
         <div class="row">
             <div class="col-xl-8">
-    
                 <div class="card">
                     <div class="card-body">
                         <ol class=" mb-0 px-4 mt-3">
@@ -1628,7 +1626,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <form method="post" action="{% url 'outgoing:place_order' %}">
+                          <form method="post" action="{% url 'outgoing:place_order' %}">
                                 {% csrf_token %}
                             <li class="checkout-item">
                                 <div class="avatar checkout-icon p-1">
@@ -1745,7 +1743,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div data-bs-toggle="collapse">
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input" value="wallet">
+                                                        <input type="radio" name="method" id="pay-methodoption1" class="card-radio-input" value="wallet">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-credit-card d-block h2 mb-3"></i>
                                                             Credit / Debit Card
@@ -1757,7 +1755,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div>
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" value="paypal">
+                                                        <input type="radio" name="method" id="pay-methodoption2" class="card-radio-input" value="paypal">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bxl-paypal d-block h2 mb-3"></i>
                                                             Paypal
@@ -1770,7 +1768,7 @@
                                                 <div> 
                                                     <label class="card-radio-label">
                                                          {% comment %} <a href="{% url 'outgoing:cash_on_delivery' %}">  {% endcomment %}
-                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" value="cod" checked>
+                                                        <input type="radio" name="method" id="pay-methodoption3" class="card-radio-input" value="cod" checked>
     
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-money d-block h2 mb-3"></i>
