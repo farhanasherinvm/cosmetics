@@ -2,7 +2,8 @@ import datetime
 from datetime import date 
 from django.utils import timezone
 import uuid
-from django.http import HttpResponse, JsonResponse
+from django.template.loader import render_to_string
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from outgoing.models import Cart , Cartitem
 from products.models import Product 
@@ -10,6 +11,7 @@ from orders.models import Order,Payment,OrderProduct
 from accounts.models import User_Profile ,Address
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.core.mail import EmailMessage
 # Create your views here.
 def cart(request, total=0, quantity=0, cart_item=None):
     print("in cart")
@@ -215,108 +217,124 @@ def place_order(request):
     if request.method == "POST":
         user = request.user
         cart_items = Cartitem.objects.filter(user=user)
+        if cart_items.exists():
+            # Get the address ID from the POST request
+            address_id = request.POST.get('address')
+            print('Address ID:', address_id)
 
-        # Get the address ID from the POST request
-        address_id = request.POST.get('address')
-        print('Address ID:', address_id)
+            # Fetch the corresponding Address object
+            address = get_object_or_404(Address, id=address_id)
+            print('Address Details:', address)
 
-        # Fetch the corresponding Address object
-        address = get_object_or_404(Address, id=address_id)
-        print('Address Details:', address)
-
-        payment_mode= request.POST.get("method")
-        print("payment:", payment_mode)
-        
-
-
+            payment_mode= request.POST.get("method")
+            print("payment:", payment_mode)
+            
 
 
-        # Fetch the User_Profile instance associated with the current user
-        user_profile = get_object_or_404(User_Profile, user=user)
-        print('User Profile:', user_profile)
 
-        order_number = request.session.get('order_id')
-        print('Order Number:', order_number)
 
-        if not order_number:
-            # Handle the case where order_number is not found in session
-            print('Order number not found in session')
-            return redirect('outgoing:checkout')
-        
-        
-        
-        # Proceed with your order placement logic
-        orders = Order.objects.create(
-            user=user_profile,
-            address=address.address,
-            user_name=address.new_name,
-            email=address.email,
-            phone=address.phone,
-            city=address.city,
-            state=address.state,
-            country=address.country,
-            order_number=order_number
-            # order_total=
-        )
-        print("order_number:", orders.order_number)
-        orders.save()
+            # Fetch the User_Profile instance associated with the current user
+            user_profile = get_object_or_404(User_Profile, user=user)
+            print('User Profile:', user_profile)
 
-        if payment_mode=="cod":
-            # if orders.exist():
-            # order=(
-            #     orders.last()
+            order_number = request.session.get('order_id')
+            print('Order Number:', order_number)
 
-            # )
-            payment=Payment(
-            user=user_profile,
-            method=payment_mode,
-            status="pending"
-            # amound=
-        )
-            payment.save()
-        else:
-            payment=Payment(
-            user=user_profile,
-            method=payment_mode,
-            status="completed"
-            )
-            payment.save()
-            orders.is_ordered= True
-        orders.payment=payment
-        orders.save()
-
-        for item in cart_items:
-            order_product=OrderProduct(
+            if not order_number:
+                # Handle the case where order_number is not found in session
+                print('Order number not found in session')
+                return redirect('outgoing:checkout')
+            
+            
+            
+            # Proceed with your order placement logic
+            orders = Order.objects.create(
                 user=user_profile,
-                order=orders,
-                payment=payment,
-                product=item.product,
-                price=item.product.price,
-                quantity=item.quantity
+                address=address.address,
+                user_name=address.new_name,
+                email=address.email,
+                phone=address.phone,
+                city=address.city,
+                state=address.state,
+                country=address.country,
+                order_number=order_number
+                # order_total=
             )
-            order_product.save()
-            # product = Product.objects.get(id=item.id)
-            # product.stock -= item.quantity
-            # product.save()
-        subject="THANK YOU FOR YOUR ORDER"
+            print("order_number:", orders.order_number)
+            orders.save()
+            
+            if payment_mode=="cod":
+                
+                # order=(
+                #     orders.last()
+
+                # )
+                payment=Payment(
+                user=user_profile,
+                method=payment_mode,
+                status="pending"
+                # amound=
+            )
+                payment.save()
+            else:
+                payment=Payment(
+                user=user_profile,
+                method=payment_mode,
+                status="completed"
+                )
+                payment.save()
+                orders.is_ordered= True
+            orders.payment=payment
+            orders.save()
+
+            for item in cart_items:
+                order_product=OrderProduct(
+                    user=user_profile,
+                    order=orders,
+                    payment=payment,
+                    product=item.product,
+                    price=item.product.price,
+                    quantity=item.quantity
+                )
+                order_product.save()
+            Cartitem.objects.filter(user=request.user).delete()
+            print("Cartitem_delet:" , Cartitem)
+                # product = Product.objects.get(id=item.id)
+                # product.stock -= item.quantity
+                # product.save()
+            subject="Thank You For Your Order"
+            message= render_to_string(
+                "recieved_mail.html", { "user":request.user , "order":orders}
+
+            )
+            to_mail=request.user.email
+            send_mail=EmailMessage(subject , message, to=[to_mail])
+            send_mail.send()
+
+            order_products = OrderProduct.objects.filter(order=orders, user=user_profile)
+            
+            context = {
+                    "order_products": order_products,
+                }
 
 
-        # order = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
-        # print(".............",order.user_name, order.order_number,order.status, order.phone, order.address, order.city, order.state, order.country)
+            # order = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
+            # print(".............",order.user_name, order.order_number,order.status, order.phone, order.address, order.city, order.state, order.country)
 
-        # Clear the cart items after placing the order (example logic)
+            # Clear the cart items after placing the order (example logic)
+            
+            
+            # cart_items.delete()
+
+            # Redirect to checkout or order summary page
         
-        
-        # cart_items.delete()
-
-        # Redirect to checkout or order summary page
-        return render(request, "order_success.html")
-
-   
+            return render(request, "order_success.html" , context)
+        else:
+            return redirect('shop:shop')
     else:
         # Handle cases where the request method is not POST
         print('Invalid request method')
-        return redirect('outgoing:checkout')
+        return HttpResponseRedirect('/')
     
 # def cash_on_delivery(request,number):
 #     print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
