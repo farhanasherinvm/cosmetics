@@ -1086,6 +1086,7 @@
                         <table class="table cart-table table-borderless">
                             <tbody>
                                 <tr class="table-order">
+                                    {% for item in order_products %}
                                     <td>
                                         <a href="javascript:void(0)">
                                             <img src="{% static 'images/fashion/instagram/1.jpg' %}"
@@ -1094,7 +1095,7 @@
                                     </td>
                                     <td>
                                         <p>Product Name</p>
-                                        <h5>Outwear & Coats</h5>
+                                        <h5> {{ item.product }}</h5>
                                     </td>
                                     <td>
                                         <p>Quantity</p>
@@ -1104,49 +1105,12 @@
                                         <p>Price</p>
                                         <h5>$63.54</h5>
                                     </td>
+                                    {% endfor %}
                                 </tr>
 
-                                <tr class="table-order">
-                                    <td>
-                                        <a href="javascript:void(0)">
-                                            <img src="{% static 'images/fashion/instagram/2.jpg' %}"
-                                                class="img-fluid blur-up lazyload" alt="">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p class="font-light">Product Name</p>
-                                        <h5>Jacket & Cap</h5>
-                                    </td>
-                                    <td>
-                                        <p class="font-light">Quantity</p>
-                                        <h5>5</h5>
-                                    </td>
-                                    <td>
-                                        <p class="font-light">Price</p>
-                                        <h5>$57.10</h5>
-                                    </td>
-                                </tr>
+                                
 
-                                <tr class="table-order">
-                                    <td>
-                                        <a href="javascript:void(0)">
-                                            <img src="{% static 'images/fashion/instagram/3.jpg' %}"
-                                                class="img-fluid blur-up lazyload" alt="">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p class="font-light">Product Name</p>
-                                        <h5>New Fashion</h5>
-                                    </td>
-                                    <td>
-                                        <p class="font-light">Quantity</p>
-                                        <h5>1</h5>
-                                    </td>
-                                    <td>
-                                        <p class="font-light">Price</p>
-                                        <h5>$63.25</h5>
-                                    </td>
-                                </tr>
+                               
                             </tbody>
                             <tfoot>
                                 <tr class="table-order">
