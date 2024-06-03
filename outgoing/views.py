@@ -223,8 +223,13 @@ def place_order(request):
         # Fetch the corresponding Address object
         address = get_object_or_404(Address, id=address_id)
         print('Address Details:', address)
+
         payment_mode= request.POST.get("method")
         print("payment:", payment_mode)
+        
+
+
+
 
         # Fetch the User_Profile instance associated with the current user
         user_profile = get_object_or_404(User_Profile, user=user)
@@ -237,14 +242,11 @@ def place_order(request):
             # Handle the case where order_number is not found in session
             print('Order number not found in session')
             return redirect('outgoing:checkout')
-        payment=Payment(
-            user=user_profile,
-            method=payment_mode,
-            # amound=
-        )
-        payment.save()
+        
+        
+        
         # Proceed with your order placement logic
-        order = Order.objects.create(
+        orders = Order.objects.create(
             user=user_profile,
             address=address.address,
             user_name=address.new_name,
@@ -252,17 +254,52 @@ def place_order(request):
             phone=address.phone,
             city=address.city,
             state=address.state,
-            country=address.country,  # Set this according to your needs
-            order_number=order_number,
-            payment= payment  # Generate or assign order number as needed
+            country=address.country,
+            order_number=order_number
             # order_total=
-
-            # Add more fields as needed
         )
-        print("order_number:", order.order_number)
-        
-        
-        order.save()
+        print("order_number:", orders.order_number)
+        orders.save()
+
+        if payment_mode=="cod":
+            # if orders.exist():
+            # order=(
+            #     orders.last()
+
+            # )
+            payment=Payment(
+            user=user_profile,
+            method=payment_mode,
+            status="pending"
+            # amound=
+        )
+            payment.save()
+        else:
+            payment=Payment(
+            user=user_profile,
+            method=payment_mode,
+            status="completed"
+            )
+            payment.save()
+            orders.is_ordered= True
+        orders.payment=payment
+        orders.save()
+
+        for item in cart_items:
+            order_product=OrderProduct(
+                user=user_profile,
+                order=orders,
+                payment=payment,
+                product=item.product,
+                price=item.product.price,
+                quantity=item.quantity
+            )
+            order_product.save()
+            # product = Product.objects.get(id=item.id)
+            # product.stock -= item.quantity
+            # product.save()
+
+
         # order = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
         # print(".............",order.user_name, order.order_number,order.status, order.phone, order.address, order.city, order.state, order.country)
 
@@ -272,7 +309,7 @@ def place_order(request):
         # cart_items.delete()
 
         # Redirect to checkout or order summary page
-        return redirect('orders:order_success')
+        return render(request, "order_success.html")
 
    
     else:
