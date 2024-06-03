@@ -298,6 +298,7 @@ def place_order(request):
             # product = Product.objects.get(id=item.id)
             # product.stock -= item.quantity
             # product.save()
+        subject="THANK YOU FOR YOUR ORDER"
 
 
         # order = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
