@@ -217,6 +217,7 @@ def place_order(request):
     if request.method == "POST":
         user = request.user
         cart_items = Cartitem.objects.filter(user=user)
+        # user_wallet=
         if cart_items.exists():
             # Get the address ID from the POST request
             address_id = request.POST.get('address')
@@ -284,6 +285,7 @@ def place_order(request):
                 )
                 payment.save()
                 orders.is_ordered= True
+
             orders.payment=payment
             orders.save()
 
