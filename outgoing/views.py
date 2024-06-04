@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from outgoing.models import Cart , Cartitem
 from products.models import Product 
 from orders.models import Order,Payment,OrderProduct
-from accounts.models import User_Profile ,Address
+from accounts.models import User_Profile ,Address , Wallet
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.core.mail import EmailMessage
@@ -217,7 +217,7 @@ def place_order(request):
     if request.method == "POST":
         user = request.user
         cart_items = Cartitem.objects.filter(user=user)
-        # user_wallet=
+        user_wallet = User_Profile.objects.get(user=user)
         if cart_items.exists():
             # Get the address ID from the POST request
             address_id = request.POST.get('address')
@@ -288,6 +288,20 @@ def place_order(request):
 
             orders.payment=payment
             orders.save()
+            if payment_mode == "wallet":
+                wallet_qs = Wallet.objects.filter(user=user)
+                if not wallet_qs.exists():
+                    data= "no wallet found for the user"
+                    return JsonResponse({"status": data})
+                wallet_instance=wallet_qs.first()
+                wallet_balance=wallet_instance.wallet_balance
+                if total > wallet_balance:
+                    data = ' You Do Not Sufficient Balance'
+                    return JsonResponse({"status": data})
+                wallet_balance -= total 
+                wallet_balance.save()
+
+
 
             for item in cart_items:
                 order_product=OrderProduct(

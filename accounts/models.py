@@ -38,7 +38,7 @@ class Address(models.Model):
     
 class Wallet(models.Model):
     user           = models.ForeignKey(User, on_delete=models.CASCADE)
-    Wallet_balance = models.DecimalField(default=0, decimal_places=2, max_digits=10, null=True, blank=True)
+    wallet_balance = models.DecimalField(default=0, decimal_places=2, max_digits=10, null=True, blank=True)
     created_at     = models.DateField(auto_now_add=True)
 
     def __str__(self):
