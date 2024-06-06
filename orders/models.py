@@ -70,6 +70,7 @@ class OrderProduct(models.Model):
     user       = models.ForeignKey(User_Profile, on_delete=models.CASCADE)
     order      = models.ForeignKey(Order, on_delete=models.CASCADE)
     payment    = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
+    image      = models.ImageField(upload_to='photos/products')
     product    = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity   = models.IntegerField()
     price      = models.FloatField()

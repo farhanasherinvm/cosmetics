@@ -1084,12 +1084,12 @@
                 <div class="col-md-6">
                     <div class="col-sm-12 table-responsive">
                         <table class="table cart-table table-borderless">
-                            <tbody>
+                            <tbody>{% for item in order_products %}
                                 <tr class="table-order">
-                                    {% for item in order_products %}
+                                    
                                     <td>
                                         <a href="javascript:void(0)">
-                                            <img src="{% static 'images/fashion/instagram/1.jpg' %}"
+                                            <img src="{{ item.product.image.url }}"
                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                     </td>
@@ -1105,9 +1105,13 @@
                                         <p>Price</p>
                                         <h5>$63.54</h5>
                                     </td>
-                                    {% endfor %}
+                                    <td>
+                                    
+                                            <a href="{% url 'orders:order_tracking' %}">track order</a>
+                                        
+                                </td>
                                 </tr>
-
+                                {% endfor %}
                                 
 
                                
