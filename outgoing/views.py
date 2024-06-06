@@ -17,7 +17,7 @@ def cart(request, total=0, quantity=0, cart_item=None):
     print("in cart")
 
     cart_items = []  # Initialize cart_items as an empty list
-    tax = 0  # Initialize tax
+    shipping = 0  # Initialize tax
     grand_total = 0  # Initialize grand_total
     
 
@@ -29,8 +29,9 @@ def cart(request, total=0, quantity=0, cart_item=None):
             print("222222")
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
-        tax= ( 2 * total)/100
-        grand_total = tax + total    
+        # tax= ( 2 * total)/100
+        shipping = 40
+        grand_total = shipping + total    
         print("suuuuuuuuuuuuuuuuuuuuuuuuuuuuuiiiiiiii")
     except ObjectDoesNotExist:
         pass
@@ -38,7 +39,7 @@ def cart(request, total=0, quantity=0, cart_item=None):
         'total' : total,
         'quantity' : quantity,
         'cart_items' : cart_items,
-        'tax': tax,
+        'shipping': shipping,
         'grand_total' : grand_total
     }
     print(f'item:{cart_items}')
@@ -139,7 +140,8 @@ def checkout(request ,total=0 ,cart_items=None):
         for i in cart_items:
             total += (i.product.price * i.quantity)
         tax= ( 2 * total)/100
-        grand_total = tax + total 
+        shipping = 40
+        grand_total = shipping + total 
          # Generate order ID
         order_number = generate_order_id()
         
@@ -222,6 +224,7 @@ def place_order(request):
         cart_items = Cartitem.objects.filter(user=user)
         user_wallet = User_Profile.objects.get(user=user)
         #order = Order.objects.filter(user=user , is_ordered=True, order_number=number).last()
+        
         if cart_items.exists():
             # Get the address ID from the POST request
             address_id = request.POST.get('address')
@@ -258,7 +261,7 @@ def place_order(request):
                 country=address.country,
                 zip=address.zip,
                 order_number=order_number,
-                # order_total=order.order_total
+                # order_total=orders.order_total
             )
             print("order_number(place):", orders.order_number)
             orders.save()
@@ -266,7 +269,7 @@ def place_order(request):
             print('payment_id:', payment_id)
 
 
-
+            # order = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
             if payment_mode=="cod":
                 
                 # order=(
