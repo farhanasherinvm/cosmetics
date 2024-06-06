@@ -145,10 +145,11 @@ def checkout(request ,total=0 ,cart_items=None):
         
         # Save order ID to session
         request.session['order_id'] = order_number
-
         print("checkout.order_number:",order_number)
     except ObjectDoesNotExist:
         pass
+    payment_id = str(uuid.uuid4())
+    request.session['payment_id'] = payment_id
     context={  
         'user_pro': user_pro,
         'user_address' :  user_address,
@@ -157,13 +158,14 @@ def checkout(request ,total=0 ,cart_items=None):
         'total': total,
         'grand_total': grand_total,
         'tax': tax,
-        'order_number': order_number
+        'order_number': order_number,
+        'payment_id': payment_id
     }
     print(f'item:{cart_items}')
     print(f'userrrrr:{user}')
     print(f'user_address:{user_address}')
     print(f'user_pro:{user_pro}')
-   
+    print(f'payment_id:{payment_id}')
     return render (request , "checkout.html", context)
 
 
@@ -216,8 +218,10 @@ def place_order(request):
     print("in place_order+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if request.method == "POST":
         user = request.user
+        print('user(place):',user)
         cart_items = Cartitem.objects.filter(user=user)
         user_wallet = User_Profile.objects.get(user=user)
+        #order = Order.objects.filter(user=user , is_ordered=True, order_number=number).last()
         if cart_items.exists():
             # Get the address ID from the POST request
             address_id = request.POST.get('address')
@@ -230,10 +234,6 @@ def place_order(request):
             payment_mode= request.POST.get("method")
             print("payment:", payment_mode)
             
-
-
-
-
             # Fetch the User_Profile instance associated with the current user
             user_profile = get_object_or_404(User_Profile, user=user)
             print('User Profile:', user_profile)
@@ -246,8 +246,6 @@ def place_order(request):
                 print('Order number not found in session')
                 return redirect('outgoing:checkout')
             
-            
-            
             # Proceed with your order placement logic
             orders = Order.objects.create(
                 user=user_profile,
@@ -258,12 +256,16 @@ def place_order(request):
                 city=address.city,
                 state=address.state,
                 country=address.country,
-                order_number=order_number
-                # order_total=
+                order_number=order_number,
+                # order_total=order.order_total
             )
-            print("order_number:", orders.order_number)
+            print("order_number(place):", orders.order_number)
             orders.save()
-            
+            payment_id = request.session.get('payment_id')
+            print('payment_id:', payment_id)
+
+
+
             if payment_mode=="cod":
                 
                 # order=(
@@ -273,33 +275,38 @@ def place_order(request):
                 payment=Payment(
                 user=user_profile,
                 method=payment_mode,
-                status="pending"
-                # amound=
+                status="pending",
+                # amound=order.order_total
             )
                 payment.save()
             else:
                 payment=Payment(
                 user=user_profile,
                 method=payment_mode,
-                status="completed"
+                payment_id=payment_id,
+                status="completed",
+                # amound=order.order_total
                 )
                 payment.save()
                 orders.is_ordered= True
+                print("payment_id:",payment_id)
 
             orders.payment=payment
             orders.save()
-            if payment_mode == "wallet":
-                wallet_qs = Wallet.objects.filter(user=user)
-                if not wallet_qs.exists():
-                    data= "no wallet found for the user"
-                    return JsonResponse({"status": data})
-                wallet_instance=wallet_qs.first()
-                wallet_balance=wallet_instance.wallet_balance
-                if total > wallet_balance:
-                    data = ' You Do Not Sufficient Balance'
-                    return JsonResponse({"status": data})
-                wallet_balance -= total 
-                wallet_balance.save()
+
+            
+            # if payment_mode == "wallet":
+            #     wallet_qs = Wallet.objects.filter(user=user)
+            #     if not wallet_qs.exists():
+            #         data= "no wallet found for the user"
+            #         return JsonResponse({"status": data})
+            #     wallet_instance=wallet_qs.first()
+            #     wallet_balance=wallet_instance.wallet_balance
+            #     if order.order_total > wallet_balance:
+            #         data = ' You Do Not Sufficient Balance'
+            #         return JsonResponse({"status": data})
+            #     wallet_balance -= order.order_total
+            #     wallet_instance.save()
 
 
 
@@ -331,6 +338,7 @@ def place_order(request):
             
             context = {
                     "order_products": order_products,
+                    "payment_id":payment_id
                 }
 
 

@@ -1626,7 +1626,7 @@
                                     </div>
                                 </div>
                             </li>
-                          <form method="post" action="{% url 'outgoing:place_order' %}">
+                          <form method="post" action="{% url 'outgoing:place_order'  %}">
                                 {% csrf_token %}
                             <li class="checkout-item">
                                 <div class="avatar checkout-icon p-1">
@@ -1810,7 +1810,7 @@
                 <div class="card checkout-order-summary">
                     <div class="card-body">
                         <div class="p-3 bg-light mb-3">
-                            <h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">{{ order.order_number }}</span></h5>
+                            <h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">{{ order_number }}</span></h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-centered mb-0 table-nowrap">
