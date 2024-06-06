@@ -256,6 +256,7 @@ def place_order(request):
                 city=address.city,
                 state=address.state,
                 country=address.country,
+                zip=address.zip,
                 order_number=order_number,
                 # order_total=order.order_total
             )
@@ -338,7 +339,8 @@ def place_order(request):
             
             context = {
                     "order_products": order_products,
-                    "payment_id":payment_id
+                    "payment_id":payment_id,
+                    "orders":orders
                 }
 
 

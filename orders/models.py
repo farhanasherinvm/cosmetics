@@ -40,6 +40,7 @@ class Order(models.Model):
     city         = models.CharField(max_length=50)
     state        = models.CharField(max_length=50)
     country      = models.CharField(max_length=50)
+    zip          = models.BigIntegerField(max_length=6, default='00000')
     status       = models.IntegerField(choices=ORDER_STATUS, default=1, null=True, blank=True)
     ip           = models.CharField(blank=True, max_length=20)
     is_ordered   = models.BooleanField(default=False)
