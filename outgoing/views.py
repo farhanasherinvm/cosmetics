@@ -216,7 +216,7 @@ def generate_order_id():
     unique_str = str(uuid.uuid4()).replace('-', '').upper()[:10]  # Generate a 10-character unique ID
     return unique_str
 
-def place_order(request):
+def place_order(request, total=0):
     print("in place_order+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if request.method == "POST":
         user = request.user
@@ -249,6 +249,11 @@ def place_order(request):
                 print('Order number not found in session')
                 return redirect('outgoing:checkout')
             
+            for i in cart_items:  # Line 29
+                total += (i.product.price * i.quantity)  # Line 30
+            shipping = 40
+            grand_total = total + shipping  # Line 41
+            print("grand_total:",grand_total)
             # Proceed with your order placement logic
             orders = Order.objects.create(
                 user=user_profile,
@@ -261,7 +266,7 @@ def place_order(request):
                 country=address.country,
                 zip=address.zip,
                 order_number=order_number,
-                # order_total=orders.order_total
+                order_total=grand_total
             )
             print("order_number(place):", orders.order_number)
             orders.save()
@@ -280,7 +285,7 @@ def place_order(request):
                 user=user_profile,
                 method=payment_mode,
                 status="pending",
-                # amound=order.order_total
+                amount=orders.order_total
             )
                 payment.save()
             else:
@@ -289,7 +294,7 @@ def place_order(request):
                 method=payment_mode,
                 payment_id=payment_id,
                 status="completed",
-                # amound=order.order_total
+                amound=orders.order_total
                 )
                 payment.save()
                 orders.is_ordered= True
@@ -343,7 +348,8 @@ def place_order(request):
             context = {
                     "order_products": order_products,
                     "payment_id":payment_id,
-                    "orders":orders
+                    "orders":orders,
+                    "total" : total
                 }
 
 
