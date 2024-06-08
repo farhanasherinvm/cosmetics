@@ -294,7 +294,7 @@ def place_order(request, total=0):
                 method=payment_mode,
                 payment_id=payment_id,
                 status="completed",
-                amound=orders.order_total
+                amount=orders.order_total
                 )
                 payment.save()
                 orders.is_ordered= True
@@ -302,20 +302,28 @@ def place_order(request, total=0):
 
             orders.payment=payment
             orders.save()
+            wallet_history=Wallet(
+                user=request.user,
+            )
+            wallet_history.save()
 
-            
-            # if payment_mode == "wallet":
-            #     wallet_qs = Wallet.objects.filter(user=user)
-            #     if not wallet_qs.exists():
-            #         data= "no wallet found for the user"
-            #         return JsonResponse({"status": data})
-            #     wallet_instance=wallet_qs.first()
-            #     wallet_balance=wallet_instance.wallet_balance
-            #     if order.order_total > wallet_balance:
-            #         data = ' You Do Not Sufficient Balance'
-            #         return JsonResponse({"status": data})
-            #     wallet_balance -= order.order_total
-            #     wallet_instance.save()
+
+            if payment_mode == "wallet":
+                wallet_qs = Wallet.objects.filter(user=request.user)
+                print("wallet_qs:",wallet_qs)
+                if not wallet_qs.exists():
+                    data= "no wallet found for the user"
+                    return JsonResponse({"status": data})
+                wallet_instance=wallet_qs.first()
+                wallet_balance=wallet_instance.wallet_balance
+                if orders.order_total > wallet_balance:
+                    data = ' You Do Not Sufficient Balance'
+                    return JsonResponse({"status": data})
+                wallet_balance -= orders.order_total
+                wallet_instance.save()
+                wallet_history.transaction="DEBIT"
+                wallet_history.wallet_balance=wallet_balance
+                wallet_history.save()
 
 
 
