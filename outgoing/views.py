@@ -302,31 +302,6 @@ def place_order(request, total=0):
 
             orders.payment=payment
             orders.save()
-            wallet_history=Wallet(
-                user=request.user,
-            )
-            wallet_history.save()
-
-
-            if payment_mode == "wallet":
-                wallet_qs = Wallet.objects.filter(user=request.user)
-                print("wallet_qs:",wallet_qs)
-                if not wallet_qs.exists():
-                    data= "no wallet found for the user"
-                    return JsonResponse({"status": data})
-                wallet_instance=wallet_qs.first()
-                wallet_balance=wallet_instance.wallet_balance
-                if orders.order_total > wallet_balance:
-                    data = ' You Do Not Sufficient Balance'
-                    return JsonResponse({"status": data})
-                wallet_balance -= orders.order_total
-                wallet_instance.save()
-                wallet_history.transaction="DEBIT"
-                wallet_history.wallet_balance=wallet_balance
-                wallet_history.save()
-
-
-
             for item in cart_items:
                 order_product=OrderProduct(
                     user=user_profile,
@@ -342,6 +317,35 @@ def place_order(request, total=0):
                 # product = Product.objects.get(id=item.id)
                 # product.stock -= item.quantity
                 # product.save()
+
+            if payment_mode == "wallet":
+                wallet_history=Wallet(
+                user=request.user,
+                )
+
+                wallet_history.save()
+
+                wallet_qs = Wallet.objects.filter(user=request.user)
+                print("wallet_qs:",wallet_qs)
+                if not wallet_qs.exists():
+                    data= "no wallet found for the user"
+                    return JsonResponse({"status": data})
+                wallet_instance=wallet_qs.first()
+                wallet_balance=wallet_instance.wallet_balance
+                if orders.order_total > wallet_balance:
+                    data = ' You Do Not Sufficient Balance'
+                    return JsonResponse({"status": data})
+                wallet_balance -= orders.order_total
+                wallet_instance.save()
+                wallet_history.transaction="DEBIT"
+                wallet_history.wallet_balance=wallet_balance
+                wallet_history.amount=orders.order_total
+                wallet_history.save()
+                print("wallet_history:",wallet_history)
+
+
+
+            
             subject="Thank You For Your Order"
             message= render_to_string(
                 "recieved_mail.html", { "user":request.user , "order":orders}

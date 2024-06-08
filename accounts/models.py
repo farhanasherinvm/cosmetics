@@ -40,6 +40,7 @@ class Wallet(models.Model):
     user           = models.ForeignKey(User, on_delete=models.CASCADE)
     wallet_balance = models.DecimalField(default=0, decimal_places=2, max_digits=10, null=True, blank=True)
     transaction    = models.CharField(max_length=150, blank=True, null=True)
+    amount         = models.CharField(max_length=100)
     created_at     = models.DateField(auto_now_add=True)
 
     def __str__(self):
