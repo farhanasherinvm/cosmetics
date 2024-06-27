@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.decorators.cache import never_cache
 from accounts.models import User_Profile
 from products.models import Product
+from orders.models import Order, OrderProduct
 from category.models import Category
 from django.utils.text import slugify
 # Create your views here
@@ -229,7 +230,7 @@ def edit_category(request):
         update.category_description = description
         
         update.save()
-        messages.success(request, 'Category updated successfully')
+        messages.success(request,'Category updated successfully')
         return redirect('adminpanel:category_manage')
     else:
         return redirect('adminpanel:category_manage') 
@@ -238,4 +239,30 @@ def edit_category(request):
 def order_detail(request):
     return render (request,"order_detail.html")
 def orders(request):
-    return render (request,"orders.html")
+    url= request.META.get('HTTP_REFERER')
+    print("in orders")
+    if request.method=='GET':
+        print("inorder.if request.meth.get")
+        order_status=Order.ORDER_STATUS
+        order_products=OrderProduct.objects.all().order_by('created_at')
+        unique_order_ids=[]
+        unique_order_product=[]
+        for order_product in order_products: 
+            if order_product.order.order_number not in unique_order_ids:
+                unique_order_ids.append(order_product.order.order_number)
+                unique_order_product.append(order_product)
+                print("unique_order_ids",unique_order_ids)
+                print("unique_order_product",unique_order_product)
+        context={
+            'order_status':order_status,
+            'unique_order_product':unique_order_product,
+                }
+    return render (request,"orders.html",context)
+    # elif request.method == 'POST':
+    #     selected_status=request.POST.get('')
+    #     selected_order_id=request.POST.get()
+
+
+            #         user=request.user
+#         order= Order.objects.get_or_create(user=user)
+#         print("order:" ,order)
