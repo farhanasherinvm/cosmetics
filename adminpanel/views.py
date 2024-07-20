@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate,login
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
@@ -257,12 +257,14 @@ def orders(request):
             'order_status':order_status,
             'unique_order_product':unique_order_product,
                 }
-    return render (request,"orders.html",context)
-    # elif request.method == 'POST':
-    #     selected_status=request.POST.get('')
-    #     selected_order_id=request.POST.get()
+        return render (request,"orders.html",context)
+    elif request.method == 'POST':
+        selected_status=request.POST.get('')
+        selected_order_id=request.POST.get('')
+        selected_order=get_object_or_404(Order, pk=selected_order_id)
+        selected_order.status=selected_status
+        return HttpResponseRedirect(url)
 
 
-            #         user=request.user
-#         order= Order.objects.get_or_create(user=user)
-#         print("order:" ,order)
+
+                 
