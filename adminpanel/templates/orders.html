@@ -516,7 +516,7 @@
                                                         <th>Option</th>
                                                     </tr>
                                                 </thead>
-
+{% for order in unique_order_product%}
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -525,7 +525,7 @@
                                                             </span>
                                                         </td>
 
-                                                        <td>+ 406-4883635</td>
+                                                        <td>{{order.order.email}}</td>
 
                                                         <td>Jul 20, 2021</td>
 
@@ -535,7 +535,7 @@
                                                             <span>Success</span>
                                                         </td>
 
-                                                        <td>$15</td>
+                                                        <td>${{order.payment}}</td>
 
                                                         <td>
                                                             <ul>
@@ -560,216 +560,14 @@
                                                         </td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="assets/images/profile/2.jpg" alt="users">
-                                                            </span>
-                                                        </td>
+                                                  
 
-                                                        <td>+ 573-685572</td>
+                                                   
 
-                                                        <td>Jul 25, 2021</td>
-
-                                                        <td>Paypal</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="assets/images/profile/3.jpg" alt="users">
-                                                            </span>
-                                                        </td>
-
-                                                        <td>+ 759-4568734</td>
-
-                                                        <td>Jul 29, 2021</td>
-
-                                                        <td>Stripe</td>
-
-                                                        <td class="order-pending">
-                                                            <span>Pending</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="assets/images/profile/4.jpg" alt="users">
-                                                            </span>
-                                                        </td>
-
-                                                        <td>+ 546-7664537</td>
-
-                                                        <td>Jul 30, 2021</td>
-
-                                                        <td>Paypal</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="assets/images/profile/1.jpg" alt="users">
-                                                            </span>
-                                                        </td>
-
-                                                        <td>+ 479-7533144</td>
-
-                                                        <td>Aug 01, 2021</td>
-
-                                                        <td>Stripe</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="assets/images/profile/2.jpg" alt="users">
-                                                            </span>
-                                                        </td>
-
-                                                        <td>+ 456-1245789</td>
-
-                                                        <td>Aug 10, 2021</td>
-
-                                                        <td>Stripe</td>
-
-                                                        <td class="order-cancle">
-                                                            <span>Cancel</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
+                                                   
+                                                  
+                                                   
+                                                    {% comment %} <tr>
                                                         <td>
                                                             <span>
                                                                 <img src="assets/images/profile/3.jpg" alt="users">
@@ -811,130 +609,10 @@
                                                         </td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="assets/images/profile/4.jpg" alt="users">
-                                                            </span>
-                                                        </td>
+                                                   
 
-                                                        <td>+ 123-1234567</td>
-
-                                                        <td>Aug 29, 2021</td>
-
-                                                        <td>Paypla</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="{% static 'assets/images/profile/1.jpg' %}" alt="users">
-                                                            </span>
-                                                        </td>
-
-                                                        <td>+ 987-9876543</td>
-
-                                                        <td>Sep 09, 2021</td>
-
-                                                        <td>Paypal</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src="assets/images/profile/2.jpg" alt="users">
-                                                            </span>
-                                                        </td>
-
-                                                        <td>+ 147-3692584</td>
-
-                                                        <td>Sep 17, 2021</td>
-
-                                                        <td>Stripe</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
+                                                   
+                                                  
                                                     <tr>
                                                         <td>
                                                             <span>
@@ -975,8 +653,9 @@
                                                                 </li>
                                                             </ul>
                                                         </td>
-                                                    </tr>
+                                                    </tr> {% endcomment %}
                                                 </tbody>
+                                                {% endfor %}
                                             </table>
                                         </div>
                                     </div>
