@@ -521,7 +521,7 @@
                                                     <tr>
                                                         <td>
                                                             <span>
-                                                                <img src="assets/images/profile/1.jpg" alt="users">
+                                                                <img src="{{ order.product.image.url}}" alt="users">
                                                             </span>
                                                         </td>
 
@@ -529,13 +529,13 @@
 
                                                         <td>Jul 20, 2021</td>
 
-                                                        <td>Paypal</td>
+                                                        <td>{{order.payment}}</td>
 
                                                         <td class="order-success">
                                                             <span>Success</span>
                                                         </td>
 
-                                                        <td>${{order.payment}}</td>
+                                                        <td>${{order.payment.amount}}</td>
 
                                                         <td>
                                                             <ul>
@@ -558,15 +558,7 @@
                                                                 </li>
                                                             </ul>
                                                         </td>
-                                                    </tr>
-
-                                                  
-
-                                                   
-
-                                                   
-                                                  
-                                                   
+                                                    </tr> 
                                                     {% comment %} <tr>
                                                         <td>
                                                             <span>
