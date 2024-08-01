@@ -5,7 +5,24 @@
 {% block header %}{% include "header.html" %}{% endblock %}
 {% block content %}
     <!-- home slider start -->
-  <!-- Carousel wrapper -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <a href="{% url 'products:shop' %}">
+            <img class="d-block w-100" src="{% static 'images\furniture-images\poster\ban.jpg' %}" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="..." alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="..." alt="Third slide">
+          </div>
+        </div>
+      </div>
+
+
+
+  {% comment %} <!-- Carousel wrapper -->
 <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel" data-mdb-carousel-init>
     <!-- Indicators -->
     <div class="carousel-indicators">
@@ -76,7 +93,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-</div>
+</div> {% endcomment %}
   <!-- Carousel wrapper -->
     <!-- home slider end -->
 
@@ -189,30 +206,30 @@
 
 
     <!-- banner image start -->
-<section class="banner-section pt-4">
+<section class="banner-section pt-3">
     <div class="container-fluid">
         <div class="row g-2" style="display: flex; justify-content: space-between;">
             {% for i in category %}
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="banner-image">
                     <a href="shop-left-sidebar.html">
                         <img src="{{ i.category_image.url }}" class="w-100 blur-up lazyload" alt="" style="height: 339px; width: 270px;">
                     </a>
                     <div class="banner-details">
-                        <a href="wishlist.html" class="heart-button">
+                        {% comment %} <a href="wishlist.html" class="heart-button">
                             <i data-feather="heart"></i>
-                        </a>
+                        </a> {% endcomment %}
                         <h4>26% <span class="theme-color">OFF</span></h4>
-                        <div class="banner-price">
+                        {% comment %} <div class="banner-price">
                             <h2>$79.00</h2>
                             <h5 class="theme-color"><del>$65.00</del></h5>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
 
                     <a href="shop-left-sidebar.html" class="banner-shop text-center">
                         <div>
                             <h5>SHOP NOW</h5>
-                            <p class="mb-0 mt-2">BUY ONE GET ONE FREE</p>
+                            <p class="mb-0 mt-2">{{i.category_name}}</p>
                         </div>
                     </a>
                 </div>
@@ -239,6 +256,10 @@
                 <div>
                     <div class="product-box">
                         <div class="img-wrapper">
+                        {% comment %} <div class="banner-details">
+                            <a href="wishlist.html" class="heart-button">
+                                <i data-feather="heart"></i>
+                            </a> {% endcomment %}
                             <a href="productlist.html">
                                 <img src="{{ i.image.url }}"
                                     class="w-100 bg-img blur-up lazyload" alt="">
