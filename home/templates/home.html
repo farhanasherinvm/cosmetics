@@ -533,15 +533,16 @@
     <!-- instagram shop section end -->
 
     <!-- service section start -->
-    <section class="service-section service-style-2 section-b-space">
+    {% comment %} <section class="service-section service-style-2 section-b-space">
         <div class="container">
             <div class="row g-4 g-sm-3">
                 <div class="col-xl-3 col-sm-6">
                     <div class="service-wrap">
                         <div class="service-icon">
                             <svg>
-                                <use xlink:href="assets/svg/icons.svg#customer"></use>
+                                <use xlink:href="{% static 'svg/icons.svg#customer' %}"></use>
                             </svg>
+                            
                         </div>
                         <div class="service-content">
                             <h3 class="mb-2">Customer Servcies</h3>
@@ -553,7 +554,6 @@
                     <div class="service-wrap">
                         <div class="service-icon">
                             <svg>
-                                <use xlink:href="assets/svg/icons.svg#shop"></use>
                             </svg>
                         </div>
                         <div class="service-content">
@@ -566,7 +566,7 @@
                     <div class="service-wrap">
                         <div class="service-icon">
                             <svg>
-                                <use xlink:href="assets/svg/icons.svg#secure-payment"></use>
+                                <use xlink:href="{% static "svg/icons.svg#secure-payment" %} "></use>
                             </svg>
                         </div>
                         <div class="service-content">
@@ -590,7 +590,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> {% endcomment %}
     <!-- service section end -->
 
     <!-- footer start -->
@@ -727,25 +727,25 @@
                             <li class="font-dark">We accept:</li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/1.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/1.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon">
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/2.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/2.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon">
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/3.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/3.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon">
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/4.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/4.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon">
                                 </a>
                             </li>
@@ -918,6 +918,7 @@
                             </div>
                             <div class="modal-product">
                                 <div class="modal-contain-img">
+                                    
                                     <img src="{% static 'images/fashion/instagram/4.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="">
                                 </div>

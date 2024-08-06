@@ -72,10 +72,10 @@
                                         <svg class="svg-icon">
                                             <use class="fill-color" xlink:href="assets/svg/icons.svg#logo"></use>
                                         </svg>
-                                        <img src="assets/images/logo.png" class="img-fluid blur-up lazyload" alt="logo">
+                                        <img src="{% static 'images/logo.png' %}" class="img-fluid blur-up lazyload" alt="logo">
                                     </a>
                                 </div>
-                                <div class="category-menu">
+                                {% comment %} <div class="category-menu">
                                     <div class="category-dropdown">
                                         <div class="close-btn d-xl-none">
                                             Category List
@@ -290,7 +290,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                             <nav>
                                 <div class="main-navbar">
@@ -306,9 +306,9 @@
                                                     </span>
                                                 </div>
                                             </li>
-                                            <li class="mega-menu dropdown home-menu">
-                                                <a href="javascript:void(0)" class="nav-link menu-title">home</a>
-                                                <div class="mega-menu-container menu-content">
+                                            <li class="mega-menu home-menu">
+                                                <a href="{% url 'home:home' %}" class="nav-link menu-title">home</a>
+                                                {% comment %} <div class="mega-menu-container menu-content">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col mega-box">
@@ -428,11 +428,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> {% endcomment %}
                                             </li>
-                                            <li class="dropdown">
+                                            <li>
                                                 <a href="javascript:void(0)" class="nav-link menu-title">shop</a>
-                                                <ul class="nav-submenu menu-content">
+                                                {% comment %} <ul class="nav-submenu menu-content">
                                                     <li>
                                                         <a href="shop-canvas-filter.html">Shop Canvas Filter</a>
                                                     </li>
@@ -465,11 +465,11 @@
                                                         <a href="shop-with-category.html">Shop With Category <span
                                                                 class="tren-budge">New</span></a>
                                                     </li>
-                                                </ul>
+                                                </ul> {% endcomment %}
                                             </li>
-                                            <li class="dropdown">
+                                            <li>
                                                 <a href="javascript:void(0)" class="nav-link menu-title">product</a>
-                                                <ul class="nav-submenu menu-content">
+                                                {% comment %} <ul class="nav-submenu menu-content">
                                                     <li>
                                                         <a href="product-4-image.html">Product 4 Images</a>
                                                     </li>
@@ -502,9 +502,9 @@
                                                         <a href="product-video-thumbnail.html">Product Video
                                                             Thumbnail</a>
                                                     </li>
-                                                </ul>
+                                                </ul> {% endcomment %}
                                             </li>
-                                            <li class="mega-menu dropdown ratio_40">
+                                            {% comment %} <li class="mega-menu dropdown ratio_40">
                                                 <a href="javascript:void(0)" class="nav-link menu-title">
                                                     <div class="gradient-title">Voxo plus</div>
                                                 </a>
@@ -724,8 +724,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li class="dropdown">
+                                            </li> {% endcomment %}
+                                            {% comment %} <li class="dropdown">
                                                 <a href="javascript:void(0)" class="nav-link menu-title">pages</a>
                                                 <ul class="nav-submenu menu-content">
                                                     <li>
@@ -803,7 +803,7 @@
                                                         <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
                                                     </li>
                                                 </ul>
-                                            </li>
+                                            </li> {% endcomment %}
                                             <li class="mobile-poster d-flex d-xl-none">
                                                 <img src="assets/images/pwa.png" class="img-fluid" alt="">
                                                 <div class="mobile-contain">
@@ -1415,7 +1415,7 @@
                                     <svg class="svg-icon">
                                         <use class="fill-color" xlink:href="assets/svg/icons.svg#logo"></use>
                                     </svg>
-                                    <img src="assets/images/logo.png" class="img-fluid blur-up lazyload" alt="logo">
+                                    <img src="{% static 'images/logo.png' %}" class="img-fluid blur-up lazyload" alt="logo">
                                 </a>
                             </div>
                             <ul class="contact-lists">
@@ -1546,22 +1546,22 @@
                             <li class="font-dark">We accept:</li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/1.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/1.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon"></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/2.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/2.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon"></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/3.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/3.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon"></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <img src="assets/images/payment-icon/4.jpg" class="img-fluid blur-up lazyload"
+                                    <img src="{% static 'images/payment-icon/4.jpg' %}" class="img-fluid blur-up lazyload"
                                         alt="payment icon"></a>
                             </li>
                         </ul>
