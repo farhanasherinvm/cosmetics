@@ -280,7 +280,7 @@
                                 </li>
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="index-2.html">
+                                    <a class="sidebar-link sidebar-title link-nav" href="dashboard">
                                         <i data-feather="home"></i>
                                         <span>Dashboard</span>
                                     </a>
@@ -293,11 +293,11 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="all-users.html">All users</a>
+                                            <a href="{% url 'adminpanel:user_manage' %}">All users</a>
                                         </li>
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="add-new-user.html">Add new user</a>
-                                        </li>
+                                        </li> {% endcomment %}
                                     </ul>
                                 </li>
 
@@ -315,7 +315,7 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="order-list.html">Order List</a>
+                                            <a href="{% url 'adminpanel:orders' %}">Order List</a>
                                         </li>
                                         <li>
                                             <a href="order-detail.html">Order Detail</a>
@@ -329,19 +329,19 @@
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i data-feather="users"></i>
-                                        <span>Venders</span>
+                                        <span>Category</span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="vendor-list.html">Vendor List</a>
+                                            <a href="{% url 'adminpanel:category_manage' %}">Category List</a>
                                         </li>
 
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="create-vendor.html">Create Vendor</a>
-                                        </li>
+                                        </li> {% endcomment %}
                                     </ul>
                                 </li>
-
+{% comment %} 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i data-feather="users"></i>
@@ -360,7 +360,7 @@
                                             <a href="taxes.html">Taxes</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> {% endcomment %}
 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
@@ -369,12 +369,12 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="products.html">Prodcts</a>
+                                            <a href="{% url 'adminpanel:product_manage' %}">Prodcts</a>
                                         </li>
 
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="add-new-product.html">Add New Products</a>
-                                        </li>
+                                        </li> {% endcomment %}
                                     </ul>
                                 </li>
 
@@ -424,12 +424,12 @@
                                     </a>
                                 </li>
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="support-ticket.html">
                                         <i data-feather="phone"></i>
                                         <span>Support Ticket</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
@@ -443,40 +443,40 @@
                                     </ul>
                                 </li>
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="reports.html">
                                         <i data-feather="file-text"></i>
                                         <span>Reports</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="list-page.html">
                                         <i data-feather="list"></i>
                                         <span>List Page</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="login.html">
                                         <i data-feather="log-in"></i>
                                         <span>Log In</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="forgot-password.html">
                                         <i data-feather="key"></i>
                                         <span>Forgot Password</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="sidebar-list">
+                                {% comment %} <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="sign-up.html">
                                         <i data-feather="plus-circle"></i>
                                         <span>Register</span>
                                     </a>
-                                </li>
+                                </li> {% endcomment %}
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow">
@@ -486,6 +486,7 @@
                 </div>
             </div>
             <!-- Page Sidebar Ends-->
+
 
 
             {% block content %}{% endblock %}

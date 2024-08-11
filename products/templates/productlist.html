@@ -29,7 +29,7 @@
     <meta name="keywords" content="Voxo">
     <meta name="author" content="Voxo">
     <link rel="icon" href="{% static 'images/favicon/2.png' %}" type="image/x-icon" />
-    <title>Product Left Thumbnail</title>
+    <title>Product</title>
 
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -74,7 +74,7 @@
                                         <svg class="svg-icon">
                                             <use class="fill-color" xlink:href="assets/svg/icons.svg#logo"></use>
                                         </svg>
-                                        <img src="assets/images/logo.png" class="img-fluid blur-up lazyload" alt="logo">
+                                        <img src="{% static 'images/logo.png' %}" class="img-fluid blur-up lazyload" alt="logo">
                                     </a>
                                 </div>
                                 <div class="category-menu">
@@ -308,9 +308,9 @@
                                                     </span>
                                                 </div>
                                             </li>
-                                            <li class="mega-menu dropdown home-menu">
+                                            <li class="mega-menu  home-menu">
                                                 <a href="javascript:void(0)" class="nav-link menu-title">home</a>
-                                                <div class="mega-menu-container menu-content">
+                                                {% comment %} <div class="mega-menu-container menu-content">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col mega-box">
@@ -429,12 +429,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    </div> 
+                                                </div>{% endcomment %}
                                             </li>
-                                            <li class="dropdown">
+                                            <li class="">
                                                 <a href="javascript:void(0)" class="nav-link menu-title">shop</a>
-                                                <ul class="nav-submenu menu-content">
+                                                {% comment %} <ul class="nav-submenu menu-content">
                                                     <li>
                                                         <a href="shop-canvas-filter.html">Shop Canvas Filter</a>
                                                     </li>
@@ -504,9 +504,9 @@
                                                         <a href="product-video-thumbnail.html">Product Video
                                                             Thumbnail</a>
                                                     </li>
-                                                </ul>
+                                                </ul> {% endcomment %}
                                             </li>
-                                            <li class="mega-menu dropdown ratio_40">
+                                             {% comment %}<li class="mega-menu dropdown ratio_40">
                                                 <a href="javascript:void(0)" class="nav-link menu-title">
                                                     <div class="gradient-title">Voxo plus</div>
                                                 </a>
@@ -725,11 +725,11 @@
 
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="javascript:void(0)" class="nav-link menu-title">pages</a>
-                                                <ul class="nav-submenu menu-content">
+                                                </div> 
+                                            </li>{% endcomment %}
+                                            <li class="">
+                                                <a href="javascript:void(0)" class="nav-link menu-title">product</a>
+                                                {% comment %} <ul class="nav-submenu menu-content">
                                                     <li>
                                                         <a href="404.html">404</a>
                                                     </li>
@@ -778,11 +778,11 @@
                                                     <li>
                                                         <a href="wishlist.html">wishlist</a>
                                                     </li>
-                                                </ul>
+                                                </ul> {% endcomment %}
                                             </li>
-                                            <li class="dropdown">
+                                           {% comment %} <li class="">
                                                 <a href="javascript:void(0)" class="nav-link menu-title">blog</a>
-                                                <ul class="nav-submenu menu-content">
+                                                 <ul class="nav-submenu menu-content">
                                                     <li>
                                                         <a href="blog-details.html">Blog Details</a>
                                                     </li>
@@ -804,7 +804,7 @@
                                                     <li>
                                                         <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
                                                     </li>
-                                                </ul>
+                                                </ul> {% endcomment %}
                                             </li>
                                             <li class="mobile-poster d-flex d-xl-none">
                                                 <img src="assets/images/pwa.png" class="img-fluid" alt="">
@@ -1064,15 +1064,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3>Product Left Thumbnail</h3>
+                    {% comment %} <h3>Product </h3> {% endcomment %}
                     <nav>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
+                            {% comment %} <li class="breadcrumb-item">
                                 <a href="index.html">
                                     <i class="fas fa-home"></i>
                                 </a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Product Left Thumbnail</li>
+                            </li> {% endcomment %}
+                            {% comment %} <li class="breadcrumb-item active" aria-current="page">Product Left Thumbnail</li> {% endcomment %}
                         </ol>
                     </nav>
                 </div>
