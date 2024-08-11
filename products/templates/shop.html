@@ -1767,15 +1767,17 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                             <div class="accordion-body category-scroll">
                                 <ul class="category-list">
+                                    {% for i in category %}
                                     <li>
                                         <div class="form-check ps-0 custome-form-check">
                                             <input class="checkbox_animated check-it" type="checkbox"
                                                 id="flexCheckDefault10">
-                                            <label class="form-check-label" for="flexCheckDefault10">Shirts</label>
+                                            <label class="form-check-label" for="flexCheckDefault10">{{ i }}</label>
                                             <p class="font-light">(25)</p>
                                         </div>
                                     </li>
-                                    <li>
+                                    {% endfor %}
+                                    {% comment %} <li>
                                         <div class="form-check ps-0 custome-form-check">
                                             <input class="checkbox_animated check-it" type="checkbox"
                                                 id="flexCheckDefault11">
@@ -1783,8 +1785,8 @@
                                                 Solly</label>
                                             <p class="font-light">(25)</p>
                                         </div>
-                                    </li>
-                                    <li>
+                                    </li> {% endcomment %}
+                                    {% comment %} <li>
                                         <div class="form-check ps-0 custome-form-check">
                                             <input class="checkbox_animated check-it" type="checkbox"
                                                 id="flexCheckDefault12">
@@ -1839,7 +1841,7 @@
                                             <label class="form-check-label" for="flexCheckDefault18">HRX</label>
                                             <p class="font-light">(25)</p>
                                         </div>
-                                    </li>
+                                    </li> {% endcomment %}
                                 </ul>
                             </div>
                         </div>

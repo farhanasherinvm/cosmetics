@@ -1,5 +1,7 @@
 
 from django.shortcuts import get_object_or_404, render
+
+from .models import Category
 from .models import Product
 
 # Create your views here.
@@ -27,9 +29,10 @@ def productlist(request):
 
 def shop(request):
     product=Product.objects.all()
+    category=Category.objects.all()
     
     context={
         'product':product,
-        
+        'category':category
     }
     return render(request, 'shop.html', context)
