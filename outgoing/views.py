@@ -1,7 +1,9 @@
 import datetime
 from datetime import date 
+from django.urls import reverse
 from django.utils import timezone
 import uuid
+import os
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -12,6 +14,33 @@ from accounts.models import User_Profile ,Address , Wallet
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.core.mail import EmailMessage
+from django.conf import settings
+import paypalrestsdk
+# paypalrestsdk.configure({
+#     "mode": "sandbox",
+#     "client_id":os.environ.get('PAYPAL_CLIENT_ID'),
+#     "client_secret":os.environ.get('PAYPAL_CLIENT_SECRET')
+# })import os
+# import paypalrestsdk
+
+# paypalrestsdk.configure({
+#     "mode": "sandbox",  # or "live"
+#     "client_id": os.environ.get('PAYPAL_CLIENT_ID'),
+#     "client_secret": os.environ.get('PAYPAL_CLIENT_SECRET')
+# })
+
+# # Check if client_id and client_secret are set
+# if not os.environ.get('PAYPAL_CLIENT_ID') or not os.environ.get('PAYPAL_CLIENT_SECRET'):
+#     raise Exception("PayPal client credentials are not set!")
+import paypalrestsdk
+from django.conf import settings
+
+paypalrestsdk.configure({
+    "mode": "sandbox",  # or "live"
+    "client_id": settings.PAYPAL_CLIENT_ID,
+    "client_secret": settings.PAYPAL_CLIENT_SECRET
+})
+
 # Create your views here.
 def cart(request, total=0, quantity=0, cart_item=None):
     print("in cart")
@@ -61,6 +90,7 @@ def add_cart(request,product_id):
     print("in add_cart+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     current_user=request.user
     product = Product.objects.get(id=product_id)#get product
+    print("")
     try:
         print("555")
         cart=Cart.objects.get(cart_id=_cart_id(request))# get the cart using cart_id present in the session
@@ -255,6 +285,7 @@ def place_order(request, total=0):
             grand_total = total + shipping  # Line 41
             print("grand_total:",grand_total)
             # Proceed with your order placement logic
+            print("orders create (place)")
             orders = Order.objects.create(
                 user=user_profile,
                 address=address.address,
@@ -276,7 +307,7 @@ def place_order(request, total=0):
 
             # order = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
             if payment_mode=="cod":
-                
+                print("coooooooooooooooooooooooood")
                 # order=(
                 #     orders.last()
 
@@ -296,6 +327,40 @@ def place_order(request, total=0):
                 status="completed",
                 amount=orders.order_total
                 )
+                if payment_mode == "paypal":
+                    print("if paypalllllllllllllllllllllllllllllllllllllllllllllllll")
+                    request.session['payment_id']=payment_id
+
+
+
+
+                    return redirect('outgoing:paypal_payment')
+                    
+                else:
+                    
+                    wallet_history=Wallet(
+                    user=request.user,
+                    )
+
+                    wallet_history.save()
+
+                    wallet_qs = Wallet.objects.filter(user=request.user)
+                    print("wallet_qs:",wallet_qs)
+                    if not wallet_qs.exists():
+                        data= "no wallet found for the user"
+                        return JsonResponse({"status": data})
+                    wallet_instance=wallet_qs.first()
+                    wallet_balance=wallet_instance.wallet_balance
+                    if orders.order_total > wallet_balance:
+                       data = ' You Do Not Sufficient Balance'
+                       return JsonResponse({"status": data})
+                    wallet_balance -= orders.order_total
+                    wallet_instance.save()
+                    wallet_history.transaction="DEBIT"
+                    wallet_history.wallet_balance=wallet_balance
+                    wallet_history.amount=orders.order_total
+                    wallet_history.save()
+                    print("wallet_history:",wallet_history)
                 payment.save()
                 orders.is_ordered= True
                 print("payment_id:",payment_id)
@@ -318,31 +383,7 @@ def place_order(request, total=0):
                 # product.stock -= item.quantity
                 # product.save()
 
-            if payment_mode == "wallet":
-                wallet_history=Wallet(
-                user=request.user,
-                )
-
-                wallet_history.save()
-
-                wallet_qs = Wallet.objects.filter(user=request.user)
-                print("wallet_qs:",wallet_qs)
-                if not wallet_qs.exists():
-                    data= "no wallet found for the user"
-                    return JsonResponse({"status": data})
-                wallet_instance=wallet_qs.first()
-                wallet_balance=wallet_instance.wallet_balance
-                if orders.order_total > wallet_balance:
-                    data = ' You Do Not Sufficient Balance'
-                    return JsonResponse({"status": data})
-                wallet_balance -= orders.order_total
-                wallet_instance.save()
-                wallet_history.transaction="DEBIT"
-                wallet_history.wallet_balance=wallet_balance
-                wallet_history.amount=orders.order_total
-                wallet_history.save()
-                print("wallet_history:",wallet_history)
-
+           
 
 
             
@@ -382,7 +423,267 @@ def place_order(request, total=0):
         # Handle cases where the request method is not POST
         print('Invalid request method')
         return HttpResponseRedirect('/')
+def paypal_payment(request):
+    print("paypal_paymnet")
+    order_id = request.session.get('order_id')
+    print('Order Number:', order_id)
+
+    if not order_id:
+                # Handle the case where order_number is not found in session
+        print('Order number not found in session')
+        return redirect('outgoing:checkout')
+            
+    cart_items = Cartitem.objects.filter(user=request.user)
+    total=0
+    for i in cart_items:
+        total += (i.product.price * i.quantity)  # Line 30
+        shipping = 40
+        grand_total = total + shipping  # Line 41
+        print("grand_total:",grand_total)
+    total_bill=grand_total
+    paypal_order={
+        "intent":"sale",
+        "payer":{
+            "payment_mode": "paypal",
+
+        },
+        "redirect_urls":{
+            "return_url":request.build_absolute_uri(reverse("outgoing:paypal_success")),
+            "cancel_url":request.build_absolute_uri(reverse("outgoing:paypal_cancel"))
+        },
+        "transactions":[{
+            "amount":{
+                "total":str(total_bill),
+                "currency":"USD"
+            },
+            "description":"Payment for order #"+str(order_id)
+        }]
+    }
+    request.session['paypal_order']=paypal_order
+    return redirect('outgoing:paypal_redirect')
+
+
+# def paypal_redirect(request):
+#     print("paypal_rediarect")
+#     client_id=settings.PAYPAL_CLIENT_ID
+#     client_secret=settings.PAYPAL_CLIENT_SECRET
+#     paypal_sdk_client=paypalrestsdk.Api({
+#         "mode":"sandbox",
+#         "client_id":client_id,
+#         "client_secret":client_secret
+
+#     })
+#     paypal_order=request.session['paypal_order']
+     
+#     paypal_order["redirect_urls"] = {
+#         "return_url": request.build_absolute_uri(reverse("outgoing:paypal_success")),
+#         "cancel_url": request.build_absolute_uri(reverse("outgoing:paypal_cancel")),  # Ensure this is correct
+#     }
+
+#     payment=paypalrestsdk.Payment(paypal_order)
+#     if payment.create():
+#         for link in payment.links:
+#             if link.rel== 'approval_url':
+#                 redirect_url=str(link.href)
+#                 return redirect(redirect_url)
+
+#     else:
+#         messages.error(request,'paymant processing failed,please try again later')
+#         return redirect('outgoing:checkout')
+# def paypal_redirect(request):
+#     print("paypal_redirect")
     
+#     # Get PayPal client credentials
+#     client_id = settings.PAYPAL_CLIENT_ID
+#     client_secret = settings.PAYPAL_CLIENT_SECRET
+    
+#     # Configure PayPal SDK
+#     paypalrestsdk.configure({
+#         "mode": "sandbox",  # or "live"
+#         "client_id": client_id,
+#         "client_secret": client_secret
+#     })
+    
+#     # Ensure paypal_order exists in session
+#     if 'paypal_order' not in request.session:
+#         messages.error(request, 'No PayPal order found in session.')
+#         return redirect('outgoing:checkout')
+    
+#     paypal_order = request.session['paypal_order']
+    
+#     # Set return and cancel URLs
+#     paypal_order["redirect_urls"] = {
+#         "return_url": request.build_absolute_uri(reverse("outgoing:paypal_success")),
+#         "cancel_url": request.build_absolute_uri(reverse("outgoing:paypal_cancel")),
+#     }
+
+#     # Create payment
+#     payment = paypalrestsdk.Payment(paypal_order)
+#     print("rediarectttttttttt",payment)
+#     if payment.create():
+#         for link in payment.links:
+#             if link.rel == 'approval_url':
+#                 redirect_url = str(link.href)
+#                 return redirect(redirect_url)
+#     # else:
+#     #     messages.error(request, 'Payment processing failed, please try again later.')
+#     #     return redirect('outgoing:checkout')
+#     else:
+#         print("Client ID:", client_id)
+#         print("Client Secret:", client_secret)
+#         print("PayPal order data:", paypal_order)
+#         print("Payment object:", payment)
+
+
+#         print("Payment failed:", payment.error)  # Add this line to print the error message
+#         messages.error(request, 'Payment processing failed, please try again later.')
+#         return redirect('outgoing:checkout')
+
+
+def paypal_redirect(request):
+    print("paypal_redirect")
+    
+    # Get PayPal client credentials
+    client_id = settings.PAYPAL_CLIENT_ID
+    client_secret = settings.PAYPAL_CLIENT_SECRET
+    
+    # Configure PayPal SDK
+    paypalrestsdk.configure({
+        "mode": "sandbox",  # or "live"
+        "client_id": client_id,
+        "client_secret": client_secret
+    })
+    
+    # Ensure paypal_order exists in session
+    if 'paypal_order' not in request.session:
+        messages.error(request, 'No PayPal order found in session.')
+        return redirect('outgoing:checkout')
+    
+    paypal_order = request.session['paypal_order']
+    
+    # Set return and cancel URLs
+    paypal_order["redirect_urls"] = {
+        "return_url": request.build_absolute_uri(reverse("outgoing:paypal_success")),
+        "cancel_url": request.build_absolute_uri(reverse("outgoing:paypal_cancel")),
+    }
+    
+    # Fixing payment_method field
+    paypal_order['payer'] = {
+        "payment_method": "paypal"
+    }
+
+    # Create payment
+    payment = paypalrestsdk.Payment(paypal_order)
+    print("Payment object:", payment)
+    
+    if payment.create():
+        for link in payment.links:
+            if link.rel == 'approval_url':
+                redirect_url = str(link.href)
+                return redirect(redirect_url)
+    else:
+        print("Payment failed:", payment.error)  # Print the error details
+        messages.error(request, 'Payment processing failed, please try again later.')
+        return redirect('outgoing:checkout')
+
+
+# def paypal_success(request):
+#     print("paypal_sucsses")
+#     payer_id=request.Get.get('payerID')
+#     order_id=request.session.get('order_id')
+#     paypal_std_clint=paypalrestsdk.Api(
+#         {
+#             "mode":"sandbox",
+#             "client_id":settings.PAYPAL_CLIENT_ID,
+#             "client_secret":settings.PAYPAL_CLIENT_SECRET
+#         }
+
+#     )
+#     payment=paypalrestsdk.Payment.find(request.GET["paymentId"])
+#     if payment.execute({"payer_id":payer_id}):
+#         order=Order.objects.get(id=order_id)
+#         order.ORDER_STATUS=5
+#         order.save()
+#         del request.session['order_id']
+#         del request.session['paypal_order']
+#         messages.success(request,"payment processed successfully")
+#         return render(request,'order_success.html',{'order':order})
+#     else:
+#         messages.error(request,'paymant processing failed,please try again later')
+#         return redirect('outgoing:checkout')
+
+# def paypal_cancel(request):
+#     print("paypal_cancel")
+#     messages.error(request,'payment was cancelled')
+#     return redirect('outgoing:checkout')
+
+
+# def paypal_success(request):
+#     print("paypal_success")
+#     payer_id = request.GET.get('PayerID')  # Make sure this matches the query parameter exactly
+#     order_id = request.session.get('order_id')
+#     paypal_std_client = paypalrestsdk.Api(
+#         {
+#             "mode": "sandbox",
+#             "client_id": settings.PAYPAL_CLIENT_ID,
+#             "client_secret": settings.PAYPAL_CLIENT_SECRET
+#         }
+#     )
+    
+#     payment = paypalrestsdk.Payment.find(request.GET.get("paymentId"))  # Correct key name here as well
+#     if payment.execute({"payer_id": payer_id}):
+#         order = Order.objects.get(id=order_id)
+#         order.ORDER_STATUS = 5
+#         order.save()
+#         del request.session['order_id']
+#         del request.session['paypal_order']
+#         messages.success(request, "Payment processed successfully")
+#         return render(request, 'order_success.html', {'order': order})
+#     else:
+#         messages.error(request, 'Payment processing failed, please try again later')
+#         return redirect('outgoing:checkout')
+def paypal_success(request):
+    payer_id = request.GET.get('PayerID')
+    order_id = request.session.get('order_id')
+
+    print(f"order_id: {order_id}, type: {type(order_id)}")
+
+    if not order_id:
+        messages.error(request, 'Order ID not found in session.')
+        return redirect('outgoing:checkout')
+
+    paypal_std_client = paypalrestsdk.Api(
+        {
+            "mode": "sandbox",
+            "client_id": settings.PAYPAL_CLIENT_ID,
+            "client_secret": settings.PAYPAL_CLIENT_SECRET
+        }
+    )
+
+    payment = paypalrestsdk.Payment.find(request.GET.get("paymentId"))
+    if payment.execute({"payer_id": payer_id}):
+        try:
+            order = Order.objects.get(order_number=order_id)  # Assuming order_number is the field to query
+            order.ORDER_STATUS = 5
+            order.save()
+            del request.session['order_id']
+            del request.session['paypal_order']
+            messages.success(request, "Payment processed successfully")
+            return render(request, 'order_success.html', {'order': order})
+        except Order.DoesNotExist:
+            messages.error(request, 'Order not found.')
+            return redirect('outgoing:checkout')
+    else:
+        messages.error(request, 'Payment processing failed, please try again later')
+        return redirect('outgoing:checkout')
+
+def paypal_cancel(request):
+    print("paypal_cancel")
+    messages.error(request, 'Payment was cancelled')
+    return redirect('outgoing:checkout')
+
+
+
 # def cash_on_delivery(request,number):
 #     print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 #     orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)
@@ -428,4 +729,3 @@ def place_order(request, total=0):
 #             #     }
 #         return redirect("outgoing:checkout")
 #     return redirect("outgoing:checkout") 
-  

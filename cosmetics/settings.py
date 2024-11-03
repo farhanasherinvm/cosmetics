@@ -156,6 +156,38 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'farhanashnz@gmail.com'
 EMAIL_HOST_PASSWORD = 'sfcz fpci uhjl bycp'
 
+# PAYPAL_CLIENT_ID=os.environ.get('PAYPAL_CLIENT_ID')
+# PAYPAL_CLIENT_SECRET=os.environ.get('PAYPAL_CLIENT_SECRET')
+# print(f'Client ID: {PAYPAL_CLIENT_ID}, Client Secret: {PAYPAL_CLIENT_SECRET}')
+
+# PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID')
+# PAYPAL_CLIENT_SECRET = os.getenv('PAYPAL_CLIENT_SECRET')
+# from dotenv import load_dotenv
+
+# import paypalrestsdk
+
+# load_dotenv()  # Load environment variables from .env file
+
+# paypalrestsdk.configure({
+#     "mode": "sandbox",  # or "live"
+#     "client_id": os.environ.get('PAYPAL_CLIENT_ID'),
+#     "client_secret": os.environ.get('PAYPAL_CLIENT_SECRET')
+# })
+
+# if not os.environ.get('PAYPAL_CLIENT_ID') or not os.environ.get('PAYPAL_CLIENT_SECRET'):
+#     raise Exception("PayPal client credentials are not set!")
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
+
+PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID')
+PAYPAL_CLIENT_SECRET = os.getenv('PAYPAL_CLIENT_SECRET')
+
+# Print the values to verify they are loaded correctly (remove this later)
+print(f"Client ID: {PAYPAL_CLIENT_ID}")
+print(f"Client Secret: {PAYPAL_CLIENT_SECRET}")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

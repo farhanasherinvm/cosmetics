@@ -29,7 +29,7 @@ class Order(models.Model):
         (6, 'Cancelled'),
         (7, 'Return')
     )
-
+    order_number = models.CharField(max_length=50, unique=True)
     user         = models.ForeignKey(User_Profile, on_delete=models.CASCADE)
     payment      = models.ForeignKey(Payment, on_delete=models.SET_NULL,blank=True,null=True)
     order_number = models.CharField(max_length=20)
