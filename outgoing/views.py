@@ -647,7 +647,7 @@ def paypal_success(request):
     order_id = request.session.get('order_id')
 
     print(f"order_id: {order_id}, type: {type(order_id)}")
-
+ 
     if not order_id:
         messages.error(request, 'Order ID not found in session.')
         return redirect('outgoing:checkout')
@@ -666,6 +666,7 @@ def paypal_success(request):
             order = Order.objects.get(order_number=order_id)  # Assuming order_number is the field to query
             order.ORDER_STATUS = 5
             order.save()
+            Cartitem.objects.filter(user=request.user).delete()
             del request.session['order_id']
             del request.session['paypal_order']
             messages.success(request, "Payment processed successfully")
