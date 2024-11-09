@@ -928,8 +928,22 @@
                                         </div>
                                     </li>
                                 </ul>
+                            </div><div class="search-full">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i data-feather="search" class="font-light"></i>
+                                    </span>
+                                    <input type="text" class="form-control search-type" id="searchInput" placeholder="Search here...">
+                                    <span class="input-group-text close-search">
+                                        <i data-feather="x" class="font-light"></i>
+                                    </span>
+                                </div>
+                            
+                                <div class="search-suggestion" id="searchResults">
+                                    <ul class="custom-scroll"></ul>
+                                </div>
                             </div>
-                            <div class="search-full">
+                            {% comment %} <div class="search-full">
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i data-feather="search" class="font-light"></i>
@@ -1001,7 +1015,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -2215,6 +2229,41 @@
     <!-- script js -->
     <script src="{% static 'js/theme-setting.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    <!-- JavaScript for AJAX Search -->
+<script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const query = this.value;
+
+        // Only search if there's input
+        if (query.length > 0) {
+            fetch(`/ajax-product-search/?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    const searchResults = document.getElementById('searchResults');
+                    const resultsList = searchResults.querySelector('ul');
+                    resultsList.innerHTML = '';  // Clear previous results
+
+                    data.products.forEach(product => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <div class="product-cart media">
+                                <img src="${product.image}" class="img-fluid blur-up lazyload" alt="">
+                                <div class="media-body">
+                                    <a href="javascript:void(0)">
+                                        <h6 class="mb-1">${product.name}</h6>
+                                    </a>
+                                    <p class="mb-0 mt-1">$${product.price}</p>
+                                </div>
+                            </div>
+                        `;
+                        resultsList.appendChild(listItem);
+                    });
+                });
+        } else {
+            document.getElementById('searchResults').querySelector('ul').innerHTML = '';  // Clear if no input
+        }
+    });
+</script>
 </body>
 
 
