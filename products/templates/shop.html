@@ -2233,7 +2233,7 @@
 <script>
     document.getElementById('searchInput').addEventListener('input', function() {
         const query = this.value;
-
+    
         // Only search if there's input
         if (query.length > 0) {
             fetch(`/ajax-product-search/?query=${query}`)
@@ -2242,19 +2242,19 @@
                     const searchResults = document.getElementById('searchResults');
                     const resultsList = searchResults.querySelector('ul');
                     resultsList.innerHTML = '';  // Clear previous results
-
+    
                     data.products.forEach(product => {
                         const listItem = document.createElement('li');
                         listItem.innerHTML = `
                             <div class="product-cart media">
-                                <img src="${product.image}" class="img-fluid blur-up lazyload" alt="">
+                                <a href="${product.url}"><img src="${product.image}" class="img-fluid blur-up lazyload" alt=""></a>
                                 <div class="media-body">
-                                    <a href="javascript:void(0)">
+                                      <!-- Link to product detail page -->
                                         <h6 class="mb-1">${product.name}</h6>
-                                    </a>
+                                   
                                     <p class="mb-0 mt-1">$${product.price}</p>
                                 </div>
-                            </div>
+                            </div> 
                         `;
                         resultsList.appendChild(listItem);
                     });
@@ -2263,6 +2263,7 @@
             document.getElementById('searchResults').querySelector('ul').innerHTML = '';  // Clear if no input
         }
     });
+    
 </script>
 </body>
 

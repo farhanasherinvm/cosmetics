@@ -1,7 +1,6 @@
 
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
-
+from django.shortcuts import render
 from .models import Category
 from .models import Product
 
@@ -12,10 +11,10 @@ def product(request,slug,id):
     product = Product.objects.get(id=id)
     return render(request, 'productlist.html', {'data':product})
    
-def productlist(request):
-    return render (request,'productlist.html')
-from django.http import JsonResponse
-from .models import Product
+# def productlist(request):
+#     return render (request,'productlist.html')
+
+from django.urls import reverse
 
 def ajax_product_search(request):
     query = request.GET.get('query', '')
@@ -26,11 +25,13 @@ def ajax_product_search(request):
                 'name': product.product_name,
                 'price': product.price,
                 'image': product.image.url if product.image else None,
+                'url': reverse('shop:product', kwargs={'slug': product.slug, 'id': product.id})  # Generate product detail URL
             }
             for product in products
         ]
         return JsonResponse({'products': product_list})
     return JsonResponse({'products': []})
+
 
 # def single_product(request,category_slug,product_slug):
 #     print("haaaaaaaaaaaaaaaaaaaaaaaaaaaa")
