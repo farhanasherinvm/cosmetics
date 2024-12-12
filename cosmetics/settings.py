@@ -153,8 +153,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # Use the appropriate port for your SMTP server
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'farhanashnz@gmail.com'
-EMAIL_HOST_PASSWORD = 'sfcz fpci uhjl bycp'
+EMAIL_HOST_USER = 'cosmeticsshop819@gmail.com'
+EMAIL_HOST_PASSWORD = 'lagm xkny mgbr odyv'
 
 # PAYPAL_CLIENT_ID=os.environ.get('PAYPAL_CLIENT_ID')
 # PAYPAL_CLIENT_SECRET=os.environ.get('PAYPAL_CLIENT_SECRET')

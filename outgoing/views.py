@@ -7,7 +7,7 @@ import os
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from outgoing.models import Cart , Cartitem
+from outgoing.models import Cart , Cartitem,Wishlist
 from products.models import Product 
 from orders.models import Order,Payment,OrderProduct
 from accounts.models import User_Profile ,Address , Wallet
@@ -683,8 +683,14 @@ def paypal_cancel(request):
     messages.error(request, 'Payment was cancelled')
     return redirect('outgoing:checkout')
 
+def add_to_wishlist(request,product_id):
+    product=get_object_or_404(Product, id=product_id)
+    Wishlist.objects.get_or_create(user=request.user,product=product)
+    return redirect("outgoing:wishlist_view")
 
-
+def wishlist_view(request):
+    wishlist_items=Wishlist.objects.filter(user=request.user)
+    return render (request,"wishlist.html",{'wishlist_items':wishlist_items})
 # def cash_on_delivery(request,number):
 #     print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 #     orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)

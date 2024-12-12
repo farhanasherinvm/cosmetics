@@ -5,11 +5,12 @@ from . import views
 app_name = 'outgoing'
 
 urlpatterns = [
+    path('wishlist',views.wishlist_view,name="wishlist"),
+    path('add/<int:product_id>/',views.add_to_wishlist,name="add"),
     path('cart', views.cart, name="cart"),
     path('add_cart/<int:product_id>/', views.add_cart, name='add_cart'),
     path('remove_cart/<int:product_id>/', views.remove_cart, name='remove_cart'),
     path('remove_item/<int:product_id>/', views.remove_item, name='remove_item'),
-
     path('checkout', views.checkout, name="checkout"),
     path('new_address', views.new_address, name="new_address"),
     path('delete_address/<int:id>/', views.delete_address, name="delete_address"),
