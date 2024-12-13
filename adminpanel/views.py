@@ -8,6 +8,7 @@ from products.models import Product
 from orders.models import Order, OrderProduct
 from category.models import Category
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 # Create your views here
 @never_cache
 def admlogin(request):
@@ -36,7 +37,15 @@ def admlogout(request):
 
 
 def dashboard(request):
-    return render(request,"dashboard.html")
+    user_count=User.objects.count()
+    product_count=Product.objects.count()
+    orders_count=Order.objects.count()
+    context={
+        'user_count':user_count,
+        'product_count':product_count,
+        'orders_count':orders_count
+    }
+    return render(request,"dashboard.html",context)
 
 
 def user_manage(request):
