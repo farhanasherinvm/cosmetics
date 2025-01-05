@@ -1245,7 +1245,7 @@
                                     </div>
 
                                     <div class="product-buttons">
-                                        <a href="wishlist.html" class="btn btn-solid">
+                                        <a href="{% url 'outgoing:add' product_id=data.id%}" class="btn btn-solid">
                                             <i class="fa fa-bookmark fz-16 me-2"></i>
                                             <span>Wishlist</span>
                                         </a>

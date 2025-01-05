@@ -1094,15 +1094,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for item in wishlist_items %}
                             <tr>
                                 <td>
                                     <a href="product-left-sidebar.html">
-                                        <img src="assets/images/fashion/product/front/1.jpg" class=" blur-up lazyload"
+                                        <img src="{{ item.product.image.url }}" class=" blur-up lazyload"
                                             alt="">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="product-left-sidebar.html" class="font-light">Yellow Jacket</a>
+                                    <a href="product-left-sidebar.html" class="font-light">{{item.product.product_name}}</a>
                                     <div class="mobile-cart-content row">
                                         <div class="col">
                                             <p>In Stock</p>
@@ -1125,10 +1126,14 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="fw-bold">$68.65</p>
+                                    <p class="fw-bold">${{item.product.price}}</p>
                                 </td>
                                 <td>
-                                    <p>In Stock</p>
+                                        {% if item.product.is_available %}
+                                            <p>In Stock</p>
+                                        {% else %}
+                                            <p>Out Of Stock</p>
+                                        {% endif %}
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)" class="icon">
@@ -1139,6 +1144,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            {% endfor%}
                         </tbody>
                         {% comment %} <tbody>
                             <tr>
@@ -1187,7 +1193,7 @@
                                 </td>
                             </tr>
                         </tbody> {% endcomment %}
-                        <tbody>
+                        {% comment %} <tbody>
                             <tr>
                                 <td>
                                     <a href="product-left-sidebar.html">
@@ -1234,7 +1240,7 @@
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                                 </td>
-                        </tbody>
+                        </tbody> {% endcomment %}
                     </table>
                 </div>
             </div>

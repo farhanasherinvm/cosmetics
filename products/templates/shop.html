@@ -1770,7 +1770,7 @@
                             </div>
                         </div>
                     </div>
-
+            
                     <div class="accordion-item category-rating">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -1785,7 +1785,7 @@
                                     <li>
                                         <div class="form-check ps-0 custome-form-check">
                                             <input class="checkbox_animated check-it" type="checkbox"
-                                                id="flexCheckDefault10">
+                                                id="flexCheckDefault10"type="checkbox" name="category" value="{{ item }}">
                                             <label class="form-check-label" for="flexCheckDefault10">{{ item }}</label>
                                             <p class="font-light">(25)</p>
                                         </div>
@@ -2263,6 +2263,7 @@
             document.getElementById('searchResults').querySelector('ul').innerHTML = '';  // Clear if no input
         }
     });
+    
     
 </script>
 </body>

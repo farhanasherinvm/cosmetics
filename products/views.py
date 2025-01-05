@@ -1,6 +1,7 @@
 
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from .models import Category
 from .models import Product
 
@@ -14,7 +15,6 @@ def product(request,slug,id):
 # def productlist(request):
 #     return render (request,'productlist.html')
 
-from django.urls import reverse
 
 def ajax_product_search(request):
     query = request.GET.get('query', '')
@@ -55,3 +55,26 @@ def shop(request):
         'category':category
     }
     return render(request, 'shop.html', context)
+
+# def filter(request):
+#     price_range = request.GET.get('price_range')  # e.g., "0;5000"
+#     categories = request.GET.getlist('category')  # e.g., ["nail", "makeup"]
+#     products = Product.objects.filter(is_available=True)  # Start with all available products
+
+#     # Handle price range filter
+#     if price_range:
+#         try:
+#             min_price, max_price = map(float, price_range.split(';'))
+#             products = products.filter(price__gte=min_price, price__lte=max_price)
+#         except ValueError:
+#             return render(request, 'shop.html', {
+#                 'products': products,
+#                 'error_message': 'Invalid price range format.'
+#             })
+
+#     # Handle category filter
+#     if categories:
+#         # Assuming `Category` model has a `category_name` field
+#         products = products.filter(category__category_name__in=categories)
+
+#     return render(request, 'shop.html', {'products': products})
