@@ -1305,11 +1305,14 @@
                                                     <i data-feather="refresh-cw"></i>
                                                 </a>
                                             </li>
+                                                                                    
                                             <li>
-                                                <a href="wishlist.html" class="wishlist">
+                                                <!-- Add to Wishlist -->
+                                                <a href="{% url 'shop:add_wishlist' product_id=i.id %}" class="wishlist">
                                                     <i data-feather="heart"></i>
                                                 </a>
                                             </li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -2222,9 +2225,9 @@
 
     <!-- Filter Hide and show Js -->
     <script src="{% static 'js/filter.js' %}"></script>
-
+{% comment %} 
     <!-- Notify js-->
-    <script src="{% static 'js/bootstrap/bootstrap-notify.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap-notify.min.js' %}"></script> {% endcomment %}
 
     <!-- script js -->
     <script src="{% static 'js/theme-setting.js' %}"></script>

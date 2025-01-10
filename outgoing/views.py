@@ -683,6 +683,8 @@ def paypal_cancel(request):
     messages.error(request, 'Payment was cancelled')
     return redirect('outgoing:checkout')
 
+
+
 def add_to_wishlist(request,product_id):
     product=get_object_or_404(Product, id=product_id)
     Wishlist.objects.get_or_create(user=request.user,product=product)

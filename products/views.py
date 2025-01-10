@@ -1,7 +1,9 @@
 
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+
+from outgoing.models import Wishlist
 from .models import Category
 from .models import Product
 
@@ -56,6 +58,10 @@ def shop(request):
     }
     return render(request, 'shop.html', context)
 
+def add_wishlist(request,product_id):
+    product=get_object_or_404(Product, id=product_id)
+    Wishlist.objects.get_or_create(user=request.user,product=product)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 # def filter(request):
 #     price_range = request.GET.get('price_range')  # e.g., "0;5000"
 #     categories = request.GET.getlist('category')  # e.g., ["nail", "makeup"]

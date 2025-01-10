@@ -9,4 +9,5 @@ urlpatterns = [
   # path('<slug:category_slug>/', views.shop, name='products_by_category'),
   path('ajax-product-search/', views.ajax_product_search, name='ajax_product_search'),
   # path('filter',views.filter,name='filter'),
+  path('add_wishlist/<int:product_id>/', views.add_wishlist,name="add_wishlist")
 ]
