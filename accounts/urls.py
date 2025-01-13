@@ -7,7 +7,7 @@ app_name = 'accounts'
 
 urlpatterns = [
     
-  
+    path('invoice',views.invoice,name="invoice"),
     path('otp',views.user_otp,name="otp"),
     path('new_otp',views.new_otp,name="new_otp"),
     path('usersignup',views.usersignup,name='usersignup'),

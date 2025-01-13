@@ -1,5 +1,5 @@
 import random
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.views.decorators.cache import never_cache
@@ -7,7 +7,41 @@ from django.core.mail import send_mail
 from accounts.forms import SignUpForm
 from django.contrib import messages
 from accounts.models import User_Profile,Address
+from orders.models import Order, OrderProduct
 # Create your views here.
+def invoice(request):
+    user=request.user
+    userpro= User_Profile.objects.get(user=user)
+    # order=Order.objects.filter(user=userpro)
+    # order = get_object_or_404(Order, id=id, user=userpro.user)
+    
+    # order = get_object_or_404(Order, user=userpro)
+    # items=get_object_or_404(OrderProduct,user=userpro)
+
+
+ # Get all orders for the user
+    orders = Order.objects.filter(user=userpro).order_by('-created_at').first() # Use .first() to get a single order
+    print("exist.......",orders)
+    # # Get all OrderProduct items for the user
+    # items = OrderProduct.objects.filter(user=userpro)
+    order_products = OrderProduct.objects.filter(order=orders, user=userpro)
+    print("order_products.............",order_products)
+    total=0
+    for i in order_products:
+        total+= (i.product.price * i.quantity)
+    shipping = 40
+    grand_total = total + shipping    
+    context={
+   'orders':orders,
+   'order_products':order_products,
+   'total':total,
+   'grand_total':grand_total,
+   'shipping':shipping
+    }
+    
+
+    
+    return render(request,"invoice.html",context)
 def user_otp(request):
     if request.method=='POST':
         print("EEEEEEEEEEEEEEEEEEEEEEEE")
