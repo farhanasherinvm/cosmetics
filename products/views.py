@@ -11,8 +11,19 @@ from .models import Product
 def product(request,slug,id):
     print("haaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     print(f'product id is :{id}')
+   
     product = Product.objects.get(id=id)
-    return render(request, 'productlist.html', {'data':product})
+    variants=product.variants.all()
+    print("variants",variants)
+    context={
+        'product':product,
+        'variants':variants
+    }
+    print(f"Number of variants: {variants.count()}")
+    for var in product.variants.all():
+        print(var.image.url)  # Check if each variant has an image
+
+    return render(request, 'productlist.html',context)
    
 # def productlist(request):
 #     return render (request,'productlist.html')

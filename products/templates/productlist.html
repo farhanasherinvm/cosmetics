@@ -1090,10 +1090,11 @@
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div class="row">
+                                    
                                     <div class="col-lg-2">
                                         <div class="details-image-vertical black-slide rounded">
                                             <div>
-                                                <img src="{{data.image.url}}"
+                                                <img src="{{product.image.url}}"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </div>
                                             {% comment %} <div>
@@ -1117,8 +1118,8 @@
                                     <div class="col-lg-10">
                                         <div class="details-image-1 ratio_asos">
                                             <div>
-                                                <img src="{{data.image.url}}" id="zoom_01"
-                                                    data-zoom-image="{{data.image.url}}"
+                                                <img src="{{product.image.url}}" id="zoom_01"
+                                                    data-zoom-image="{{product.image.url}}"
                                                     class="img-fluid w-100 image_zoom_cls-0 blur-up lazyload" alt="">
                                             </div>
                                             {% comment %} <div>
@@ -1161,7 +1162,7 @@
                                     </div>
 
                                     <div class="details-image-concept">
-                                        <h2>{{data.product_name}}</h2>
+                                        <h2>{{product.product_name}}</h2>
                                     </div>
 
                                     <div class="label-section">
@@ -1169,19 +1170,21 @@
                                         <span class="label-text">in fashion</span>
                                     </div>
 
-                                    <h3 class="price-detail">${{data.price}}<del>$459.00</del><span>55% off</span></h3>
+                                    <h3 class="price-detail">${{product.price}}<del>$459.00</del><span>55% off</span></h3>
 
                                     <div class="color-image">
                                         <div class="image-select">
-                                            <h5>Color :</h5>
+                                          {% if variants %}  <h5>Color :</h5>
                                             <ul class="image-section">
+                                                {% for var in variants%}
                                                 <li>
                                                     <a href="javascript:void(0)">
-                                                        <img src="{% static 'images/fashion/product/front/5.jpg' %}"
+                                                        <img src="{{var.image.url}}"
                                                             class="img-fluid blur-up lazyload" alt="">
                                                     </a>
                                                 </li>
-                                                <li>
+                                                {% endfor %}
+                                                {% comment %} <li>
                                                     <a href="javascript:void(0)">
                                                         <img src="{% static 'images/fashion/product/front/6.jpg' %}"
                                                             class="img-fluid blur-up lazyload" alt="">
@@ -1192,8 +1195,9 @@
                                                         <img src="assets/images/fashion/product/front/7.jpg"
                                                             class="img-fluid blur-up lazyload" alt="">
                                                     </a>
-                                                </li>
+                                                </li> {% endcomment %}
                                             </ul>
+                                            {% endif %}
                                         </div>
                                     </div>
 
@@ -1245,11 +1249,11 @@
                                     </div>
 
                                     <div class="product-buttons">
-                                        <a href="{% url 'outgoing:add' product_id=data.id%}" class="btn btn-solid">
+                                        <a href="{% url 'outgoing:add' product_id=product.id%}" class="btn btn-solid">
                                             <i class="fa fa-bookmark fz-16 me-2"></i>
                                             <span>Wishlist</span>
                                         </a>
-                                        <a href="{% url 'outgoing:add_cart' product_id=data.id %}" id="cartEffect"
+                                        <a href="{% url 'outgoing:add_cart' product_id=product.id %}" id="cartEffect"
                                             class="btn btn-solid hover-solid btn-animation">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Add To Cart</span>
