@@ -60,7 +60,13 @@
 </head>
 
 <body class="theme-color2 light ltr">
-
+<style> 
+    
+    {% comment %} overflow-x: auto; {% endcomment %}
+    .side-image {
+        border: 1px solid #ddd;
+    }
+</style>
     <!-- header start -->
     <header class="header-style-2" id="home">
         <div class="main-header navbar-searchbar">
@@ -1093,9 +1099,12 @@
                                     
                                     <div class="col-lg-2">
                                         <div class="details-image-vertical black-slide rounded">
-                                            <div>
-                                                <img src="{{product.image.url}}"
-                                                    class="img-fluid blur-up lazyload" alt="">
+                                            <div id="side-images">
+                                                <div class="side-images-container">
+                                                    {% for side_image in product.side_images.all %}
+                                                        <img src="{{ side_image.image.url }}" alt="Side Image" class="img-fluid side-image">
+                                                    {% endfor %}
+                                                </div>
                                             </div>
                                             {% comment %} <div>
                                                 <img src="{% static 'images/fashion/2.jpg' %}"
@@ -1118,9 +1127,9 @@
                                     <div class="col-lg-10">
                                         <div class="details-image-1 ratio_asos">
                                             <div>
-                                                <img src="{{product.image.url}}" id="zoom_01"
-                                                    data-zoom-image="{{product.image.url}}"
-                                                    class="img-fluid w-100 image_zoom_cls-0 blur-up lazyload" alt="">
+                                                <img src="{{ product.image.url }}" id="main-product-image"
+                                                data-zoom-image="{{ product.image.url }}"
+                                                class="img-fluid w-100 image_zoom_cls-0 blur-up lazyload" alt="{{ product.name }}">
                                             </div>
                                             {% comment %} <div>
                                                 <img src="{% static 'images/fashion/2.jpg '%}" id="zoom_02"
@@ -1202,7 +1211,7 @@
                                     </div>
 
                                     <div id="selectSize" class="addeffect-section product-description border-product">
-                                        <h6 class="product-title size-text">select size
+                                        {% comment %} <h6 class="product-title size-text">select size
                                             <a href="javascript:void(0)" data-bs-toggle="modal"
                                                 data-bs-target="#sizemodal">size chart</a>
                                         </h6>
@@ -1224,7 +1233,7 @@
                                                     <a href="javascript:void(0)">xl</a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> {% endcomment %}
 
                                         <h6 class="product-title product-title-2 d-block">quantity</h6>
 
@@ -2957,6 +2966,33 @@
     <!-- script js -->
     <script src="{% static 'js/theme-setting.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+<!-- Main Product Image -->
+<div>
+    <img src="{{ product.image.url }}" id="main-product-image"
+         data-zoom-image="{{ product.image.url }}"
+         class="img-fluid w-100 image_zoom_cls-0 blur-up lazyload" alt="{{ product.name }}">
+</div>
+
+<!-- Side Images (Additional Images for the Product) -->
+<div id="side-images">
+    <h5>Additional Views:</h5>
+    <div class="side-images-container">
+        {% for side_image in product.side_images.all %}
+            <img src="{{ side_image.image.url }}" alt="Side Image" class="img-fluid side-image">
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Optional JavaScript to dynamically change the main product image when a side image is clicked -->
+<script>
+    document.querySelectorAll('.side-image').forEach(image => {
+        image.addEventListener('click', function() {
+            const mainImage = document.getElementById('main-product-image');
+            mainImage.src = image.src;
+            mainImage.setAttribute('data-zoom-image', image.src);
+        });
+    });
+</script>
 
 </body>
 
