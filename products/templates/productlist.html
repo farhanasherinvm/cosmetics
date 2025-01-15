@@ -65,6 +65,33 @@
     {% comment %} overflow-x: auto; {% endcomment %}
     .side-image {
         border: 1px solid #ddd;
+        cursor: pointer;
+        height: 110px;
+    }
+    .slick-list.draggable {
+        height: 504.8px !important; /* Forces the height override */
+    }
+    
+    .side-images-container {
+        
+        display: flex;
+        flex-direction: column; /* Stack images vertically */
+        max-height: 400px; /* Adjust height to fit 3 images */
+        overflow-y: auto; /* Enable vertical scrolling */
+        gap: 10px; /* Add spacing between images */
+       
+        padding: 5px; /* Optional: Add padding inside the container */
+        scrollbar-width: none; /* Hides scrollbar in modern browsers */
+    }
+
+    
+    
+    .side-images-container::-webkit-scrollbar {
+        display: none; /* Hides the scrollbar */
+    }
+    
+    .col-md-6 {
+        height: 600px; /* Set the height to your desired value */
     }
 </style>
     <!-- header start -->
@@ -1094,7 +1121,7 @@
                 <div class="col-lg-12 col-12">
                     <div class="details-items">
                         <div class="row g-4">
-                            <div class="col-md-6">
+                            <div class="col-md-6" >
                                 <div class="row">
                                     
                                     <div class="col-lg-2">
@@ -1125,9 +1152,9 @@
 
 
                                     <div class="col-lg-10">
-                                        <div class="details-image-1 ratio_asos">
+                                        <div class="details-image-1 ratio_asos main-img">
                                             <div>
-                                                <img src="{{ product.image.url }}" id="main-product-image"
+                                                <img src="{{ product.image.url }}"  style="height: 500px; width: auto;"id="main-product-image"
                                                 data-zoom-image="{{ product.image.url }}"
                                                 class="img-fluid w-100 image_zoom_cls-0 blur-up lazyload" alt="{{ product.name }}">
                                             </div>
@@ -2966,22 +2993,6 @@
     <!-- script js -->
     <script src="{% static 'js/theme-setting.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
-<!-- Main Product Image -->
-<div>
-    <img src="{{ product.image.url }}" id="main-product-image"
-         data-zoom-image="{{ product.image.url }}"
-         class="img-fluid w-100 image_zoom_cls-0 blur-up lazyload" alt="{{ product.name }}">
-</div>
-
-<!-- Side Images (Additional Images for the Product) -->
-<div id="side-images">
-    <h5>Additional Views:</h5>
-    <div class="side-images-container">
-        {% for side_image in product.side_images.all %}
-            <img src="{{ side_image.image.url }}" alt="Side Image" class="img-fluid side-image">
-        {% endfor %}
-    </div>
-</div>
 
 <!-- Optional JavaScript to dynamically change the main product image when a side image is clicked -->
 <script>
