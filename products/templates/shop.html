@@ -1265,13 +1265,8 @@
 
                     <!-- Prodcut setion -->
                     <div class="row g-sm-4 g-3 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2 gx-sm-4 gx-3 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
-                        {% for i in product %}
+                        {% for i in page_obj %}
                         <div>
-                            
-
-                            
-
-                            
                             <div class="product-box">
                                 <div class="img-wrapper">
                                     <div class="front">
@@ -1364,29 +1359,36 @@
 
                     <nav class="page-section">
                         <ul class="pagination">
+                            {% if page_obj.has_previous %}
                             <li class="page-item">
-                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                <a class="page-link" href="?page=page_obj.previous_page_number" aria-label="Previous">
                                     <span aria-hidden="true">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="javascript:void(0)">1</a>
+                            {% endif %}
+                            {% for num in page_obj.paginator.page_range %}
+                            <li class="page-item  {% if page_obj.number == num %}active{% endif %}">
+                                <a class="page-link" href="?page={{ num }}">{{num}}</a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:void(0)">2</a>
+                            {% endfor %}
+                           
+                            {% comment %} <li class="page-item">
+                                <a class="page-link" href="">2</a>
                             </li>
+                           
                             <li class="page-item">
                                 <a class="page-link" href="javascript:void(0)">3</a>
-                            </li>
+                            </li> {% endcomment %}
+                            {% if page_obj.has_next %}
                             <li class="page-item">
-                                <a class="page-link" aria-label="Next">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}"aria-label="Next">
                                     <span aria-hidden="true">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
-                            </li>
+                            </li> {% endif %}
                         </ul>
                     </nav>
                 </div>

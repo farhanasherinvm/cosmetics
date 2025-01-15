@@ -1,4 +1,4 @@
-
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -62,8 +62,11 @@ def ajax_product_search(request):
 def shop(request):
     product=Product.objects.all()
     category=Category.objects.all()
-    
+    paginator=Paginator(product,10)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
     context={
+        'page_obj':page_obj,
         'product':product,
         'category':category
     }
