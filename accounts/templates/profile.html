@@ -82,7 +82,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="{% if user_pro.image %}{{ user_pro.image.url }}{% else %}https://bootdey.com/img/Content/avatar/avatar7.png{% endif %}" alt="Admin" class="rounded-circle" width="150">
                   
                   </div>
 
@@ -126,7 +126,7 @@
                    <br>
                    <div class="col-sm-5 col-7">
                     <div class="left-side-button float-start">
-                        <a href="{% url 'outgoing:cart' %}" class="btn btn-outline-danger btn-fw-bold mb-0 ms-0">
+                        <a href="{% url 'shop:shop' %}" class="btn btn-outline-danger btn-fw-bold mb-0 ms-0">
                             <i class="fas fa-arrow-left"></i> Continue Shopping
                         </a>
                     </div>

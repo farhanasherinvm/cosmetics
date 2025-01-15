@@ -183,7 +183,8 @@ def profile(request):
 
 
 def edit_profile(request):
-    if request.method=='POST': 
+    if request.method=='POST':
+        user_form = request.user 
         username=request.POST['username']
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -195,19 +196,21 @@ def edit_profile(request):
         print("email:",email)
         print("number:", number)
 
-        user_form , created = User.objects.get_or_create(username=username)
-        user_form.email = email
-        user_form.first_name= first_name
+        # user_form , created = User.objects.get_or_create(username=username)
+        user_form.username = username
+        user_form.first_name = first_name
         user_form.last_name = last_name
+        user_form.email = email
         user_form.save()
         print("user_form",user_form.email)
        
-        profile , created= User_Profile.objects.get_or_create(user=user_form)
-        print("after:",profile)
+        profile, created = User_Profile.objects.get_or_create(user=user_form)
         profile.phone= number
         print("phoneeeeeee:",profile.phone)
         if image:
             profile.image = image
+        profile.save()
+
         return redirect('accounts:profile')
     else:
         user_form=request.user
@@ -215,10 +218,9 @@ def edit_profile(request):
 
         context={
             'user_form':user_form,
-            'profie': profile
+            'profile': profile
         }
     return render(request, "edit_profile.html", context)
-
 def address(request):
     user_pro ,created = User_Profile.objects.get_or_create(user=request.user)
     user_address= Address.objects.filter(user=request.user)
