@@ -11,13 +11,14 @@ from .models import Product
 def product(request,slug,id):
     print("haaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     print(f'product id is :{id}')
-   
+    wishlist_items=Wishlist.objects.filter(user=request.user)
     product = Product.objects.get(id=id)
     variants=product.variants.all()
     print("variants",variants)
     context={
         'product':product,
-        'variants':variants
+        'variants':variants,
+        'wishlist_items':wishlist_items,
     }
     print(f"Number of variants: {variants.count()}")
     for var in product.variants.all():
@@ -65,10 +66,12 @@ def shop(request):
     paginator=Paginator(product,10)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
+    wishlist_items=Wishlist.objects.filter(user=request.user)
     context={
         'page_obj':page_obj,
         'product':product,
-        'category':category
+        'category':category,
+        'wishlist_items':wishlist_items,
     }
     return render(request, 'shop.html', context)
 

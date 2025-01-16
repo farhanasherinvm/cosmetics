@@ -76,12 +76,16 @@
                                         </div>
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown">
+                                        {% if wishlist_items %}
                                         <div class="cart-media">
-                                            <a href="wishlist.html">
+                                           
+
+                                            <a href="{% url 'outgoing:wishlist_view' %}">
                                                 <i data-feather="heart"></i>
-                                                <span class="label label-theme rounded-pill">5</span>
+                                                <span class="label label-theme rounded-pill">{{ wishlist_items|length }}</span>
                                             </a>
                                         </div>
+                                        {%else%}
                                         <div class="onhover-div">
                                             <a href="wishlist.html">
                                                 <div class="wislist-empty">
@@ -91,6 +95,7 @@
                                                 </div>
                                             </a>
                                         </div>
+                                        {% endif %}
                                     </li>
                                     <li class="onhover-dropdown cart-dropdown">
                                         <a href="{% url 'outgoing:cart' %}"> <button type="button" class="btn btn-solid-default btn-spacing">

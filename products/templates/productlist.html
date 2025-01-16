@@ -7,7 +7,7 @@
     
     {% comment %} overflow-x: auto; {% endcomment %}
     .side-image {
-        border: 1px solid #ddd;
+        {% comment %} border: 1px solid #ddd; {% endcomment %}
         cursor: pointer;
         height: 110px;
     }
@@ -21,7 +21,7 @@
         flex-direction: column; /* Stack images vertically */
         max-height: 400px; /* Adjust height to fit 3 images */
         overflow-y: auto; /* Enable vertical scrolling */
-        gap: 10px; /* Add spacing between images */
+        gap: 1px; /* Add spacing between images */
        
         padding: 5px; /* Optional: Add padding inside the container */
         scrollbar-width: none; /* Hides scrollbar in modern browsers */

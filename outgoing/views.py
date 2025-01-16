@@ -32,8 +32,6 @@ import paypalrestsdk
 # # Check if client_id and client_secret are set
 # if not os.environ.get('PAYPAL_CLIENT_ID') or not os.environ.get('PAYPAL_CLIENT_SECRET'):
 #     raise Exception("PayPal client credentials are not set!")
-import paypalrestsdk
-from django.conf import settings
 
 paypalrestsdk.configure({
     "mode": "sandbox",  # or "live"
@@ -48,7 +46,7 @@ def cart(request, total=0, quantity=0, cart_item=None):
     cart_items = []  # Initialize cart_items as an empty list
     shipping = 0  # Initialize tax
     grand_total = 0  # Initialize grand_total
-    
+    wishlist_items=Wishlist.objects.filter(user=request.user)
 
     try:
         print("11111111111")
@@ -68,6 +66,7 @@ def cart(request, total=0, quantity=0, cart_item=None):
         'total' : total,
         'quantity' : quantity,
         'cart_items' : cart_items,
+        'wishlist_items':wishlist_items,
         'shipping': shipping,
         'grand_total' : grand_total
     }
@@ -158,6 +157,7 @@ def checkout(request ,total=0 ,cart_items=None):
     print("in checkout++++++++++++++++++++++++++++++++++++++++++++++++++++")
     cart_items = [] 
     user= request.user
+    wishlist_items=Wishlist.objects.filter(user=request.user)
     user_pro , create=User_Profile.objects.get_or_create(user=user)
     user_profile_image_url=user_pro.image.url if user_pro.image else None
     user_pro.save()
@@ -186,6 +186,7 @@ def checkout(request ,total=0 ,cart_items=None):
         'user_pro': user_pro,
         'user_address' :  user_address,
         'cart_items' : cart_items,
+        'wishlist_items':wishlist_items,
         'user_profile_image_url' : user_profile_image_url,
         'total': total,
         'grand_total': grand_total,
@@ -263,6 +264,8 @@ def place_order(request, total=0):
             # Fetch the corresponding Address object
             address = get_object_or_404(Address, id=address_id)
             print('Address Details:', address)
+            
+            wishlist_items=Wishlist.objects.filter(user=request.user)
 
             payment_mode= request.POST.get("method")
             print("payment:", payment_mode)
@@ -402,7 +405,8 @@ def place_order(request, total=0):
                     "order_products": order_products,
                     "payment_id":payment_id,
                     "orders":orders,
-                    "total" : total
+                    "total" : total,
+                    'wishlist_items':wishlist_items,
                 }
 
 
