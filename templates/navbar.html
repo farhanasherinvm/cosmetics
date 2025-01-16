@@ -33,19 +33,20 @@
                                                     </span>
                                                 </div>
                                             </li>
-                                            <li class="mega-menu  home-menu">
+                                            <li class="mega-menu home-menu {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
                                                 <a href="{% url 'home:home' %}" class="nav-link menu-title">home</a>
                                                
                                             </li>
-                                            <li>
-                                                <a href="{% url 'products:shop' %}" class="nav-link menu-title">shop</a>
+                                            <li class="{% if request.resolver_match.url_name == 'shop' and not selected_category %}active{% endif %}">
+                                                <a href="{% url 'products:shop' %}" class="nav-link menu-title">products</a>
                                     
                                             </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="nav-link menu-title">product</a>
+                                            {% for i in category %}
+                                            <li class="{% if selected_category and selected_category.id == i.id %}active{% endif %}">
+                                                <a href="{% url 'shop:shop' %}?category_id={{ i.id }}" class="nav-link menu-title">{{i.category_name}}</a>
 
                                             </li>
-                                            
+                                            {% endfor %}
                                             
                                            
                                            

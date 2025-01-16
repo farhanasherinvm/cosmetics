@@ -217,7 +217,7 @@
             {% for i in category %}
             <div class="col-lg-3 col-md-6">
                 <div class="banner-image">
-                    <a href="shop-left-sidebar.html">
+                    <a href="{% url 'shop:shop' %}?category_id={{ i.id }}">
                         <img src="{{ i.category_image.url }}" class="w-100 blur-up lazyload" alt="" style="height: 339px; width: 270px;">
                     </a>
                     <div class="banner-details">
@@ -231,7 +231,7 @@
                         </div> {% endcomment %}
                     </div>
 
-                    <a href="shop-left-sidebar.html" class="banner-shop text-center">
+                    <a href="{% url 'shop:shop' %}?category_id={{ i.id }}" class="banner-shop text-center">
                         <div>
                             <h5>SHOP NOW</h5>
                             <p class="mb-0 mt-2">{{i.category_name}}</p>

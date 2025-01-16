@@ -61,8 +61,17 @@ def ajax_product_search(request):
 #     return render(request,'productlist.html', context)
 
 def shop(request):
-    product=Product.objects.all()
+    
     category=Category.objects.all()
+    selected_category_id = request.GET.get('category_id')
+
+    if selected_category_id:
+        selected_category = get_object_or_404(Category, id=selected_category_id)
+        product = Product.objects.filter(category=selected_category)
+    else:
+        product=Product.objects.all()
+        selected_category = None
+
     paginator=Paginator(product,10)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
@@ -72,6 +81,7 @@ def shop(request):
         'product':product,
         'category':category,
         'wishlist_items':wishlist_items,
+        'selected_category':selected_category
     }
     return render(request, 'shop.html', context)
 
