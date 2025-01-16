@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themes.pixelstrap.com/voxo/front-end/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Jan 2024 17:30:40 GMT -->
+<head>
+{% comment %} hhhhhhhhhhhhhhhhhhhhhh {% endcomment %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ {% comment %} hhhhhhhhhhhhhhhhhhhhhh {% endcomment %}
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="assets/images/favicon/2.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/images/favicon/2.png" />
+    <meta name="theme-color" content="#e22454" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Voxo" />
+    <meta name="msapplication-TileImage" content="assets/images/favicon/2.png" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Voxo">
+    <meta name="keywords" content="Voxo">
+    <meta name="author" content="Voxo">
+    <link rel="icon" href="{% static 'images/favicon/2.png' %}" type="image/x-icon" />
+    <title>Cart Page</title>
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <!-- bootstrap css -->
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="{% static 'css/vendors/bootstrap.css' %}">
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/font-awesome.css' %}">
+
+    <!-- feather icon css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/feather-icon.css' %}">
+
+    <!-- animation css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/animate.css' %}">
+
+    <!-- slick css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/slick/slick-theme.css' %}">
+
+    <!-- Theme css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="{% static 'css/demo2.css' %}">
+
+</head>
+{% block nav %}{% endblock %}
+{% block content%}{%endblock%}
+
+
+
+{% comment %} hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh {% endcomment %}
+{% comment %} <script>
+    function updateQuantity(productId, action) {
+        $.ajax({
+            url: `/update_quantity/${productId}/${action}/`,
+            method: 'GET',
+            success: function(data) {
+                // Update the quantity input value
+                $('#quantityInput_' + productId).val(data.quantity);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script> {% endcomment %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% comment %} 
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script> {% endcomment %}
+
+<script>
+    function updateQuantity(cartId, action) {
+        var quantityInput = document.getElementById('quantityInput_' + cartId);
+        var newQuantity = parseInt(quantityInput.value);
+
+        // Ensure the new quantity is valid
+        if (isNaN(newQuantity) || newQuantity < 1) {
+            alert('Please enter a valid quantity.');
+            return;
+        }
+
+        // Your AJAX logic here to update the quantity on the server
+        // You can use the fetch API or another library like jQuery.ajax
+
+        // Example using fetch:
+        fetch(`/update_quantity/${cartId}/${action}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf_token,  // Make sure to include the CSRF token
+            },
+            body: JSON.stringify({ 'new_quantity': newQuantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the input value with the new quantity
+            quantityInput.value = data.new_quantity;
+        })
+        .catch(error => {
+            console.error('Error updating quantity:', error);
+        });
+    }
+
+
+
+
+
+function add_cart(product_id) {
+    var url = `/add_cart/${product_id}/increase/`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token,
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response if needed
+        console.log('Cart updated:', data);
+        // Optionally, you can update the UI to reflect the changes
+        updateUI();
+    })
+    .catch(error => {
+        console.error('Error updating cart:', error);
+    });
+}
+
+</script>
+{% comment %} hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh {% endcomment %}
+
+
+
+    <!-- latest jquery-->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+    <!-- Add To Home js -->
+    <script src="{% static 'js/pwa.js' %}"></script>
+
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- feather icon js -->
+    <script src="{% static 'js/feather/feather.min.js' %}"></script>
+
+    <!-- lazyload js -->
+    <script src="{% static 'js/lazysizes.min.js' %}"></script>
+
+    <!-- Slick js -->
+    <script src="{% static 'js/slick/slick.js' %}"></script>
+    <script src="{% static 'js/slick/slick-animation.min.js' %}"></script>
+    <script src="{% static 'js/slick/custom_slick.js' %}"></script>
+
+    <!-- timer js -->
+    <script src="{% static 'js/count-down-timer.js' %}"></script>
+
+    <!-- Notify js -->
+    <script src="{% static 'js/bootstrap/bootstrap-notify.min.js' %}"></script>
+
+    <!-- script js -->
+    <script src="{% static 'js/theme-setting.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from themes.pixelstrap.com/voxo/front-end/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Jan 2024 17:30:43 GMT -->
+</html>
+
+
+
+
+

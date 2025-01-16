@@ -173,44 +173,14 @@
                                     <span class="input-group-text">
                                         <i data-feather="search" class="font-light"></i>
                                     </span>
-                                    <input type="text" class="form-control search-type" placeholder="Search here..">
+                                    <input type="text" class="form-control search-type" id="searchInput" placeholder="Search here...">
                                     <span class="input-group-text close-search">
                                         <i data-feather="x" class="font-light"></i>
                                     </span>
                                 </div>
-                                <div class="search-suggestion">
-                                    <ul class="custom-scroll">
-                                        <li>
-                                            <div class="product-cart media">
-                                                <img src="images/electronics/product/1.jpg"
-                                                    class="img-fluid blur-up lazyload" alt="">
-                                                <div class="media-body">
-                                                    <a href="javascript:void(0)">
-                                                        <h6 class="mb-1">New Smart Watch 4 ERT2</h6>
-                                                    </a>
-                                                    <ul class="rating p-0">
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="mb-0 mt-1">$28.00</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        
-                                    </ul>
+                            
+                                <div class="search-suggestion" id="searchResults">
+                                    <ul class="custom-scroll"></ul>
                                 </div>
                             </div>
                         </div>
@@ -257,3 +227,39 @@
         </ul>
     </div>
     <!-- mobile fix menu end -->
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const query = this.value;
+        
+            // Only search if there's input
+            if (query.length > 0) {
+                fetch(`/ajax-product-search/?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const searchResults = document.getElementById('searchResults');
+                        const resultsList = searchResults.querySelector('ul');
+                        resultsList.innerHTML = '';  // Clear previous results
+        
+                        data.products.forEach(product => {
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `
+                                <div class="product-cart media">
+                                    <a href="${product.url}"><img src="${product.image}" class="img-fluid blur-up lazyload" alt=""></a>
+                                    <div class="media-body">
+                                          <!-- Link to product detail page -->
+                                            <h6 class="mb-1">${product.name}</h6>
+                                       
+                                        <p class="mb-0 mt-1">$${product.price}</p>
+                                    </div>
+                                </div> 
+                            `;
+                            resultsList.appendChild(listItem);
+                        });
+                    });
+            } else {
+                document.getElementById('searchResults').querySelector('ul').innerHTML = '';  // Clear if no input
+            }
+        });
+        
+        
+    </script>

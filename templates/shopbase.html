@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themes.pixelstrap.com/voxo/front-end/shop-canvas-filter.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Jan 2024 17:29:36 GMT -->
+<head>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="assets/images/favicon/2.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/images/favicon/2.png" />
+    <meta name="theme-color" content="#e22454" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Voxo" />
+    <meta name="msapplication-TileImage" content="assets/images/favicon/2.png" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Voxo">
+    <meta name="keywords" content="Voxo">
+    <meta name="author" content="Voxo">
+    <link rel="icon" href="{% static 'images/favicon/2.png' %}" type="image/x-icon" />
+    <title>Shop</title>
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <!-- bootstrap css -->
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="{% static 'css/vendors/bootstrap.css' %}">
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/font-awesome.css' %}">
+
+    <!-- feather icon css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/feather-icon.css' %}">
+
+    <!--Plugin CSS file with desired skin-->
+    <link rel="stylesheet" href="{% static 'css/vendors/ion.rangeSlider.min.css' %}" />
+
+    <!-- animation css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/animate.css' %}">
+
+    <!-- slick css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/slick/slick-theme.css' %}">
+
+    <!-- Theme css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="{% static 'css/demo2.css' %}">
+
+</head>
+{% block nav %} {% endblock %}
+{% block content %}{% endblock %}
+
+
+
+<!-- latest jquery-->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+    <!-- Add To Home js -->
+    <script src="{% static 'js/pwa.js' %}"></script>
+
+    <!-- Bootstrap js-->
+    <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- feather icon js-->
+    <script src="{% static 'js/feather/feather.min.js' %}"></script>
+
+    <!-- lazyload js-->
+    <script src="{% static 'js/lazysizes.min.js' %}"></script>
+
+    <!-- Slick js-->
+    <script src="{% static 'js/slick/slick.js' %}"></script>
+    <script src="{% static 'js/slick/slick-animation.min.js' %}"></script>
+    <script src="{% static 'js/slick/custom_slick.js' %}"></script>
+
+    <!-- Notify js-->
+    <script src="{% static 'js/bootstrap/bootstrap-notify.min.js' %}"></script>
+
+    <!-- Price Filter js -->
+    <script src="{% static 'js/price-filter.js' %}"></script>
+
+    <!--Plugin JavaScript file-->
+    <script src="{% static 'js/ion.rangeSlider.min.js' %}"></script>
+
+    <!-- Filter Hide and show Js -->
+    <script src="{% static 'js/filter.js' %}"></script>
+{% comment %} 
+    <!-- Notify js-->
+    <script src="{% static 'js/bootstrap/bootstrap-notify.min.js' %}"></script> {% endcomment %}
+
+    <!-- script js -->
+    <script src="{% static 'js/theme-setting.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <!-- JavaScript for AJAX Search -->
+<script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const query = this.value;
+    
+        // Only search if there's input
+        if (query.length > 0) {
+            fetch(`/ajax-product-search/?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    const searchResults = document.getElementById('searchResults');
+                    const resultsList = searchResults.querySelector('ul');
+                    resultsList.innerHTML = '';  // Clear previous results
+    
+                    data.products.forEach(product => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <div class="product-cart media">
+                                <a href="${product.url}"><img src="${product.image}" class="img-fluid blur-up lazyload" alt=""></a>
+                                <div class="media-body">
+                                      <!-- Link to product detail page -->
+                                        <h6 class="mb-1">${product.name}</h6>
+                                   
+                                    <p class="mb-0 mt-1">$${product.price}</p>
+                                </div>
+                            </div> 
+                        `;
+                        resultsList.appendChild(listItem);
+                    });
+                });
+        } else {
+            document.getElementById('searchResults').querySelector('ul').innerHTML = '';  // Clear if no input
+        }
+    });
+    
+    
+</script>
+</body>
+
+
+<!-- Mirrored from themes.pixelstrap.com/voxo/front-end/shop-canvas-filter.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Jan 2024 17:29:37 GMT -->
+</html>
