@@ -114,6 +114,7 @@ def add_cart(request,product_id):
             cart = cart,
         )
         cart = cart.save()
+    Wishlist.objects.filter(user=request.user, product=product).delete()
     #return HttpResponse(cart_item.quantity)   
     return redirect('outgoing:cart')
 
@@ -689,14 +690,23 @@ def paypal_cancel(request):
 
 
 
+
+
+def wishlist_view(request):
+    wishlist_items=Wishlist.objects.filter(user=request.user)
+    return render (request,"wishlist.html",{'wishlist_items':wishlist_items})
+
 def add_to_wishlist(request,product_id):
     product=get_object_or_404(Product, id=product_id)
     Wishlist.objects.get_or_create(user=request.user,product=product)
     return redirect("outgoing:wishlist_view")
 
-def wishlist_view(request):
-    wishlist_items=Wishlist.objects.filter(user=request.user)
-    return render (request,"wishlist.html",{'wishlist_items':wishlist_items})
+def remove_from_wishlist(request, product_id):
+    product = get_object_or_404(Wishlist, user=request.user, product__id=product_id)
+    product.delete()
+    
+    return redirect("outgoing:wishlist_view")
+
 # def cash_on_delivery(request,number):
 #     print("COD+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 #     orders=Order.objects.filter(user=request.user, is_ordered=False, order_number=number)

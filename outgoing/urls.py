@@ -7,6 +7,7 @@ app_name = 'outgoing'
 urlpatterns = [
     path('wishlist_view',views.wishlist_view,name="wishlist_view"),
     path('add/<int:product_id>/',views.add_to_wishlist,name="add"),
+    path('wishlist_remove/<int:product_id>/', views.remove_from_wishlist, name='wishlist_remove'),
     path('cart', views.cart, name="cart"),
     path('add_cart/<int:product_id>/', views.add_cart, name='add_cart'),
     path('remove_cart/<int:product_id>/', views.remove_cart, name='remove_cart'),
