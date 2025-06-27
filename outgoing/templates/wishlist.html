@@ -32,6 +32,7 @@
     <section class="wish-list-section section-b-space">
         <div class="container">
             <div class="row">
+                {% if wishlist_items %}
                 <div class="col-sm-12 table-responsive">
                     <table class="table cart-table wishlist-table">
                         <thead>
@@ -193,6 +194,9 @@
                         </tbody> {% endcomment %}
                     </table>
                 </div>
+                {% else %}
+                <p>Your wislist empty !!</p>
+                {% endif %}
             </div>
         </div>
     </section>

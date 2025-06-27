@@ -11,9 +11,9 @@
                             <div class="menu-left">
                                 <div class="brand-logo">
                                     
-                                        <svg class="svg-icon">
+                                        {% comment %} <svg class="svg-icon">
                                             <use class="fill-color" xlink:href="{% static 'svg/icons.svg' %}#logo"></use>
-                                        </svg>
+                                        </svg> {% endcomment %}
                                         <img src="{% static 'images/logo.png' %}" class="img-fluid blur-up lazyload" alt="logo">
                                     
                                 </div>
@@ -75,18 +75,18 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </li>
+                                    </li> 
                                     <li class="onhover-dropdown wislist-dropdown">
-                                        {% if wishlist_items %}
+                                       
+                                        {% comment %} {% if wishlist_items %} {% endcomment %}
                                         <div class="cart-media">
-                                           
 
                                             <a href="{% url 'outgoing:wishlist_view' %}">
                                                 <i data-feather="heart"></i>
                                                 <span class="label label-theme rounded-pill">{{ wishlist_items|length }}</span>
                                             </a>
                                         </div>
-                                        {%else%}
+                                        {% comment %} {%else%}
                                         <div class="onhover-div">
                                             <a href="wishlist.html">
                                                 <div class="wislist-empty">
@@ -96,7 +96,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        {% endif %}
+                                        {% endif %} {% endcomment %}
                                     </li>
                                     <li class="onhover-dropdown cart-dropdown">
                                         <a href="{% url 'outgoing:cart' %}"> <button type="button" class="btn btn-solid-default btn-spacing">

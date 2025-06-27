@@ -220,7 +220,7 @@
 
                 <div class="mt-4">
                     <div class="row text-600 text-white bgc-default-tp1 py-25">
-                        <div class="d-none d-sm-block col-1">#</div>
+                        <div class="d-none d-sm-block col-1">ID</div>
                         <div class="col-9 col-sm-5">Items</div>
                         <div class="d-none d-sm-block col-4 col-sm-2">Qty</div>
                         <div class="d-none d-sm-block col-sm-2">Price</div>
@@ -229,7 +229,7 @@
                      {% for i in order_products%}
                     <div class="text-95 text-secondary-d3">
                         <div class="row mb-2 mb-sm-0 py-25">
-                            <div class="d-none d-sm-block col-1">1</div>
+                            <div class="d-none d-sm-block col-1">{{ forloop.counter }}</div>
                             <div class="col-9 col-sm-5">{{ i.product }}</div>
                             <div class="d-none d-sm-block col-2">{{i.quantity}}</div>
                             <div class="d-none d-sm-block col-2 text-95">${{i.price }}</div>

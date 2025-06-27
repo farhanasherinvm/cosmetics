@@ -208,8 +208,7 @@
     <!-- banner image start -->
 <section class="banner-section pt-3"> <div class="title-3 text-center">
     <h2>Our Category</h2>
-    <h5 class="theme-color">Our Collection</h5>
-</div>
+    <h5 class="theme-color">Our Collection</h5></div>
     <div class="container-fluid">
         <div class="row g-2" style="display: flex; justify-content: space-between;"> <div class="col-12 p-0">
            
@@ -218,7 +217,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="banner-image">
                     <a href="{% url 'shop:shop' %}?category_id={{ i.id }}">
-                        <img src="{{ i.category_image.url }}" class="w-100 blur-up lazyload" alt="" style="height: 339px; width: 270px;">
+                        <img src="{{ i.category_image.url }}" class="w-100 blur-up lazyload hover-effect" alt="" style="height: 400px; width: 300px;">
                     </a>
                     <div class="banner-details">
                         {% comment %} <a href="wishlist.html" class="heart-button">
@@ -455,27 +454,24 @@
                                     <a href="javascript:void(0)" class="heart-wishlist ms-auto"><i
                                             class="far fa-heart"></i></a>
                                 </div> {% endcomment %}
-                                <a href="javascript:void(0)" class="text-center">
-                                    <img src="{% static 'images/furniture-images/shop/5.jpg' %}"
-                                        class="img-fluid blur-up lazyload" alt="">
+                                <a href="javascript:void(0)" class="text-center image-container">
+                                    <img src="{% static 'images/furniture-images/shop/1.jpg' %}"
+                                        class="img-fluid blur-up lazyload" alt="" style="height:356px ">
                                 </a>
                           
                                 <div class="insta-hover insta-hover-gradient text-center">
-                                <br>
-                                <div>
+                                     <br>
+                                    <div>
                                
-                                    <h5>Soft Glam</h5>
+                                       <h5>Soft Glam</h5>
                                    
-                                    {% comment %} <button onclick="location.href = 'shop-left-sidebar.html';" type="button"
-                                        class="btn btn-light-white">Shop now 
-                                        <i class="fas fa-chevron-right ms-2"></i></button> {% endcomment %}
+                                        {% comment %} <button onclick="location.href = 'shop-left-sidebar.html';" type="button"
+                                            class="btn btn-light-white">Shop now 
+                                            <i class="fas fa-chevron-right ms-2"></i></button> {% endcomment %}
+                                    </div>
                                 </div>
+                     
                             </div>
-
-
-
-                       
-                    </div>
                             <div>
                               
                                     
@@ -483,10 +479,13 @@
                                     <a href="javascript:void(0)" class="heart-wishlist ms-auto"><i
                                             class="far fa-heart"></i></a>
                                 </div> {% endcomment %}
-                                <a href="javascript:void(0)" class="text-center">
-                                    <img src="{% static 'images/furniture-images/shop/6.jpg' %}"
-                                        class="img-fluid blur-up lazyload" alt="">
+                                <a href="javascript:void(0)" class="text-center image-container">
+                                    <img src="{% static 'images/furniture-images/shop/9.jpg' %}"
+                                         class="img-fluid blur-up lazyload" 
+                                         alt="" 
+                                         style="height: 356px; width: 300px; padding-left: 55px; ">
                                 </a>
+                                
                           
                                {% comment %} <div class="insta-hover insta-hover-gradient text-center">
                                 <div>
@@ -499,7 +498,7 @@
                                 </div>
                                 </div> {% endcomment %}
                                 <br>
-                            <h5 class=" text-center">Vogue Beauty</h5>
+                             <h5 class=" text-center">Vogue Beauty</h5>
                        
                             </div>
 
@@ -510,9 +509,9 @@
                                             <a href="javascript:void(0)" class="heart-wishlist ms-auto"><i
                                                     class="far fa-heart"></i></a>
                                         </div> {% endcomment %}
-                                        <a href="javascript:void(0)" class="text-center">
-                                            <img src="{% static 'images/furniture-images/shop/7.jpg' %}"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                        <a href="javascript:void(0)" class="text-center image-container">
+                                            <img src="{% static 'images/furniture-images/shop/8.jpg' %}"
+                                                class="img-fluid blur-up lazyload" alt="" style="height:356px">
                                         </a>
                                   
                                     {% comment %} <div class="insta-hover insta-hover-gradient text-center">
@@ -1065,6 +1064,23 @@
             <i class="fas fa-chevron-up"></i>
         </a>
     </div>
+    <style>
+      
+        
+        
+
+
+
+
+        .image-container img {
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        
+        .image-container img:hover {
+            transform: scale(1.1); /* Zoom effect */
+            filter: brightness(1.2); /* Brighten the image slightly */
+        }
+    </style>
     <script>// Initialization for ES Users
         import { Carousel, initMDB } from "mdb-ui-kit";
         

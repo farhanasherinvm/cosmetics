@@ -11,7 +11,11 @@ from .models import Product
 def product(request,slug,id):
     print("haaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     print(f'product id is :{id}')
-    wishlist_items=Wishlist.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+        wishlist_items = Wishlist.objects.filter(user=request.user)
+    else:
+        wishlist_items = [] 
+    
     product = Product.objects.get(id=id)
     variants=product.variants.all()
     print("variants",variants)
@@ -71,11 +75,14 @@ def shop(request):
     else:
         product=Product.objects.all()
         selected_category = None
-
+    if request.user.is_authenticated:
+        wishlist_items = Wishlist.objects.filter(user=request.user)
+    else:
+        wishlist_items = [] 
     paginator=Paginator(product,10)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
-    wishlist_items=Wishlist.objects.filter(user=request.user)
+  
     context={
         'page_obj':page_obj,
         'product':product,
@@ -86,9 +93,12 @@ def shop(request):
     return render(request, 'shop.html', context)
 
 def add_wishlist(request,product_id):
-    product=get_object_or_404(Product, id=product_id)
-    Wishlist.objects.get_or_create(user=request.user,product=product)
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+    if request.user.is_authenticated:
+        product=get_object_or_404(Product, id=product_id)
+        Wishlist.objects.get_or_create(user=request.user,product=product)
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        return redirect('accounts:userlogin')
 # def filter(request):
 #     price_range = request.GET.get('price_range')  # e.g., "0;5000"
 #     categories = request.GET.getlist('category')  # e.g., ["nail", "makeup"]

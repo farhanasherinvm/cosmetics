@@ -1,8 +1,8 @@
 {% autoescape off %}
 
-Hi user.user_name,
+Hi {{ user.user_name }},
 YOUR ORDER HAS BEEN RECEIVED
 
-Order Number:order.order_number
-Tracking Id: order
+Order Number:{{ order.order_number }}
+{% comment %} Tracking Id: {{ order }} {% endcomment %}
 {% endautoescape %}

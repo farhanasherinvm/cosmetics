@@ -41,40 +41,43 @@ paypalrestsdk.configure({
 
 # Create your views here.
 def cart(request, total=0, quantity=0, cart_item=None):
-    print("in cart")
+    if request.user.is_authenticated:
+        print("in cart")
 
-    cart_items = []  # Initialize cart_items as an empty list
-    shipping = 0  # Initialize tax
-    grand_total = 0  # Initialize grand_total
-    wishlist_items=Wishlist.objects.filter(user=request.user)
+        cart_items = []  # Initialize cart_items as an empty list
+        shipping = 0  # Initialize tax
+        grand_total = 0  # Initialize grand_total
+        wishlist_items=Wishlist.objects.filter(user=request.user)
 
-    try:
-        print("11111111111")
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = Cartitem.objects.filter(cart=cart, is_active=True)
-        for cart_item in cart_items:
-            print("222222")
-            total += (cart_item.product.price * cart_item.quantity)
-            quantity += cart_item.quantity
-        # tax= ( 2 * total)/100
-        shipping = 40
-        grand_total = shipping + total    
-        print("suuuuuuuuuuuuuuuuuuuuuuuuuuuuuiiiiiiii")
-    except ObjectDoesNotExist:
-        pass
-    context = {
-        'total' : total,
-        'quantity' : quantity,
-        'cart_items' : cart_items,
-        'wishlist_items':wishlist_items,
-        'shipping': shipping,
-        'grand_total' : grand_total
-    }
-    print(f'item:{cart_items}')
-    print(f'total:{quantity}')
-    print(f'total:{total}')
+        try:
+            print("11111111111")
+            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart_items = Cartitem.objects.filter(cart=cart, is_active=True)
+            for cart_item in cart_items:
+                print("222222")
+                total += (cart_item.product.price * cart_item.quantity)
+                quantity += cart_item.quantity
+            # tax= ( 2 * total)/100
+            shipping = 40
+            grand_total = shipping + total    
+            print("suuuuuuuuuuuuuuuuuuuuuuuuuuuuuiiiiiiii")
+        except ObjectDoesNotExist:
+            pass
+        context = {
+            'total' : total,
+            'quantity' : quantity,
+            'cart_items' : cart_items,
+            'wishlist_items':wishlist_items,
+            'shipping': shipping,
+            'grand_total' : grand_total
+        }
+        print(f'item:{cart_items}')
+        print(f'total:{quantity}')
+        print(f'total:{total}')
 
-    return render(request,"cart.html", context)
+        return render(request,"cart.html", context)
+    else:
+        return redirect('accounts:userlogin')
 
 def _cart_id(request):
     print("in cart_id+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -86,37 +89,40 @@ def _cart_id(request):
     return cart
 
 def add_cart(request,product_id):
-    print("in add_cart+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-    current_user=request.user
-    product = Product.objects.get(id=product_id)#get product
-    print("")
-    try:
-        print("555")
-        cart=Cart.objects.get(cart_id=_cart_id(request))# get the cart using cart_id present in the session
-    except Cart.DoesNotExist:
-        print("666666")
-        cart = Cart.objects.create(
-            cart_id= _cart_id(request)
-        ) 
-    cart.save()
-    print("add_cart....cart_save")
-    try:
-        print("88888888")
-        cart_item =Cartitem.objects.get(product = product, user=current_user, cart = cart)
-        cart_item.quantity += 1
-        cart_item.save()
-    except Cartitem.DoesNotExist:
-        print("999999999")
-        cart_item = Cartitem.objects.create(
-            user = current_user,
-            product = product,
-            quantity = 1,
-            cart = cart,
-        )
-        cart = cart.save()
-    Wishlist.objects.filter(user=request.user, product=product).delete()
-    #return HttpResponse(cart_item.quantity)   
-    return redirect('outgoing:cart')
+    if request.user.is_authenticated:
+        print("in add_cart+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        current_user=request.user
+        product = Product.objects.get(id=product_id)#get product
+        print("")
+        try:
+            print("555")
+            cart=Cart.objects.get(cart_id=_cart_id(request))# get the cart using cart_id present in the session
+        except Cart.DoesNotExist:
+            print("666666")
+            cart = Cart.objects.create(
+                cart_id= _cart_id(request)
+            ) 
+        cart.save()
+        print("add_cart....cart_save")
+        try:
+            print("88888888")
+            cart_item =Cartitem.objects.get(product = product, user=current_user, cart = cart)
+            cart_item.quantity += 1
+            cart_item.save()
+        except Cartitem.DoesNotExist:
+            print("999999999")
+            cart_item = Cartitem.objects.create(
+                user = current_user,
+                product = product,
+                quantity = 1,
+                cart = cart,
+            )
+            cart = cart.save()
+        Wishlist.objects.filter(user=request.user, product=product).delete()
+        #return HttpResponse(cart_item.quantity)   
+        return redirect('outgoing:cart')
+    else:
+        return redirect('accounts:userlogin')
 
 def remove_cart(request, product_id):
     print("in remove_cart+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -393,9 +399,9 @@ def place_order(request, total=0):
             
             subject="Thank You For Your Order"
             message= render_to_string(
-                "recieved_mail.html", { "user":request.user , "order":orders}
+                "recieved_mail.html", { "user":user_profile , "order":orders}
 
-            )
+            ) 
             to_mail=request.user.email
             send_mail=EmailMessage(subject , message, to=[to_mail])
             send_mail.send()
@@ -693,13 +699,18 @@ def paypal_cancel(request):
 
 
 def wishlist_view(request):
-    wishlist_items=Wishlist.objects.filter(user=request.user)
-    return render (request,"wishlist.html",{'wishlist_items':wishlist_items})
-
+    if request.user.is_authenticated:
+        wishlist_items=Wishlist.objects.filter(user=request.user)
+        return render (request,"wishlist.html",{'wishlist_items':wishlist_items})
+    else:
+        return redirect("accounts:userlogin")
 def add_to_wishlist(request,product_id):
-    product=get_object_or_404(Product, id=product_id)
-    Wishlist.objects.get_or_create(user=request.user,product=product)
-    return redirect("outgoing:wishlist_view")
+    if request.user.is_authenticated:
+        product=get_object_or_404(Product, id=product_id)
+        Wishlist.objects.get_or_create(user=request.user,product=product)
+        return redirect("outgoing:wishlist_view")
+    else:
+        return redirect("accounts:userlogin")
 
 def remove_from_wishlist(request, product_id):
     product = get_object_or_404(Wishlist, user=request.user, product__id=product_id)
