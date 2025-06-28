@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d4fxl@u8-1!$530rnx945b2#pfca+7e3+b$+p@g5$f03takbp-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # DEBUG = False
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['43.204.218.135']
 
 
 # Application definition
@@ -82,15 +82,26 @@ WSGI_APPLICATION = 'cosmetics.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cosmetics',
+#         'USER': 'postgres',
+#         'PASSWORD':'123',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cosmetics',
-        'USER': 'postgres',
-        'PASSWORD':'123',
+        'USER': 'farhana',
+        'PASSWORD': 'your_strong_password',
         'HOST': 'localhost',
-        'PORT': '5432'
-    }}
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
@@ -132,15 +143,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [ BASE_DIR / "static" ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 #media files configurations
-MEDIA_ROOTS = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
-
 
 
 from django.contrib.messages import constants as messages

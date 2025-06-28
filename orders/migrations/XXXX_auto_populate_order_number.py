@@ -17,7 +17,7 @@ def populate_order_number(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0001_initial'),  # Ensure this points to the correct initial migration
+        ('orders', '0002_order_orderproduct'),  
     ]
 
     operations = [

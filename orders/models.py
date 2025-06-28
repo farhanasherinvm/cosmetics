@@ -32,7 +32,6 @@ class Order(models.Model):
     order_number = models.CharField(max_length=50, unique=True)
     user         = models.ForeignKey(User_Profile, on_delete=models.CASCADE)
     payment      = models.ForeignKey(Payment, on_delete=models.SET_NULL,blank=True,null=True)
-    order_number = models.CharField(max_length=20)
     user_name    = models.CharField(max_length=50)
     address      = models.CharField(max_length=100)
     email        = models.EmailField(max_length=50)
